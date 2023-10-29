@@ -1,0 +1,22 @@
+
+body{
+    display: flex;
+    min-height: 100vh;
+}
+main{
+    flex: 1;
+    flex-flow: column;
+    display: flex;
+    padding: var(--gap);
+}
+label, input, button{
+    display: block;
+}
+form{
+    display: flex;
+    flex-flow: column;
+    gap: var(--gap);
+}
+button, input{
+    max-width: max-content;
+}

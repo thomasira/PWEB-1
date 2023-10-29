@@ -1,0 +1,82 @@
+
+.carousel{
+  margin: 0;
+}
+.carousel p{
+  color: var(--colorDark);
+}
+.carousel h2{
+  font-size: var(--fontxl);
+  color: var(--colorDark);
+}
+
+/* chaque fiche du caroussel */
+.carousel-item{
+  flex-flow: row wrap;
+  gap: var(--gapl);
+  padding: var(--gapxl);
+  justify-content: center;
+}
+
+/* image et boîte image(même élément)*/
+.carousel-item img{
+  flex: 1 0 300px;
+  opacity: .9;
+  height: 400px;
+  max-width: 100%;
+  object-fit: cover;
+  object-position: top;
+  width: auto;
+  overflow: hidden;
+  border: var(--borderStd);
+  box-shadow: 2px 2px var(--colorDark);
+}
+
+/* la boîte de texte*/
+.carousel-item>div{
+  flex: 1 0 400px;
+}
+
+/* boîtes caption->préférables de passer par ce détour dans le cas présent*/
+.carousel-item>div>div{
+  display: flex;
+  flex-flow: column;
+}
+.carousel-item:first-of-type>div>div{
+  text-align: right;
+  align-items: end;
+}
+.carousel-item:nth-of-type(2)>div>div{
+  text-align: center;
+  align-items: center;
+}
+.carousel-item:last-of-type>div>div{
+  text-align: left;
+  align-items: start;
+}
+/* boîte caption*/
+.carousel-caption{
+  position: relative;
+  z-index: 10;
+  background-color: var(--colorLightTr);
+  border-radius: .4em;
+  padding: var(--gapxl);
+  right: auto;
+  left: auto;
+  top: auto;
+  bottom: auto;
+}
+.carousel-caption p{
+  text-align: inherit;
+}
+
+/*rythme de la boîte caption*/
+.carousel-caption>*+*{
+  margin-top: var(--gapxs);
+}
+
+/* distances du bord flèches gauches droites, chercher dans bootstrap.min pour les autres options*/
+.carousel-control-next, .carousel-control-prev{
+  width: 10%;
+}
+

@@ -1,0 +1,156 @@
+
+.card-lot{
+    background-color: var(--colorComp);
+    border: var(--borderStd);
+    border-radius: .4em;
+    box-shadow: .075em .075em var(--colorDark);
+    max-width: 1080px;
+    min-width: 340px;
+    padding: var(--gaps);
+    position: relative;
+}
+.card-lot section{
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gaps);
+    justify-content: center;
+    row-gap: var(--gapxl);
+}
+
+/* icone mise */
+.card-lot span img{
+    width: 20px;
+}
+
+/* temps */
+.card-lot thead td{
+    font-family: var(--typeHead);
+    font-size: var(--fontxs);
+    line-height: .8em;
+}
+.card-lot td{
+    line-height: .8em;
+    padding: 0;
+    text-align: center;
+}
+
+/* header */
+.card-lot h3{
+    font-size: var(--fontl);
+    line-height: 1em;
+}
+.card-lot header strong{
+    display: block;
+    font-size: var(--fonts);
+    font-style: italic;
+    line-height: 1.2em;
+}
+
+/* image du timbre */
+.card-lot div>img{
+    aspect-ratio: 1/1;
+    border: 1px solid var(--colorDark);
+    border-radius: .3em;
+    box-shadow: .075em .075em var(--colorDark);
+    display: block;
+    margin: auto;
+    max-width: 400px;
+    min-width: 160px;
+    object-fit: cover;
+    overflow: hidden;
+    width: 100%;
+}
+
+/* divisions des premières sections flex*/
+.card-lot section:first-of-type>div:first-of-type{
+    flex: 1 0 300px;
+}
+.card-lot section:first-of-type>div:nth-of-type(2){
+    flex: 0 0 140px;
+}
+.card-lot section:first-of-type>div:nth-of-type(3){
+    flex: 1 1 150px;
+}
+
+/* condition et étampé */
+.card-lot section:first-of-type>div:nth-of-type(2) p{
+    font-style: italic;
+}
+.card-lot section:first-of-type>div span{
+    display: block;
+    font-family: var(--typeHead);
+    font-size: var(--fontxs);
+    font-weight: 400;
+}
+
+.card-lot section:last-of-type{
+    align-items: end;
+    gap: var(--gapxs);
+}
+.card-lot section:last-of-type>div{
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gapxs);
+}
+
+/* divisions des deuxièmes sections flex */
+.card-lot section:last-of-type>div:first-of-type>div{
+    display: flex;
+    flex-flow: row;
+    gap: var(--gaps);
+}
+.card-lot section:last-of-type>div:first-of-type{
+    flex: 4; 
+    row-gap: var(--gapl);
+}
+.card-lot section:last-of-type>div:last-of-type{
+    flex: 3;
+    justify-content: end;
+    text-align: end;
+}
+
+/* rythme */
+.card-lot>*+*{
+    margin-top: var(--gaps);
+}
+.card-lot section:first-of-type>div>*+*{
+    margin-top: var(--gapxs);
+}
+
+/* variants */
+.card-lot.tag{  
+    margin-top: var(--gapl);
+}
+.card-lot.tag>div{
+    background-color: var(--colorCompL);
+    border: var(--borderStd);
+    border-radius:.4em .4em 0 0;
+    bottom: 100%;
+    padding: var(--gapTHxxs) var(--gapxxs);
+    position: absolute;
+}
+.card-lot.tag>div p{
+    font-family: var(--typeHead);
+    font-weight: 600;
+}
+.card-lot.en-vedette>div{
+    background-color: var(--colorSecD);
+    color: var(--colorLight);
+}
+.card-lot.a-venir>div{
+    background-color: var(--colorMainD);
+    color: var(--colorLight);
+}
+
+/* états */
+.card-lot div>img:hover{
+    cursor: pointer;
+}
+
+/* queriess */
+@media screen and (min-width:620px){
+    .card-lot section:last-of-type>div:first-of-type>div{
+        order:2;
+    }
+}

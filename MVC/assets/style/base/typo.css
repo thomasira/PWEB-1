@@ -1,0 +1,14 @@
+
+body{
+    font-family: var(--typeText);
+}
+h1, h2, h3, h4, h5, h6{
+    font-family: var(--typeHead);
+    font-weight: 600;
+}
+p{
+    font-size: var(--fontText);
+}
+h2{
+    font-size: var(--fontxl);
+}

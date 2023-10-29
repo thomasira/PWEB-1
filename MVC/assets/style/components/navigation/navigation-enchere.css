@@ -1,0 +1,33 @@
+
+.navigation-enchere>div{
+    display: flex;
+    flex-flow: row;
+    gap: var(--gapxs);
+}
+.navigation-enchere h4{
+    font-family: var(--typeText);
+    font-size: var(--fontText);
+    font-weight: 400;
+}
+.navigation-enchere>div:first-of-type{
+    background-color: var(--colorDark);
+}
+.navigation-enchere>div:first-of-type button{
+    color: var(--colorLight);
+    font-family: var(--typeHead);
+    font-size: var(--fontText);
+    padding: var(--gapTHxxs) var(--gapxs);
+}
+.navigation-enchere>div:first-of-type button.selected{
+    color: var(--colorMainL);
+}
+.navigation-enchere>div:last-of-type button{
+    font-family: var(--typeText);
+    font-size: var(--fontText);
+    padding: 0 var(--gapxxs);
+}
+
+/* rythme */
+.navigation-enchere>*+*{
+    margin-top: var(--gapxxs);
+}

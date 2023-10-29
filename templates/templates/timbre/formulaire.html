@@ -1,0 +1,46 @@
+
+<form action="#" class="no-show">
+    <label>Nom du timbre
+        <input type="text" name="nom" required>
+    </label>
+    <label>Date de création
+        <input type="date" name="date_creation" required>
+    </label>
+    <label>Pays d'origine
+        <input type="text" name="pays_origine" required>
+    </label>
+    <label>Est-il certifié?
+        <select name="certifie" required>
+            <option value="0">Non</option>
+            <option value="1">Oui</option>
+        </select>
+    </label>
+    <label>Image principale
+        <input type="file" required>
+    </label>
+
+    <div> Images Secondaires
+        <button data-js-ajout="image">Ajouter d'autres images</button>
+        <!-- will call labels -->
+    </div>
+
+    <label>Tirage
+        <input type="text" name="tirage">
+    </label>
+    <label>Dimensions
+        <input type="text" name="dimensions">
+    </label>
+    <label>Condition
+        <select name="condition">
+            <option value="1">Mint</option>
+            <option value="2">Mint-2</option>
+            <option value="3">Mint-3</option>
+            <option value="4">Used</option>
+            <option value="5">Ripped</option>
+        </select>
+    </label>
+
+   <!-- REMEMBER TO RECUPERATE MEMBRE_ID AND ENCHERE_ID IN THE CODE-->
+
+    <input type="submit" value="ajouter le timbre">
+</form>

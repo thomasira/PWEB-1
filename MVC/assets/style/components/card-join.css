@@ -1,0 +1,38 @@
+
+.card-join{
+    align-items: center;
+    margin: auto;
+    background-color: var(--colorSecL);
+    border: var(--borderStd);
+    border-radius: .7em;
+    box-shadow: 4px 4px var(--colorDark);
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gapm);
+    justify-content: center;
+    max-width: 900px;
+    padding: var(--gapl);
+    row-gap: var(--gapxl);
+    transform: rotate(2deg);
+}
+.card-join header{
+    flex:1 1 400px;
+}
+.card-join header>*+*{
+    margin-top: var(--gapxs);
+}
+.card-join p{
+    font-size: var(--fontm);
+}
+.card-join picture{
+    flex: 0 1 400px;
+    max-width: 500px;
+}
+.card-join img{
+    width: 100%;
+}
+
+/* variants */
+.card-join.var-comp{
+    background-color: var(--colorComp);
+}

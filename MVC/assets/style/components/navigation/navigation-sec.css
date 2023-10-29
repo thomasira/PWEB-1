@@ -1,0 +1,54 @@
+.navigation-sec{
+    background-color: var(--colorMainD);
+}
+.navigation-sec>div{
+    display: flex;
+    flex-flow: row;
+    margin: auto;
+    max-width: 1400px;
+    padding: var(--gapxxs) var(--gaps);
+}
+.navigation-sec>div>div{
+    position: relative;
+}
+.navigation-sec a{
+    display: block;
+    color: var(--colorLight);
+    font-size: var(--fontText);
+    padding: 0 var(--gaps);
+}
+.navigation-sec div>div>div{
+    color: var(--colorMainD);
+    background-color: var(--colorMainD);
+    opacity: 0;
+    padding: var(--gapxs);
+    position: absolute;
+    pointer-events: none;
+    top: 100%;
+    z-index: -1;
+}
+.navigation-sec div>div:last-of-type>div{
+    right: 0;
+}
+.navigation-sec div>div>div>a{
+    border-top: 1px solid var(--colorLight);
+    padding: var(--gapxxs) var(--gapxs);
+}
+.navigation-sec>div>div:not(:last-of-type)>a{
+    border-right: 1px solid var(--colorLight);
+}
+
+/* états */
+.navigation-sec a:active{
+    color: var(--colorSecL);
+}
+.navigation-sec a:hover{
+    color: var(--colorComp);
+}
+@media (hover:hover) {
+    .navigation-sec div>div:hover div{
+        opacity: 1;
+        pointer-events: all;
+        z-index: 2;
+    }
+}

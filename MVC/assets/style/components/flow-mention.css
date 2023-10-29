@@ -1,0 +1,6 @@
+
+.flow-mention{
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gaps);
+}

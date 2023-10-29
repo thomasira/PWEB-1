@@ -1,0 +1,14 @@
+
+.modal-cover{
+    position: fixed;
+    background-color: var(--colorCover);
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    margin: 0;
+    height: 100vh;
+    padding: var(--gapl);
+}

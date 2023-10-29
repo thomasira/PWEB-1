@@ -1,0 +1,43 @@
+body{
+    background-color: var(--confColorLight);
+    display: flex;
+    flex-flow: column;
+    min-height: 100vh;
+}   
+body>main{
+    flex: 1;
+}
+body>header{
+    background-color: var(--confColorLight);
+    color: var(--confColorDark);
+    display: flex;
+    flex-flow: row;
+    gap: var(--gaps);
+    justify-content: space-between;
+    padding: var(--gapTHxxs);
+}
+body>footer, body>header {
+    font-family: var(--confFont);
+}
+body>header h1{
+    font-family: var(--confType);
+    font-size: var(--confFont);
+}
+body>header p, body>footer p{
+    font-family: var(--confType);
+    font-size: var(--confFont);
+}
+body>footer{
+    align-items: center;
+    background-color: var(--confColorLight);
+    color: var(--confColorDark);
+    display: flex;
+    flex-flow: row;
+    gap: var(--gapl);
+    padding: var(--gapxxs);
+    padding-right: 150px;
+}
+body>footer h4{
+    font-family: var(--confType);
+    font-size: var(--confFont);
+}

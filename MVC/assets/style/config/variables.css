@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:ital,wght@0,400;0,700;1,500&family=Trispace:wght@400;500;600&display=swap');
+:root{
+    
+    /* config*/
+    --confColorDark: rgb(7, 8, 6);
+    --confColorLight: rgb(213, 218, 230);
+    --confType: sans-serif;
+    --confFont: 12px;
+
+    --colorLightTr: #fffae9b3;
+
+
+    /* Palette de couleurs */
+    --colorDark: #150D0D;
+    --colorLight: #FFFAE9;
+    --colorNeutral: #A6A29B;
+    --colorNeutralD: #8a8781;
+    --colorNeutralL: #d4cfc7;
+    --colorMain: #5C95D9;
+    --colorMainD: #31557E;
+    --colorMainL: #A0CCFF;
+    --colorSec: #E84B4B;
+    --colorSecD: #9A3131;
+    --colorSecL: #FFB7B7;
+    --colorComp: #F1D192;
+    --colorCompD: #DD960A;
+    --colorCompL: #FFF0D3;
+
+    --colorCover: #150d0df8;
+    --colorSuccess: #0c3d16;
+    --colorKill: #ec2c2c;
+    
+    /* Police */
+    --typeText: 'Barlow Semi Condensed', sans-serif;
+    --typeHead: 'Trispace', sans-serif;
+    --typeLyric: 'Assistant', monospace;
+
+    /* Taille de polices */
+    --fontxxs: clamp(12px, 1.5vw, 14px);
+    --fontText: clamp(16px, 1.75vw, 20px);
+    --fontxs: clamp(18px, 2.25vw, 22px);
+    --fonts: clamp(20px, 3vw, 28px);
+    --fontm: clamp(24px, 3.75vw, 32px);
+    --fontl: clamp(32px, 4.75vw, 40px);
+    --fontxl: clamp(38px, 6vw, 54px);
+    --fontxxl: clamp(50px, 7.5vw, 66px);
+    --fontHuge: clamp(60px, 9.25vw, 96px);
+    --fontHuger: clamp(72px, 11.5vw, 120px);
+
+    /* Taille de police statique*/
+    --fontSText: 16px;
+    --fontSxs: 20px;
+    --fontSs: 22px;
+
+    /* Espacement */
+    --gapTHxxs: clamp(3px, .5vw, 5px);
+    --gapSafe: 6px;
+    --gapxxs: clamp(4px, 1vw, 8px);
+    --gapxs: clamp(8px, 1.5vw, 14px);
+    --gaps: clamp(12px, 1.75vw, 16px);
+    --gapm: clamp(16px, 2.5vw, 24px);
+    --gapl: clamp(24px, 3.5vw, 32px);
+    --gapxl: clamp(32px, 5vw, 48px);
+    --gapxxl: clamp(48px, 8vw, 96px);
+    --gapHuge: clamp(84px, 10vw, 120px);
+
+    /* Effets */
+    --borderStd: 1px solid var(--colorDark);
+}

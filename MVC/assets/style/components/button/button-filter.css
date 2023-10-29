@@ -1,0 +1,36 @@
+
+.button-filter{
+    background-color: var(--colorNeutralD);
+    border: var(--borderStd);
+    border-radius: 100px;
+    box-shadow: .075em .075em var(--colorDark);
+    color: var(--colorDark);
+    font-size: var(--fontxs);
+    font-weight: 600;
+    font-style: italic;
+    padding: var(--gapTHxxs) var(--gaps);
+}
+
+/* variants */
+.button-filter.var-main{
+    background-color: var(--colorMain);
+}
+.button-filter.var-lrg{
+    font-size: var(--fontl);
+}
+.button-filter.var-tri{
+    font-family: var(--typeHead);
+    font-weight: 400;
+    font-style: normal;
+    font-size: var(--fontSxxs);
+}
+
+/* états */
+.button-filter:hover{
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+.button-filter:active{
+    box-shadow: inset .075em .075em var(--colorDark);
+    transform: translateX(1px) translateY(1px);
+}

@@ -1,0 +1,48 @@
+.button-icon{
+    align-items: center;
+    aspect-ratio: 1/1;
+    background-color: var(--colorComp);
+    border: 1px solid var(--colorDark);
+    border-radius: 100%;
+    box-shadow: .075em .075em var(--colorDark);
+    display: flex;
+    justify-content: center;
+    max-width: max-content;
+    padding: var(--gapxxs);
+}
+.button-icon img{
+    height: clamp(24px, 3vw, 30px);
+    display: block;
+    width: clamp(24px, 3vw, 30px);
+}
+
+/* variants */
+.button-icon.heart picture{
+    transform: translateY(6%);
+}
+.button-icon.bell picture{
+    transform: translateX(6%) scale(1.1);
+}
+.button-icon.light{
+    background-color: var(--colorCompL);
+}
+.button-icon.exit{
+    background-color: var(--colorCompL);
+}
+.button-icon.exit img{
+    height: clamp(20px, 3vw, 24px);
+    width: clamp(20px, 3vw, 24px);
+}
+
+
+/* états */
+.button-icon:hover{
+    filter: brightness(1.1);
+    cursor: pointer;
+}
+.button-icon:active{
+    box-shadow: inset .075em .075em var(--colorDark);
+}
+.button-icon:active {
+    transform: translateY(1px) translateX(1px);
+}

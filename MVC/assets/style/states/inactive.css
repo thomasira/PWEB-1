@@ -1,0 +1,6 @@
+
+.inactive{
+    filter: grayscale(.9);
+
+    pointer-events: none;
+}

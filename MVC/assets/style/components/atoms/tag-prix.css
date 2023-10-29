@@ -1,0 +1,30 @@
+
+.tag-prix{
+    background-color: var(--colorLight);
+    border: var(--borderStd);
+    box-shadow: inset .05em .05em var(--colorDark);
+    border-radius: .2em;
+    display: block;
+    font-family: var(--typeHead);
+    font-size: var(--fontm);
+    font-weight: 400;
+    max-width: max-content;
+    padding: var(--gapxxs);
+}
+.tag-prix span{
+    font-size: inherit;
+}
+
+/* variants */
+.tag-prix.depart{
+    background-color: var(--colorNeutral);
+    font-size: var(--fontxs);
+}
+.tag-prix.small{
+    font-size: var(--fontxs);
+}
+.tag-prix.large{
+    font-weight: 500;
+    max-width: 100%;
+    text-align: center;
+}

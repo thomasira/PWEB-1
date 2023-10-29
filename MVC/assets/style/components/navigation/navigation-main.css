@@ -1,0 +1,57 @@
+.navigation-main{
+    background-color: var(--colorDark);
+}
+.navigation-main>div{
+    align-items: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin: auto;
+    max-width: 1400px;
+}
+.navigation-main a{
+    color: var(--colorLight);
+    font-family: var(--typeHead);
+    font-size: var(--fontxs);
+    padding: var(--gapxs) var(--gaps);
+}
+.navigation-main>div>div{
+    background-color: var(--colorDark);
+    display: flex;
+    flex-flow: row;
+}
+.navigation-main div>img{
+    height: 40px;
+    width: auto;
+}
+.navigation-main a:first-of-type{
+    color: var(--colorComp);
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.navigation-main>div>div:first-of-type{
+    flex: 1 1 400px;
+    justify-content: space-between;
+    max-width: 500px;
+}
+.navigation-main>div>div:last-of-type{
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    flex: 0 1 400px;
+    gap: var(--gaps);
+    max-width: 420px;
+    padding: var(--gaps);
+}
+
+/* états */
+
+.navigation-main a:hover{
+    color: var(--colorComp);
+}
+.navigation-main div>img:hover{
+    cursor: pointer;
+}
+.navigation-main a:active{
+    transform: translateX(1px) translateY(1px);
+}

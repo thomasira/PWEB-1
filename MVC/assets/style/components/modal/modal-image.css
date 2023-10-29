@@ -1,0 +1,27 @@
+
+.modal-image picture{
+    overflow: hidden;
+    border: var(--borderStd);
+    border-radius: .4em;
+    display: block;
+    background-color: var(--colorCompL);
+    padding: var(--gapxs);
+}
+.modal-image div{
+    padding: var(--gapl);
+}
+.modal-image picture img{
+    object-fit: cover;
+    max-height: 60vh;
+    max-width: 100%;
+}
+.modal-image>div>img{
+    display: block;
+    margin: auto;
+}
+.modal-image div>img:hover{
+    cursor: pointer;
+}
+.modal-image button{
+    margin: auto;
+}

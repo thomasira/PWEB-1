@@ -1,0 +1,42 @@
+
+.navigation-icon{
+    align-items: end;
+    bottom: 0;
+    display: flex;
+    flex-flow: row;
+    gap: var(--gapxs);
+    position: fixed;
+    right: var(--gapxs);
+    z-index:3;
+}
+.navigation-icon button{
+    background-color: var(--colorDark);
+    border-radius: .4em .4em 0 0;
+    border: 1px solid var(--colorLight);
+    border-bottom: none;
+    box-shadow: 1px 1px var(--colorDark);
+    display: block;
+    font-size: var(--fonts);
+    font-weight: 600;
+    height: 40px;
+    padding: var(--gapxxs);
+    width: 40px;
+}
+.navigation-icon img{
+    display: block;
+    width: 100%;
+}
+
+/* états */
+.navigation-icon button:hover{
+    height:50px;
+}
+
+/* queries */
+
+@media screen and (min-width: 820px) {
+    
+    .navigation-icon{
+        display: none;
+    }
+}

@@ -1,0 +1,105 @@
+
+.box-filter{
+    background-color: var(--colorNeutral);
+    border: var(--borderStd);
+    border-radius: .6em;
+    box-shadow: .075em .075em var(--colorDark);
+    margin: auto;
+    max-width: 440px;
+    min-width: 320px;
+    overflow: hidden;
+}
+.box-filter h2{
+    font-size: var(--fontm);
+}
+.box-filter span{
+    font-weight: 600;
+}
+
+/* header */
+.box-filter header{
+    background-color: var(--colorNeutralL);
+    display: flex;
+    flex-flow: row;
+    gap: var(--gapm);
+    justify-content: space-between;
+    padding: var(--gapxs);
+    border-bottom: var(--borderStd);
+}
+.box-filter header span{
+    font-size: var(--fontm);
+}
+
+/* form */
+.box-filter form{
+    padding: var(--gaps);
+    max-height: 80vh;
+    overflow-y: scroll;
+}
+.box-filter form::-webkit-scrollbar{
+    width: 6px;
+}
+.box-filter form::-webkit-scrollbar-thumb {
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: var(--colorLight);
+    border-radius: 100px;
+}
+.box-filter label{
+    font-size: var(--fontSs);
+}
+.box-filter section>div>div:first-of-type{
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+}
+
+/* form sections*/
+.box-filter section:first-of-type>div>div:last-of-type{
+    margin-top: var(--gapxxs);
+    background-color: var(--colorNeutralL);
+    border: 1px solid var(--colorDark);
+    border-radius: .6em;
+    box-shadow: inset .075em .075em var(--colorDark);
+    padding: var(--gapxs);
+}
+.box-filter section:nth-of-type(2){
+    align-items: center;
+    background-color: var(--colorNeutral);
+    border: var(--borderStd);
+    border-radius: .4em;
+    box-shadow: .075em .075em var(--colorDark);
+    display: flex;
+    flex-flow: row;
+    gap: var(--gaps);
+    justify-content: space-between;
+    padding: var(--gapxs);
+}
+.box-filter section:last-of-type{
+    background-color: var(--colorNeutralD);
+    border: 1px solid var(--colorDark);
+    border-radius: .6em;
+    box-shadow: inset .075em .075em var(--colorDark);
+    padding: var(--gapxs);
+}
+
+/* ryhtme */
+.box-filter form>*+*{
+    margin-top: var(--gaps);
+}
+.box-filter section:not(:nth-of-type(2))>*+*{
+    margin-top: var(--gapxs);
+}
+.box-filter>form aside>*+*{
+    margin-top: var(--gapxs);
+}
+
+/* états */
+.box-filter span:hover{
+    cursor: pointer;
+}
+.box-filter input[type='checkbox']:checked{
+    background-color: var(--colorSec);
+}

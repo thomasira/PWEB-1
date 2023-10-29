@@ -1,0 +1,33 @@
+
+.recherche label{
+    align-items: center;
+    background-color: var(--colorLight);
+    border-radius: 100px;
+    display: flex;
+    flex-flow: row;
+    gap: var(--gapxs);
+    padding: var(--gapxxs) var(--gaps);
+}
+.recherche input{
+    background-color: var(--colorLight);
+    border: none;
+    flex: 1;
+    font-family: var(--typeText);
+    font-size: var(--fontxs);
+    outline: none;
+    width: 100%;
+}
+.recherche img{
+    height: 1.2em;
+}
+.recherche span{
+    display: block;
+    font-size: var(--fontl);
+    line-height: 0;
+    transform: translateY(-2px);
+}
+
+/* états */
+.recherche img:hover, .recherche span:hover{
+    cursor: pointer;
+}

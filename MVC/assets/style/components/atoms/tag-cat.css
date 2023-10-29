@@ -1,0 +1,14 @@
+
+.tag-cat{
+    background-color: var(--colorMainL);
+    border: var(--borderStd);
+    border-radius: .4em;
+    box-shadow: 2px 2px var(--colorDark);
+    line-height: 1em;
+    padding: var(--gapTHxxs) var(--gapxxs);
+}
+
+/* états */
+.tag-cat:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,33 @@
+body{
+    background-color: var(--colorMain);
+}
+body>main{
+    background-color: var(--colorLight);
+}
+input[type='checkbox']{ 
+    appearance: none;
+    background-color: var(--colorNeutralL);
+    border: var(--borderStd);
+    border-radius: .2em;
+    box-shadow: .075em .075em var(--colorDark);
+    height: 1.2em;
+    margin-right: var(--gapxxs);
+    width: 1.2em; 
+}
+input[type='checkbox']:hover{
+    cursor: pointer;
+}
+button{
+    background: none;
+    border: none;
+    display: block;
+    font-family: inherit;
+    font-size: inherit;
+}
+button:hover{
+    cursor: pointer;
+}
+picture{
+    display: block;
+    width: 100%;
+}

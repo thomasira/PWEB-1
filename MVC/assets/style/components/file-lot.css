@@ -1,0 +1,124 @@
+
+.file-lot{
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gapm);
+    max-width: 1400px;
+    min-width: 330px;
+    position: relative;
+    row-gap: var(--gapxl);
+}
+.file-lot h3{
+    font-family: var(--typeText);
+    font-size: var(--fonts);
+    font-style: italic;
+}
+.file-lot ul{
+    font-size: var(--fontText);
+}
+ 
+/* icone mise */
+.file-lot span img{
+    width: 20px;
+}
+
+/* temps */
+.file-lot th{
+    font-family: var(--typeHead);
+    font-size: var(--fontxs);
+    line-height: .8em;
+}
+.file-lot td{
+    line-height: .8em;
+    padding: 0;
+    text-align: center;
+}
+
+.file-lot header section{
+    align-items: center;
+    border-bottom: 1px solid var(--colorComp);
+    border-top: 1px solid var(--colorComp);
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gapm);
+    justify-content: space-between;
+    padding: var(--gaps) 0;
+}
+.file-lot header a{
+    font-weight: bold;
+    color: var(--colorMainD);
+}
+.file-lot>div:first-of-type{
+    flex: 0 0 320px;
+}
+.file-lot>div:nth-of-type(2){
+    position: relative;
+    flex: 3 0 300px;
+}
+.file-lot>div:last-of-type{
+    flex: 1 0 240px;
+}
+.file-lot>div:nth-of-type(2)>picture{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    object-fit: cover;
+}
+.file-lot>div:nth-of-type(2)>picture img{
+    height: 100%;
+}
+.file-lot>div:first-of-type div{
+    display: flex;
+    flex-flow: row;
+    gap: var(--gaps);
+    justify-content: space-between;
+    padding: var(--gapxs);
+}
+.file-lot>div:first-of-type picture{
+    border: var(--borderStd);
+    border-radius: .4em;
+    box-shadow: 1px 1px var(--colorDark);
+    display: block;
+    overflow: hidden;
+    object-fit: cover;
+}
+.file-lot>div:first-of-type img{
+    height: 100%;
+}
+.file-lot section:last-of-type ul{
+    display: flex;
+    gap: var(--gaps);
+    padding: var(--gapxs) 0;
+}
+.file-lot section:last-of-type li{
+    margin: 0;
+}
+.file-lot>div:first-of-type div picture{   
+    height: 50px;
+    width: 50px;
+}
+
+/* rythme */
+.file-lot ul>*+*{
+    margin-top: var(--gapxs);
+}
+.file-lot header section>div:last-of-type>*+*{
+    margin-top: var(--gaps);
+}
+
+.file-lot>div:nth-of-type(2)>div>section>*+*{
+    margin-top: var(--gaps);
+}
+.file-lot>div:nth-of-type(2)>div>*+*{
+    margin-top: var(--gaps);
+}
+.file-lot>section>div:first-of-type>*+*{
+    margin-top: var(--gapm);
+}
+
+/* états */
+.file-lot img:hover{
+    cursor: pointer;
+}

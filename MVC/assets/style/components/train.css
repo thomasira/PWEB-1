@@ -1,0 +1,11 @@
+
+.train{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    transition: top 5s ease-out, left 5s ease-out, transform .2s ease-in;
+}
+.train img{
+    width: 100%;
+}

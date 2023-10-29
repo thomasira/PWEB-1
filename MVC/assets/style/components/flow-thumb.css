@@ -1,0 +1,10 @@
+
+.flow-thumb{
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gaps);
+    justify-content: space-around;
+}
+.flow-thumb.var-accueil{
+    gap: var(--gapxs);
+}

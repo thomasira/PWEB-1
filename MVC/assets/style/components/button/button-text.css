@@ -1,0 +1,39 @@
+.button-text{
+    background-color: var(--colorSecD);
+    border-radius: .4em;
+    border: 1px solid var(--colorDark);
+    box-shadow: .075em .075em var(--colorDark);
+    color: var(--colorLight);
+    display: block;
+    font-family: var(--typeText);
+    font-size: var(--fontxs);
+    line-height: 1em;
+    max-width: max-content;
+    padding: var(--gapTHxxs) var(--gapm);
+}
+
+/* variants */
+.button-text.var-lrg{
+    font-size: var(--fonts);
+}
+.button-text.var-main{
+    background-color: var(--colorMainD);
+}
+.button-text.var-neutral{
+    background-color: var(--colorNeutral);
+}
+.button-text.var-neutralL{
+    color: var(--colorDark);
+    background-color: var(--colorNeutralL);
+}
+
+
+/* états */
+.button-text:hover{
+    cursor: pointer;
+    filter: brightness(1.1);
+}
+.button-text:active{
+    box-shadow: inset .075em .075em var(--colorDark);
+    transform: translateX(1px) translateY(1px);
+}
