@@ -1,6 +1,6 @@
 
 .flex-row{
-    align-self: start;
+    align-items: start;
     display: flex;
     flex-flow: row wrap;
     gap: var(--gapm);

@@ -7,9 +7,9 @@
 {% if error %} 
     <p class="error">{{ error }}</p>
 {% endif %}
-    <section class="form">
+    <section>
+        <form action="{{ path }}membre/store" method="post" class="form">
         <h2>Créer un compte</h2>
-        <form action="{{ path }}membre/store" method="post">
         <label>Nom
             <input type="text" name="nom_membre" value="{{ membre.nom_membre }}" required>
             <span class="error">{{ errors.name }}</span>

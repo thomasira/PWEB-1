@@ -1,5 +1,8 @@
 <?php
 RequirePage::model("Enchere");
+RequirePage::model("Timbre");
+RequirePage::model("Condition");
+
 
 
 class ControllerEnchere implements Controller {
@@ -12,13 +15,8 @@ class ControllerEnchere implements Controller {
     }
 
     public function create() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
-        if(isset($_POST["nom_enchere"])) {
-            $data["enchere"]["nom_enchere"] = $_POST["nom_enchere"];
-        } else $data["enchere"]["nom_enchere"] = "";
+        $condition = new Condition;
+        $data["conditions"] = $condition->read();
         
         Twig::render("enchere/create.html", $data);
     }
@@ -41,6 +39,9 @@ class ControllerEnchere implements Controller {
             exit();
         } 
 
+/*         echo '<pre>';
+        print_r($_POST);
+        die(); */
         $result = $this->validate();
 
         if($result->isSuccess()) {
@@ -72,49 +73,6 @@ class ControllerEnchere implements Controller {
             Twig::render("membre/create.html", $data);
         }
     }
-
-   
-    /**
-     * afficher le formulaire mettre à jour
-     */
-    public function edit() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
-        checkSession::sessionAuth();
-
-        if($_SESSION["privilege_id"] < 2) $id = $_POST["id"];
-        else $id = $_SESSION["id"];
-
-        $user = new User;
-        $data["user"] = $user->readId($id);
-        Twig::render("user/edit.php", $data);
-    }
-
-    /**
-     * mettre à jour une entrée dans la DB
-     */
-    public function update() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
-        $result = $this->validate();
-
-        if($result->isSuccess()) {
-            $user = new User;
-            $updatedId = $user->update($_POST);
-            if($updatedId) RequirePage::redirect("customer/profile");
-            else print_r($updatedId);
-        } else {
-            $data["errors"] = $result->getErrors();
-            $data["user"] = $_POST;
-
-            Twig::render("user/edit.php", $data);
-        }
-    }
-
     /**
      * valider les entrées
      */
@@ -122,11 +80,15 @@ class ControllerEnchere implements Controller {
         RequirePage::library("Validation");
         $val = new Validation;
 
+        if($_POST["enchere"]["date_debut"] > date("Y-m-d")) {
+            print_r('okay');
+        } else print_r("notokay");
+        print_r($_POST["enchere"]["date_debut"]);
+        print_r(date("Y-m-d"));
+        die();
         extract($_POST);
-        $val->name("nom_membre")->value($nom_membre)->min(4)->max(45)->required();
-        if(isset($email)) $val->name("email")->value($email)->pattern("email")->max(45)->required();
-        if(isset($password)) $val->name("password")->value($password)->min(8)->max(20)->pattern("no_space")->required();
-
+        $val->name("nom_enchere")->value($enchere["nom_enchere"])->min(4)->max(45)->required();
+        $val->name("date_debut")->value($enchere["date_debut"])->min(4)->max(45)->required();
         return $val;
     }
 

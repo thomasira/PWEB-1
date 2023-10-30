@@ -8,11 +8,9 @@
         {% if success %} 
         <p class="success">{{ success }}</p>
         {% endif %}
-
-        <section class="form">
-
+        <section>
+            <form action="{{ path }}login/auth" method="post" class="form">
             <h2>Login</h2>
-            <form action="{{ path }}login/auth" method="post">
                 <label>Email: 
                     <input type="email" name="email" required>
                 </label>

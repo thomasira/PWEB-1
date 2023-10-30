@@ -70,6 +70,11 @@
 
         }
 
+        public function datePast($date = null){
+            if(!$date) $date = date("Y/m/d");
+            if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
+            else return true;
+        }
         /**
          * File
          *

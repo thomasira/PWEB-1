@@ -1,67 +1,95 @@
 
 
 <main>
-    <section class="flow-form">
 {% if error %} 
     <p class="error">{{ error }}</p>
 {% endif %}
-    <section class="form row">
+    <section>
         <h2>Créer une enchère</h2>
-        <form action="{{ path }}enchere/store" method="post" >
-            <div class="form var-neutralD">
-                <h3>Votre enchère</h3>
-                <label>Nom
-                    <input type="text" name="nom_enchere" value="{{ enchere.nom_enchere }}" required>
-                    <span class="error">{{ errors.nom_enchere }}</span>
-                </label>
-                <label>Prix de départ
-                    <div><input type="number" min="10" step="0.50" value="10.00" name="prix_plancher" required/><span>$</span></div>
-                    <span>{{ errors.prix_plancher }}</span>
-                </label>
-                <label>Date de début
-                    <input type="date" name="date_debut" required>
-                    <span class="error">{{ errors.date_debut }}</span>
-                </label>
-                <label>Date de fin
-                    <input type="date" name="date_fin" required>
-                    <span class="error">{{ errors.date_fin }}</span>
-                </label>
-            </div>
-            <div class="form">
-                <h3>Timbre</h3>
-                <label>Nom
-                    <input type="text" name="nom_timbre" value="{{ timbre.nom_timbre }}" required>
-                    <span class="error">{{ errors.nom_timbre }}</span>
-                </label>
-                <label>Date de création
-                    <input type="date" name="date_creation" required>
-                    <span class="error">{{ errors.date_creation }}</span>
-                </label>
-                <label>Pays d'origine
-                    <input type="text" name="pays_origine" value="{{ timbre.pays_origine }}" required>
-                    <span class="error">{{ errors.pays_origine }}</span>
-                </label>
-                <label>Est-il certifié?
-                    <select name="certifie" required>
-                        <option value="0">non</option>
-                        <option value="1">oui</option>
-                    </select>
-                </label>
-                <label>Tirage
-                    <input type="text" name="tirage" value="{{ timbre.tirage }}">
-                    <span class="error">{{ errors.tirage }}</span>
-                </label>
-                <label>Dimensions
-                    <input type="text" name="tirage" value="{{ timbre.tirage }}">
-                    <span class="error">{{ errors.tirage }}</span>
-                </label>
-
-                <input type="hidden" name="privilege_id" value="3">
+        <div>
+            <form action="{{ path }}enchere/store" method="post" class="form-enchere">
+                <div class="form var-neutralD">
+                    <h3>Votre enchère</h3>
+                    <div class="flex-row">
+                        <div>
+                            <label>Nom
+                                <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}">
+                                <span class="error">{{ errors.nom_enchere }}</span>
+                            </label>
+                            <label>Description
+                                <input type="text" name="enchere[description]" value="{{ enchere.descrition }}">
+                                <span class="error">{{ errors.description }}</span>
+                            </label>
+                            <label>Prix de départ
+                                <div><input type="number" min="10" step="0.50" value="10.00" name="enchere[prix_plancher]" required/><span>$</span></div>
+                                <span>{{ errors.prix_plancher }}</span>
+                            </label>
+                        </div>
+                        <div>
+                            <label>Date de début
+                                <input type="date" name="enchere[date_debut]" required>
+                                <span class="error">{{ errors.date_debut }}</span>
+                            </label>
+                            <label>Date de fin
+                                <input type="date" name="enchere[date_fin]" required>
+                                <span class="error">{{ errors.date_fin }}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form">
+                    <h3>Timbre</h3>
+                    <div class="flex-row">
+                        <div>
+                            <label>Nom
+                                <input type="text" name="timbre[nom_timbre]]" value="{{ timbre.nom_timbre }}" required>
+                                <span class="error">{{ errors.nom_timbre }}</span>
+                            </label>
+                            <label>Date de création
+                                <input type="date" name="timbre[date_creation]" required>
+                                <span class="error">{{ errors.date_creation }}</span>
+                            </label>
+                            <label>Pays d'origine
+                                <input type="text" name="timbre[pays_origine]" value="{{ timbre.pays_origine }}" required>
+                                <span class="error">{{ errors.pays_origine }}</span>
+                            </label>
+                            <label>Est-il certifié?
+                                <select name="timbre[certifie]" required>
+                                    <option value="0">non</option>
+                                    <option value="1">oui</option>
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <label>Tirage
+                                <input type="text" name="timbre[tirage]" value="{{ timbre.tirage }}">
+                                <span class="error">{{ errors.tirage }}</span>
+                            </label>
+                            <label>Dimensions
+                                <input type="text" name="timbre[dimensions]" value="{{ timbre.simensions }}">
+                                <span class="error">{{ errors.tirage }}</span>
+                            </label>
+                            <label>Images: 
+                                <input type="file" accept="image/*" name="timbre[images]" multiple>
+                                <span class="error">{{ errors.images }}</span>
+                            </label>
+                            <label>Condition:
+                                <select name="timbre[condition_id]">
+                                    {% for condition in conditions %}
+                                        <option value="{{ condition.id }}">{{ condition.condition}}</option>
+                                    {% endfor %}
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="membre_id" value="{{ session.id }}">
                 <input type="submit" value="create" class="button-text">
-            </div>
-       </form>
+           </form>
+        </div>
+        
     </section>
-</section>
     <footer>
         <div>
             <section>

@@ -10,7 +10,7 @@
 .form h2{
     font-size: var(--fontm);
 }
-.form form{
+.form{
     display: flex;
     flex-flow: column;
     gap: var(--gapxs);
@@ -32,15 +32,4 @@
 .form.var-neutralD{
     background-color: var(--colorNeutralD);
 }
-.form.row form{
-    display: flex;
-    flex-flow: row;
-    gap: var(--gaps);
 
-    &>div{
-        display: flex;
-        flex-flow: column;
-        gap: var(--gapxs);
-        align-items: start;
-    }
-}
