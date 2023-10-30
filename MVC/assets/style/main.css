@@ -10,6 +10,7 @@
 @import url(./layout/schoolWrapper.css);
 @import url(./layout/section-enchere.css);
 @import url(./layout/structure.css);
+@import url(./layout/flex-row.css);
 
 @import url(./components/navigation/navigation-enchere.css);
 @import url(./components/navigation/navigation-icon.css);

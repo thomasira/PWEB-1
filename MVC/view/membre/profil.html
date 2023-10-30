@@ -2,22 +2,65 @@
 
 <main>
     <header>
-        <h1>Bienvenue {{ membre.nom_membre}}</h1>
+        <h1>Bienvenue {{ membre.nom_membre }}</h1>
     </header>
-    <div>
+    <section class="flex-row mid">
         <section>
+            <article class="card-info">
+                <hgroup>
+                    <h2>{{ membre.nom_membre }}</h2>
+                    <p><img src="#" alt="image enveloppe"> {{ membre.email }}</p>
+                </hgroup>
+                <div>
+                    <p>total nbr of bets-add to table</p>
+                    <p>total nbr of encheres-add to table</p>
+                </div>
+
+            </article>    
+        </section>
+        <section class="card-profil-encheres">
             <h2>Vos Enchères</h2>
             <nav>
                 <a href="#" class="button-text">En cours</a>
                 <a href="#" class="button-text">Passé</a>
             </nav>
-            <div class>
-    
+            <div>
             </div>
         </section>
-        <section>
-            <h2>Créer une Enchère</h2>
-            <a href="#">Créer</a>
+        <section class="form">
+            <h3>Créer une Enchère</h3>
+            <form action="{{ path}}enchere/create" method="post">
+                <label> Nom:
+                    <input type="text" name="nom_enchere">
+                </label>
+                <input type="submit" value="Créer" class="button-text">
+            </form>
         </section>
-    </div>
+    </section>
+    <footer>
+        <div>
+            <section>
+                <h3>Contactez-nous</h3>
+                <p>Adresse: <span>28 rue de l'étampe, Min., USA, 1W3SD3</span></p>
+                <p>Téléphone: <span>1-544-432-4222</span></p>
+                <p>Email: <span>contact@lordstampee.com</span></p>
+            </section>
+            <section>
+                <h3>Suivez-nous</h3>
+                <div>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/facebook.svg" alt="facebook-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/x.svg" alt="x-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/instagram.svg" alt="instagram-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/threads.svg" alt="threads-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/tiktok.svg" alt="tiktok-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/courrier.svg" alt="courrier-icon" loading="lazy"></a>
+                </div>
+            </section>
+            <section>
+                <h3>Merci à</h3>
+                <img src="{{ path }}assets/icons/external/maisonneuve.svg" alt="maisonneuve-icon" loading="lazy">
+                <img src="{{ path }}assets/icons/external/rquebec.svg" alt="rquebec-icon" loading="lazy">
+            </section>
+        </div>
+    </footer>
 </main>

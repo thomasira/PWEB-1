@@ -1,0 +1,18 @@
+
+.flex-row{
+    align-self: start;
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gapm);
+}
+.flex-row>*{
+    flex: 1;
+}
+.flex-row.mid{
+    &>*{
+        flex: 1;
+    }
+    &>*:nth-of-type(2){
+        flex: 2;
+    }
+}

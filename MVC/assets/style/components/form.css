@@ -29,3 +29,16 @@
 .form [type="submit"]{
     background-color: var(--colorSecD);
 }
+
+.form.row form{
+    display: flex;
+    flex-flow: row;
+    gap: var(--gaps);
+
+    &>div{
+        display: flex;
+        flex-flow: column;
+        gap: var(--gapxs);
+        align-items: start;
+    }
+}

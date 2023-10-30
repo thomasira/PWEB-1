@@ -12,5 +12,4 @@ class Membre extends Crud {
         "privilege_id"
     ];
 }
-
 ?>
