@@ -12,6 +12,8 @@ class Twig {
         }
         else $guest = true;
         $twig->addGlobal("guest", $guest);
+        $twig->addGlobal("date", date("Y-m-d"));
+
 
         $url = isset($_SERVER["PATH_INFO"]) ? explode("/", ltrim($_SERVER["PATH_INFO"], "/")) : "/";
         if ($url != "/") $head["title"] = $url[0];

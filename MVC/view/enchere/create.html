@@ -27,11 +27,11 @@
                         </div>
                         <div>
                             <label>Date de début
-                                <input type="date" name="enchere[date_debut]" required>
+                                <input type="date" name="enchere[date_debut]" min="{{ date }}" required>
                                 <span class="error">{{ errors.date_debut }}</span>
                             </label>
                             <label>Date de fin
-                                <input type="date" name="enchere[date_fin]" required>
+                                <input type="date" name="enchere[date_fin]" min="{{ date }}" required>
                                 <span class="error">{{ errors.date_fin }}</span>
                             </label>
                         </div>
@@ -47,7 +47,7 @@
                                 <span class="error">{{ errors.nom_timbre }}</span>
                             </label>
                             <label>Date de création
-                                <input type="date" name="timbre[date_creation]" required>
+                                <input type="date" name="timbre[date_creation]" min="1840-01-01" required>
                                 <span class="error">{{ errors.date_creation }}</span>
                             </label>
                             <label>Pays d'origine

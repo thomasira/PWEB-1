@@ -80,15 +80,25 @@ class ControllerEnchere implements Controller {
         RequirePage::library("Validation");
         $val = new Validation;
 
-        if($_POST["enchere"]["date_debut"] > date("Y-m-d")) {
-            print_r('okay');
-        } else print_r("notokay");
-        print_r($_POST["enchere"]["date_debut"]);
-        print_r(date("Y-m-d"));
-        die();
         extract($_POST);
-        $val->name("nom_enchere")->value($enchere["nom_enchere"])->min(4)->max(45)->required();
-        $val->name("date_debut")->value($enchere["date_debut"])->min(4)->max(45)->required();
+
+        $val->name("nom_enchere")->value($enchere["nom_enchere"])
+            ->min(4)->max(45)->required();
+
+        $val->name("date_debut")->value($enchere["date_debut"])
+            ->datePast(date("Y-m-d"))->required();
+
+        $val->name("date_fin")->value($enchere["date_fin"])
+            ->datePast($enchere["date_debut"])->required();
+
+        $val->name("prix_plancher")->value($enchere["prix_plancher"])
+            ->is_float($enchere["prix_plancher"])->min(10)->required();
+        
+
+        $val->name("nom_timbre")->value($timbre["nom_timbre"])
+            ->min(4)->max(45)->required();
+
+        
         return $val;
     }
 

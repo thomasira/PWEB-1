@@ -70,8 +70,12 @@
 
         }
 
-        public function datePast($date = null){
-            if(!$date) $date = date("Y/m/d");
+        public function datePast($date) {
+            if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
+            else return true;
+        }
+
+        public function dateFuture($date) {
             if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
             else return true;
         }
