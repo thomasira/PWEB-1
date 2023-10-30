@@ -5,11 +5,11 @@
 {% if error %} 
     <p class="error">{{ error }}</p>
 {% endif %}
-    <section >
+    <section class="form row">
         <h2>Créer une enchère</h2>
         <form action="{{ path }}enchere/store" method="post" >
-            <div class="form">
-                <h3></h3>
+            <div class="form var-neutralD">
+                <h3>Votre enchère</h3>
                 <label>Nom
                     <input type="text" name="nom_enchere" value="{{ enchere.nom_enchere }}" required>
                     <span class="error">{{ errors.nom_enchere }}</span>

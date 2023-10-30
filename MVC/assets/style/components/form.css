@@ -29,7 +29,9 @@
 .form [type="submit"]{
     background-color: var(--colorSecD);
 }
-
+.form.var-neutralD{
+    background-color: var(--colorNeutralD);
+}
 .form.row form{
     display: flex;
     flex-flow: row;
