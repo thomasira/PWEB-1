@@ -1,15 +1,14 @@
 <?php
 require_once "./model/Crud.php";
 
-class User extends Crud {
-    public $table = "pw2tp3_user";
+class Membre extends Crud {
+    public $table = "pweb_membre";
     public $primaryKey = "id";
     public $fillable = [
         "id",
-        "name",
+        "nom",
         "email",
-        "password", 
-        "address",
+        "password",
         "privilege_id"
     ];
 }

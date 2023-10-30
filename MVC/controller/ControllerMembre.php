@@ -1,11 +1,7 @@
 <?php
-RequirePage::model("User");
+RequirePage::model("Membre");
 RequirePage::model("Privilege");
-RequirePage::model("Staff");
-RequirePage::model("Stamp");
-RequirePage::model("Customer");
-RequirePage::model("StampCategory");
-RequirePage::library("Mailer");
+
 
 class ControllerUser implements Controller {
 

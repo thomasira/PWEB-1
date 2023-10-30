@@ -1,5 +1,5 @@
 <?php
-RequirePage::model("User");
+/* RequirePage::model("User"); */
 
 class ControllerLogin implements Controller {
 
@@ -10,7 +10,7 @@ class ControllerLogin implements Controller {
         if(!isset($_SESSION["fingerprint"])) Twig::render("login/index.php");
         else RequirePage::redirect("error");
     }
-
+ 
     /**
      * authentifier la connexion
      */

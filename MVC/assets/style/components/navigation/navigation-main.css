@@ -42,6 +42,10 @@
     gap: var(--gaps);
     max-width: 420px;
     padding: var(--gaps);
+
+    & a{
+        padding: 0;
+    }
 }
 
 /* états */
