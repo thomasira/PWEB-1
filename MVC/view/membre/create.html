@@ -1,0 +1,56 @@
+
+
+<main>
+    <section class="flow-form">
+
+
+{% if error %} 
+    <p class="error">{{ error }}</p>
+{% endif %}
+    <section class="form">
+        <h2>Créer un compte</h2>
+        <form action="{{ path }}membre/store" method="post">
+        <label>Nom
+            <input type="text" name="nom_membre" value="{{ membre.nom_membre }}" required>
+            <span class="error">{{ errors.name }}</span>
+        </label>
+        <label>Email
+            <input type="email" name="email" value="{{ membre.email }}" required>
+            <span>{{ errors.email }}</span>
+        </label>
+        <label>Mot de passe(min. 8 car.)
+            <input type="password" name="password" required>
+            <span class="error">{{ errors.password }}</span>
+        </label>
+        <input type="hidden" name="privilege_id" value="3">
+        <input type="submit" value="create" class="button-text">
+       </form>
+    </section>
+</section>
+    <footer>
+        <div>
+            <section>
+                <h3>Contactez-nous</h3>
+                <p>Adresse: <span>28 rue de l'étampe, Min., USA, 1W3SD3</span></p>
+                <p>Téléphone: <span>1-544-432-4222</span></p>
+                <p>Email: <span>contact@lordstampee.com</span></p>
+            </section>
+            <section>
+                <h3>Suivez-nous</h3>
+                <div>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/facebook.svg" alt="facebook-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/x.svg" alt="x-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/instagram.svg" alt="instagram-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/threads.svg" alt="threads-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/tiktok.svg" alt="tiktok-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/courrier.svg" alt="courrier-icon" loading="lazy"></a>
+                </div>
+            </section>
+            <section>
+                <h3>Merci à</h3>
+                <img src="{{ path }}assets/icons/external/maisonneuve.svg" alt="maisonneuve-icon" loading="lazy">
+                <img src="{{ path }}assets/icons/external/rquebec.svg" alt="rquebec-icon" loading="lazy">
+            </section>
+        </div>
+    </footer>
+</main>

@@ -1,5 +1,5 @@
 <?php
-/* RequirePage::model("User"); */
+RequirePage::model("Membre");
 
 class ControllerLogin implements Controller {
 
@@ -7,7 +7,7 @@ class ControllerLogin implements Controller {
      * afficher l'index
      */
     public function index() {
-        if(!isset($_SESSION["fingerprint"])) Twig::render("login/index.php");
+        if(!isset($_SESSION["fingerprint"])) Twig::render("login/index.html");
         else RequirePage::redirect("error");
     }
  
@@ -15,34 +15,33 @@ class ControllerLogin implements Controller {
      * authentifier la connexion
      */
     public function auth() {
-        $user = new User;
+        $membre = new Membre;
         $where["target"] = "email";
         $where["value"] = $_POST["email"];
-        $readUser = $user->readWhere($where);
+        $readMembre = $membre->readWhere($where);
 
-        if(!$readUser) {
-            $data["error"] = "no such account";
-            Twig::render("login/index.php", $data);
+        if(!$readMembre) {
+            $data["error"] = "ce compte n'existe pas";
+            Twig::render("login/index.html", $data);
             exit();
         }
-        $readUser = $readUser[0];
+        $readMembre = $readMembre[0];
         $password = $_POST["password"];
-        $dbPassword = $readUser["password"];
+        $dbPassword = $readMembre["password"];
         $salt = "7dh#9fj0K";
 
         if(password_verify($password.$salt, $dbPassword)) {
             session_regenerate_id();
-            $_SESSION["id"] = $readUser["id"];
-            $_SESSION["name"] = $readUser["name"];
+            $_SESSION["id"] = $readMembre["id"];
+            $_SESSION["name"] = $readMembre["name"];
             $_SESSION["fingerprint"] = md5($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']);
-            $_SESSION["privilege_id"] = $readUser["privilege_id"];
+            $_SESSION["privilege_id"] = $readMembre["privilege_id"];
         } else {
-            $data["error"] = "password not correct";
-            Twig::render("login/index.php", $data);
+            $data["error"] = "mot de pass incorrect";
+            Twig::render("login/index.html", $data);
             exit();
         }
-        if($_SESSION["privilege_id"] < 3) RequirePage::redirect("panel");
-        else RequirePage::redirect("customer/profile");
+        RequirePage::redirect("membre/profil");
     }
 
     /**

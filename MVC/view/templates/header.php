@@ -33,12 +33,12 @@
             <div>
                 <form class="recherche">
                     <label>
-                        <img src="./assets/icons/magnifier.svg" alt="loupe recherche" title="rechercher" loading="lazy">
+                        <img src="{{ path }}assets/icons/magnifier.svg" alt="loupe recherche" title="rechercher" loading="lazy">
                         <input type="text" name="recherche">
                         <span title="plus d'option">+</span>
                     </label>
                 </form>
-                <a href="{{path}}login"><img src="./assets/icons/profile.svg" alt="profile-icon" title="profil" loading="lazy"></a>
+                <a href="{{ path }}membre/profil"><img src="{{ path }}assets/icons/profile.svg" alt="profile-icon" title="profil" loading="lazy"></a>
             </div>
         </div>
     </nav>
@@ -83,8 +83,8 @@
 
     <!-- nav icon -->
     <aside class="navigation-icon">
-        <button><img src="./assets/shapes/nav-icon/magnifier.svg" alt="recherche" loading="lazy"></button>
-        <button><img src="./assets/shapes/nav-icon/burger.svg" alt="menu" loading="lazy"></button>
-        <button><img src="./assets/shapes/nav-icon/profileS.svg" alt="profil" loading="lazy"></button>
+        <button><img src="{{ path }}assets/shapes/nav-icon/magnifier.svg" alt="recherche" loading="lazy"></button>
+        <button><img src="{{ path }}assets/shapes/nav-icon/burger.svg" alt="menu" loading="lazy"></button>
+        <button><img src="{{ path }}assets/shapes/nav-icon/profileS.svg" alt="profil" loading="lazy"></button>
     </aside>
 

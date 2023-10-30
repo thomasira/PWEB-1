@@ -30,6 +30,10 @@
 @import url(./components/flow-thumb.css);
 @import url(./components/recherche.css);
 @import url(./components/thumb-lot.css);
+@import url(./components/flow-form.css);
+@import url(./components/form.css);
+
+
 
 @import url(./components/atoms/tag-cat.css);
 @import url(./components/atoms/tag-mention.css);

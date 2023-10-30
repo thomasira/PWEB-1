@@ -6,7 +6,7 @@ class Membre extends Crud {
     public $primaryKey = "id";
     public $fillable = [
         "id",
-        "nom",
+        "nom_membre",
         "email",
         "password",
         "privilege_id"

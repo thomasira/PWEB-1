@@ -20,6 +20,7 @@
     background-color: var(--colorMainD);
 }
 .button-text.var-neutral{
+    color: var(--colorDark);
     background-color: var(--colorNeutral);
 }
 .button-text.var-neutralL{

@@ -1,0 +1,14 @@
+
+.flow-form{
+    display: flex;
+    flex-flow: column;
+    gap: var(--gapm);
+    align-items: center;
+    padding: var(--gapxxl) 0;
+}
+.flow-form article{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: var(--gapxs);
+}
