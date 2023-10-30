@@ -18,7 +18,7 @@ USE `e2395387` ;
 -- Table `e2395387`.`pweb_condition`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `e2395387`.`pweb_condition` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `condition` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
@@ -38,8 +38,8 @@ ENGINE = InnoDB;
 -- Table `e2395387`.`pweb_membre`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `e2395387`.`pweb_membre` (
-  `id` INT NOT NULL,
-  `nom_user` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `nom_membre` VARCHAR(45) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `password` VARCHAR(256) NOT NULL,
   `privilege_id` INT NOT NULL,
