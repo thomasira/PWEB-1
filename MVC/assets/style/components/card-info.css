@@ -1,0 +1,9 @@
+
+.card-info{
+    border-radius: .4em;
+    background-color: var(--colorMainD);
+    border: var(--borderStd);
+    box-shadow: 2px 2px var(--colorDark);
+    color: var(--colorLight);
+    padding: var(--gaps);
+}

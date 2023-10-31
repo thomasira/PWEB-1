@@ -1,0 +1,7 @@
+
+.error{
+    color: var(--colorError);
+}
+input +.error{
+    border-color: var(--colorError);
+}

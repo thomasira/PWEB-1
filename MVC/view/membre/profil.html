@@ -1,21 +1,18 @@
 
 
 <main>
-    <header>
-        <h1>Bienvenue {{ membre.nom_membre }}</h1>
-    </header>
     <section class="flex-row mid">
         <section>
             <article class="card-info">
                 <hgroup>
                     <h3>{{ membre.nom_membre }}</h3>
-                    <p><img src="#" alt="image enveloppe"> {{ membre.email }}</p>
+                    <p>&#9993 : {{ membre.email }}</p>
                 </hgroup>
                 <div>
                     <p>total nbr of bets-add to table</p>
                     <p>total nbr of encheres-add to table</p>
                 </div>
-
+                <a href="{{ path }}login/logout" class="button-text">Logout</a>
             </article>    
         </section>
         <section class="card-profil-encheres">
@@ -25,7 +22,7 @@
                     <article class="thumb-lot">
                         <div>
                             <picture>
-                                <img src="{{ path }}assets/img/public/{{ image_principale }}" alt=""  loading="lazy">
+                                <img src="{{ path }}assets/img/public/{{ enchere.image.image_link }}" alt=""  loading="lazy">
                             </picture>
                         </div>
                         <div>

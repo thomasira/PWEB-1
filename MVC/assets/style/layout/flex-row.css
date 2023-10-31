@@ -1,6 +1,7 @@
 
 .flex-row{
     align-items: start;
+    justify-content: start;
     display: flex;
     flex-flow: row wrap;
     gap: var(--gapm);
@@ -13,6 +14,6 @@
         flex: 1;
     }
     &>*:nth-of-type(2){
-        flex: 4;
+        flex: 3;
     }
 }

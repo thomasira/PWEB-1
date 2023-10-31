@@ -25,24 +25,21 @@ class ControllerMembre implements Controller {
             $data["membre"] = $membre->readId($id);
 
             $enchere = new Enchere;
-            $data["encheres"] = $enchere->read();
+            $where["target"] = "membre_id";
+            $where["value"] = $data["membre"]["id"];
+            $data["encheres"] = $enchere->readWhere($where);
 
-            $timbre = new Timbre;
-            $where["target"] = "enc  here_id";
-            $where["value"] = $data
-            $timbreData = $timbre->readId($data["encheres"]);
-
-            $timbreId = $timbreData[0]["id"];
-
-            $image = new Image;
-            $imageData = $image->readId($timbreId);
-            $data["image_principale"] = $imageData[0]["image_link"];
-
-/*             foreach($data["encheres"] as $enchereData) {
-                $timbre = new Timbre;
-                $data["encheres"]["timbres"] = $timbre->readId($data["encheres"]);
-            } */
-
+            if($data["encheres"]) {
+                foreach($data["encheres"] as &$enchere) {
+                    $timbre = new Timbre;
+                    $where["target"] = "enchere_id";
+                    $where["value"] = $enchere["id"];
+                    $timbreData = $timbre->readWhere($where);
+                     
+                    $image = new Image;
+                    $enchere["image"] = $image->readId($timbreData[0]["id"]);
+                }
+            }
             Twig::render("membre/profil.html", $data);
         };
     }
@@ -97,8 +94,8 @@ class ControllerMembre implements Controller {
 
         extract($_POST);
         $val->name("nom_membre")->value($nom_membre)->min(4)->max(45)->required();
-        if(isset($email)) $val->name("email")->value($email)->pattern("email")->max(45)->required();
-        if(isset($password)) $val->name("password")->value($password)->min(8)->max(20)->pattern("no_space")->required();
+        $val->name("email")->value($email)->pattern("email")->max(45)->required();
+        $val->name("password")->value($password)->min(8)->max(20)->pattern("no_space")->required();
 
         return $val;
     }

@@ -17,19 +17,59 @@
     align-items: start;
 }
 .form label{
+    max-width: max-content;
     font-weight: 600;
     display: flex;
     flex-flow: column;
 }
-.form input{
-    padding: var(--gapTHxxs);
+.form input, textarea, select{
+    font-family: var(--typeText);
+    font-size: var(--fontText);
+    padding: var(--gapxxs);
     background-color: var(--colorLight);
     border-radius: .4em;
+    border: var(--borderStd);
+    box-shadow: inset 1px 1px var(--colorDark);
+}
+.form select{
+    padding: var(--gapTHxxs);
+}
+.form textarea{
+    border: var(--borderStd);
+    resize: none;
 }
 .form [type="submit"]{
     background-color: var(--colorSecD);
 }
+.form label[id="tag-prix"] div{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    max-width: 200px;
+}
+.form input[type="number"]{
+    max-width: 90%;
+    border: none;
+    font-weight: 600;
+    font-size: var(--fontm);
+    box-shadow: none;
+}
+
+.form.split{
+    &>div{
+        display: flex;
+        flex-flow: row wrap;
+        gap: var(--gapm);
+        justify-content: start;
+
+        &>div{
+            display: flex;
+            flex-flow: column;
+            gap: var(--gapxs);
+        }
+    }
+}
+
 .form.var-neutralD{
     background-color: var(--colorNeutralD);
 }
-
