@@ -1,9 +1,8 @@
 <?php
 RequirePage::model("Enchere");
 RequirePage::model("Timbre");
+RequirePage::model("Image");
 RequirePage::model("Condition");
-
-
 
 class ControllerEnchere implements Controller {
 
@@ -21,14 +20,6 @@ class ControllerEnchere implements Controller {
         Twig::render("enchere/create.html", $data);
     }
 
-    public function profil() {
-        if(CheckSession::sessionAuth()) {
-            $id = $_SESSION["id"];
-            $membre = new Membre;
-            $data["membre"] = $membre->readId($id);
-            Twig::render("membre/profil.html", $data);
-        };
-    }
 
     /**
      * enregistrer une entrée dans la DB
@@ -39,40 +30,47 @@ class ControllerEnchere implements Controller {
             exit();
         } 
 
-/*         echo '<pre>';
-        print_r($_POST);
-        die(); */
+        $_POST["enchere"]["membre_id"] = $_POST["membre_id"];
+        $_POST["timbre"]["membre_id"] = $_POST["membre_id"];
+
         $result = $this->validate();
 
         if($result->isSuccess()) {
-            //vérifier si email existe dans la DB
-            $membre = new Membre;
-            $where["target"] = "email";
-            $where["value"] = $_POST["email"];
-            $exist = $membre->ReadWhere($where);
-            if($exist) {
-                $data["error"] = "ce email est déjà associé à un compte";
-                if(isset($_SESSION["fingerprint"])) Twig::render("membre/create.html", $data);
-                else Twig::render("membre/create.html", $data);
-                exit();
-            }
             
-            //créer membre
-            $Membre = new Membre;
-            $salt = "7dh#9fj0K";
-            $_POST["password"] = password_hash($_POST["password"] . $salt, PASSWORD_BCRYPT);
-            $Membre->create($_POST);
+            //créer enchère
+            $enchere = new Enchere;
+            $enchereId = $enchere->create($_POST["enchere"]);
 
-            //message custom ou panel si la requête est faite à l'interne(employé seulement)
-            $data["success"] = "YEAH! votre compte est créé. Connectez-vous pour continuer";
-            Twig::render("login/index.html", $data);
+            //créer timbre -> can loop thru later in project
+            $timbre = new Timbre;
+            $_POST["timbre"]["enchere_id"] = $enchereId;
+            $timbreId = $timbre->create($_POST["timbre"]);
+
+            foreach($_FILES["images"]["name"] as $name) {
+                $data["timbre_id"] = $timbreId;
+                $data["image_link"] = $name;
+                $image = new Image;
+                $image->create($data);
+            }
+            for ($i=0; $i < count($_FILES["images"]["name"]); $i++) { 
+                $target_dir = "assets/img/public/";
+                $target_file = $target_dir . basename($_FILES["images"]["name"][$i]);
+                move_uploaded_file($_FILES["images"]["tmp_name"][$i], $target_file);
+            }
+
+            RequirePage::redirect("membre/profil");
 
         } else {
+            $condition = new Condition;
+            $data["conditions"] = $condition->read();
+            $data["timbre"] = $_POST["timbre"];
+            $data["enchere"] = $_POST["enchere"];
             $data["errors"] = $result->getErrors();
-            $data["membre"] = $_POST;
-            Twig::render("membre/create.html", $data);
+            Twig::render("enchere/create.html", $data);
         }
     }
+
+
     /**
      * valider les entrées
      */
@@ -81,6 +79,10 @@ class ControllerEnchere implements Controller {
         $val = new Validation;
 
         extract($_POST);
+
+        foreach($_FILES["images"]["error"] as $error) {
+            if($error == 1) $val->errors["images"] = "une de vos photos est trop large, max 2MB";
+        } 
 
         $val->name("nom_enchere")->value($enchere["nom_enchere"])
             ->min(4)->max(45)->required();
@@ -91,14 +93,25 @@ class ControllerEnchere implements Controller {
         $val->name("date_fin")->value($enchere["date_fin"])
             ->datePast($enchere["date_debut"])->required();
 
-        $val->name("prix_plancher")->value($enchere["prix_plancher"])
-            ->is_float($enchere["prix_plancher"])->min(10)->required();
+        $val->name("prix_plancher")->value(floatval($enchere["prix_plancher"]))
+            ->min(10)->required();
         
 
         $val->name("nom_timbre")->value($timbre["nom_timbre"])
             ->min(4)->max(45)->required();
 
-        
+        $val->name("date_creation")->value($timbre["date_creation"])
+            ->datePast("1840-01-01")->required();
+
+        $val->name("pays_origine")->value($timbre["pays_origine"])
+            ->min(3)->required();
+
+        if($timbre["tirage"]) $val->name("tirage")->value($timbre["tirage"])
+            ->min(3)->max(45);
+
+        if($timbre["dimensions"]) $val->name("dimensions")->value($timbre["dimensions"])
+            ->min(5)->max(45);
+
         return $val;
     }
 

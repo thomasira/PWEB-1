@@ -8,7 +8,7 @@
         <section>
             <article class="card-info">
                 <hgroup>
-                    <h2>{{ membre.nom_membre }}</h2>
+                    <h3>{{ membre.nom_membre }}</h3>
                     <p><img src="#" alt="image enveloppe"> {{ membre.email }}</p>
                 </hgroup>
                 <div>
@@ -19,22 +19,46 @@
             </article>    
         </section>
         <section class="card-profil-encheres">
-            <h2>Vos Enchères</h2>
-            <nav>
-                <a href="#" class="button-text">En cours</a>
-                <a href="#" class="button-text">Passé</a>
-            </nav>
-            <div>
+            <h3>Vos Enchères</h3>
+            <div class="flow-thumb">
+                {% for enchere in encheres %}
+                    <article class="thumb-lot">
+                        <div>
+                            <picture>
+                                <img src="{{ path }}assets/img/public/{{ image_principale }}" alt=""  loading="lazy">
+                            </picture>
+                        </div>
+                        <div>
+                            <header>
+                                <h4>{{ enchere.nom_enchere }}</h4>
+                            </header>
+                            <div>
+                                <div>
+                                    <table>
+                                        <caption>termine dans</caption>
+                                        <thead>
+                                            <tr>
+                                                <td>05</td>
+                                                <td>:23</td>
+                                                <td>:02</td>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div>
+                                    <p>mise courante</p>
+                                    <div class="tag-prix">3,201<span>$</span></div >
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+
             </div>
         </section>
         <section>
-            <form action="{{ path }}enchere/create" method="post" class="form">
-                <h3>Créer une Enchère</h3>
-                <label> Nom:
-                    <input type="text" name="nom_enchere">
-                </label>
-                <input type="submit" value="Créer" class="button-text">
-            </form>
+            <h3>Créer une Enchère</h3>
+            <a href="{{ path }}enchere/create" class="button-text">Créer</a>
         </section>
     </section>
     <footer>

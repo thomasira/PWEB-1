@@ -1,5 +1,8 @@
 <?php
 RequirePage::model("Membre");
+RequirePage::model("Enchere");
+RequirePage::model("Timbre");
+RequirePage::model("Image");
 
 
 class ControllerMembre implements Controller {
@@ -20,6 +23,26 @@ class ControllerMembre implements Controller {
             $id = $_SESSION["id"];
             $membre = new Membre;
             $data["membre"] = $membre->readId($id);
+
+            $enchere = new Enchere;
+            $data["encheres"] = $enchere->read();
+
+            $timbre = new Timbre;
+            $where["target"] = "enc  here_id";
+            $where["value"] = $data
+            $timbreData = $timbre->readId($data["encheres"]);
+
+            $timbreId = $timbreData[0]["id"];
+
+            $image = new Image;
+            $imageData = $image->readId($timbreId);
+            $data["image_principale"] = $imageData[0]["image_link"];
+
+/*             foreach($data["encheres"] as $enchereData) {
+                $timbre = new Timbre;
+                $data["encheres"]["timbres"] = $timbre->readId($data["encheres"]);
+            } */
+
             Twig::render("membre/profil.html", $data);
         };
     }
@@ -65,48 +88,6 @@ class ControllerMembre implements Controller {
         }
     }
 
-   
-    /**
-     * afficher le formulaire mettre à jour
-     */
-    public function edit() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
-        checkSession::sessionAuth();
-
-        if($_SESSION["privilege_id"] < 2) $id = $_POST["id"];
-        else $id = $_SESSION["id"];
-
-        $user = new User;
-        $data["user"] = $user->readId($id);
-        Twig::render("user/edit.php", $data);
-    }
-
-    /**
-     * mettre à jour une entrée dans la DB
-     */
-    public function update() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
-        $result = $this->validate();
-
-        if($result->isSuccess()) {
-            $user = new User;
-            $updatedId = $user->update($_POST);
-            if($updatedId) RequirePage::redirect("customer/profile");
-            else print_r($updatedId);
-        } else {
-            $data["errors"] = $result->getErrors();
-            $data["user"] = $_POST;
-
-            Twig::render("user/edit.php", $data);
-        }
-    }
-
     /**
      * valider les entrées
      */
@@ -121,5 +102,4 @@ class ControllerMembre implements Controller {
 
         return $val;
     }
-
 }

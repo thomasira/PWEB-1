@@ -6,7 +6,7 @@ class Enchere extends Crud {
     public $primaryKey = "id";
     public $fillable = [
         "id",
-        "enchere_nom",
+        "nom_enchere",
         "date_debut",
         "date_fin",
         "prix_plancher",

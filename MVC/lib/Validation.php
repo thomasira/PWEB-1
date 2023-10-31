@@ -72,12 +72,12 @@
 
         public function datePast($date) {
             if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
-            else return true;
+            return $this;
         }
 
         public function dateFuture($date) {
             if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
-            else return true;
+            return $this;
         }
         /**
          * File

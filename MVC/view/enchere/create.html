@@ -1,37 +1,36 @@
 
 
 <main>
-{% if error %} 
-    <p class="error">{{ error }}</p>
-{% endif %}
     <section>
         <h2>Créer une enchère</h2>
         <div>
-            <form action="{{ path }}enchere/store" method="post" class="form-enchere">
+            <form action="{{ path }}enchere/store" method="post" class="form-enchere" enctype="multipart/form-data">
                 <div class="form var-neutralD">
                     <h3>Votre enchère</h3>
                     <div class="flex-row">
                         <div>
                             <label>Nom
-                                <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}">
+                                <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}" required>
                                 <span class="error">{{ errors.nom_enchere }}</span>
                             </label>
                             <label>Description
-                                <input type="text" name="enchere[description]" value="{{ enchere.descrition }}">
+                                <input type="text" name="enchere[description]" value="{{ enchere.description }}">
                                 <span class="error">{{ errors.description }}</span>
                             </label>
                             <label>Prix de départ
-                                <div><input type="number" min="10" step="0.50" value="10.00" name="enchere[prix_plancher]" required/><span>$</span></div>
+                                <div>
+                                    <input type="number" min="10" step="0.50" value="{{ enchere.prix_plancher }}" name="enchere[prix_plancher]" required/><span>$</span>
+                                </div>
                                 <span>{{ errors.prix_plancher }}</span>
                             </label>
                         </div>
                         <div>
                             <label>Date de début
-                                <input type="date" name="enchere[date_debut]" min="{{ date }}" required>
+                                <input type="date" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" required>
                                 <span class="error">{{ errors.date_debut }}</span>
                             </label>
                             <label>Date de fin
-                                <input type="date" name="enchere[date_fin]" min="{{ date }}" required>
+                                <input type="date" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
                                 <span class="error">{{ errors.date_fin }}</span>
                             </label>
                         </div>
@@ -47,7 +46,7 @@
                                 <span class="error">{{ errors.nom_timbre }}</span>
                             </label>
                             <label>Date de création
-                                <input type="date" name="timbre[date_creation]" min="1840-01-01" required>
+                                <input type="date" name="timbre[date_creation]" min="1840-01-01" value="{{ timbre.date_creation }}" required>
                                 <span class="error">{{ errors.date_creation }}</span>
                             </label>
                             <label>Pays d'origine
@@ -67,11 +66,11 @@
                                 <span class="error">{{ errors.tirage }}</span>
                             </label>
                             <label>Dimensions
-                                <input type="text" name="timbre[dimensions]" value="{{ timbre.simensions }}">
-                                <span class="error">{{ errors.tirage }}</span>
+                                <input type="text" name="timbre[dimensions]" value="{{ timbre.dimensions }}">
+                                <span class="error">{{ errors.dimensions }}</span>
                             </label>
                             <label>Images: 
-                                <input type="file" accept="image/*" name="timbre[images]" multiple>
+                                <input type="file" accept="image/*" name="images[]" multiple>
                                 <span class="error">{{ errors.images }}</span>
                             </label>
                             <label>Condition:
