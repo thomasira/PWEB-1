@@ -16,5 +16,3 @@ class CheckSession {
         }
     }
 }
-
-//can probably check for privilege id as well, return id

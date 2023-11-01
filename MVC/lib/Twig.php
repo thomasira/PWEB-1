@@ -8,14 +8,12 @@ class Twig {
         if(isset($_SESSION["fingerprint"]) && 
         $_SESSION["fingerprint"] == md5($_SERVER["HTTP_USER_AGENT"] . $_SERVER["REMOTE_ADDR"])) {
             $guest = false;
-        }
-        else $guest = true;
+        } else $guest = true;
         
         $twig->addGlobal("path", ROOT);
         $twig->addGlobal("session", $_SESSION);
         $twig->addGlobal("guest", $guest);
         $twig->addGlobal("date", date("Y-m-d"));
-
 
         $url = isset($_SERVER["PATH_INFO"]) ? explode("/", ltrim($_SERVER["PATH_INFO"], "/")) : "/";
         if ($url != "/") $head["title"] = $url[0];
@@ -24,6 +22,9 @@ class Twig {
 
         $header = $twig->load("templates/header.php");
         $footer = $twig->load("templates/footer.php");
+
+        print_r($twig);
+        die();
 
         echo $twig->render($header, $head);
         echo $twig->render($template, $data);
