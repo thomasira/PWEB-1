@@ -3,6 +3,8 @@ RequirePage::model("Membre");
 RequirePage::model("Enchere");
 RequirePage::model("Timbre");
 RequirePage::model("Image");
+RequirePage::model("Mise");
+
 
 
 class ControllerMembre implements Controller {
@@ -19,29 +21,45 @@ class ControllerMembre implements Controller {
     }
 
     public function profil() {
-        if(CheckSession::sessionAuth()) {
-            $id = $_SESSION["id"];
-            $membre = new Membre;
-            $data["membre"] = $membre->readId($id);
+        CheckSession::sessionAuth();
+        
+        /* chercher le compte */
+        $id = $_SESSION["id"];
+        $membre = new Membre;
+        $data["membre"] = $membre->readId($id);
 
-            $enchere = new Enchere;
-            $where["target"] = "membre_id";
-            $where["value"] = $data["membre"]["id"];
-            $data["encheres"] = $enchere->readWhere($where);
+        /* chercher les enchères associées au compte */
+        $enchere = new Enchere;
+        $where["target"] = "membre_id";
+        $where["value"] = $data["membre"]["id"];
+        $data["encheres"] = $enchere->readWhere($where);
 
-            if($data["encheres"]) {
-                foreach($data["encheres"] as &$enchere) {
-                    $timbre = new Timbre;
-                    $where["target"] = "enchere_id";
-                    $where["value"] = $enchere["id"];
-                    $timbreData = $timbre->readWhere($where);
-                     
-                    $image = new Image;
-                    $enchere["image"] = $image->readId($timbreData[0]["id"]);
-                }
+
+        if($data["encheres"]) {
+            foreach($data["encheres"] as &$enchere) {
+
+                /* chercher la derniere mise */
+                $mise = new Mise;
+                $where["target"] = "enchere_id";
+                $where["value"] = $enchere["id"];
+                $what = "montant";
+                $maxMise = $mise->readMax($what, $where);
+
+                if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
+                else $enchere["max_mise"] = $maxMise[0];
+                    
+                /* chercher le/les timbres */
+                $timbre = new Timbre;
+                $where["target"] = "enchere_id";
+                $where["value"] = $enchere["id"];
+                $timbreData = $timbre->readWhere($where);
+                    
+                /* chercher la premiere image associée du premier timbre */
+                $image = new Image;
+                $enchere["image"] = $image->readId($timbreData[0]["id"]);
             }
-            Twig::render("membre/profil.html", $data);
-        };
+        }
+        Twig::render("membre/profil.html", $data);
     }
 
     /**
@@ -99,4 +117,5 @@ class ControllerMembre implements Controller {
 
         return $val;
     }
+
 }

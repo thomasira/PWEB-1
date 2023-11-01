@@ -13,13 +13,18 @@ class ControllerEnchere implements Controller {
         RequirePage::redirect("customer");
     }
 
+    public function show() {
+        $enchere = new Enchere;
+        $data["encheres"] = $enchere->read();
+
+    }
+
     public function create() {
         $condition = new Condition;
         $data["conditions"] = $condition->read();
         
         Twig::render("enchere/create.html", $data);
     }
-
 
     /**
      * enregistrer une entrée dans la DB
@@ -57,7 +62,6 @@ class ControllerEnchere implements Controller {
                 $target_file = $target_dir . basename($_FILES["images"]["name"][$i]);
                 move_uploaded_file($_FILES["images"]["tmp_name"][$i], $target_file);
             }
-
             RequirePage::redirect("membre/profil");
 
         } else {

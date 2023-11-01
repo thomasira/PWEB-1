@@ -17,6 +17,14 @@ abstract class Crud extends PDO {
         else return false;
     }
 
+    public function readMax($what, $where) {
+        $target = $where["target"];
+        $value = $where["value"];
+        $sql = "SELECT MAX($what) FROM $this->table WHERE $target = '$value'";
+        $query = $this->query($sql);
+        return $query->fetch();
+    }
+
     /**
      * lire les entrées de la DB associées à la classe et au paramètre $where
      * 
