@@ -27,7 +27,7 @@
         <div>
             <div>
                 <a href="{{ path }}home">stampee</a>
-                <a href="catalogue.html">Enchères</a>
+                <a href="{{ path }}enchere">Enchères</a>
                 <a href="#">Timbres</a>
             </div>
             <div>

@@ -1,0 +1,306 @@
+
+<main>
+<header class="entete">
+    <div>
+        <h2>Les enchères</h2>
+        <div>
+            <p>Le portail où trouver les meilleurs timbres</p>
+            <img src="./assets/shapes/edge.svg" alt="railway edge">
+        </div>
+    </div>
+    <aside><img src="./assets/shapes/train.svg" alt="train"></aside>
+</header>
+
+<!-- nav icon -->
+<aside class="navigation-icon">
+    <button><img src="./assets/shapes/nav-icon/magnifier.svg" alt="recherche" loading="lazy"></button>
+    <button><img src="./assets/shapes/nav-icon/burger.svg" alt="menu" loading="lazy"></button>
+    <button><img src="./assets/shapes/nav-icon/profileS.svg" alt="profil" loading="lazy"></button>
+</aside>
+
+<!-- section enchère -->
+<section class="section-enchere">
+
+    <!-- nav enchère -->
+    <nav class="navigation-enchere">
+        <div>
+            <button class="selected">En cours</button>
+            <button>À venir</button>
+            <button>Passé</button>
+            <button>Tout</button>
+        </div>
+        <div>
+            <h4>Classer par: </h4>
+            <button>Date</button>
+            <button>Prix</button>
+            <button class="selected">Nbr. de mises</button>
+        </div>
+    </nav>
+
+    <!-- section enchère et filtres -->
+    <div>
+
+        <div>
+            <!-- box-filter -->
+            <aside class="box-filter" data-js-boxFilter>
+                <header>
+                    <h2>Filtres</h2>
+                    <span data-js-trigger="open-filtre" class="inverse">&#709;</span>
+                </header> 
+                <form>
+                    <!-- les filtres et sous-filtres -->
+                    <section>
+                        <div data-js-filtre="fauna">
+                            <div>
+                                <div>
+                                    <input type="checkbox" name="fauna" value="1" id="fauna">
+                                    <label for="fauna">fauna</label>
+                                </div>
+                                <span data-js-trigger="open-filtre">&#709;</span>
+                            </div>
+                            <div data-js-subfiltre class="non-exist">
+                                <div>
+                                    <input type="checkbox" name="mammifère" value="1" id="mammifère">
+                                    <label for="mammifère">mammifère</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="insecte" value="1" id="insecte">
+                                    <label for="insecte">insecte</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-js-filtre="flora">
+                            <div>
+                                <div>
+                                    <input type="checkbox" name="flora" value="1" id="flora">
+                                    <label for="flora">flora</label>
+                                </div>
+                                <span data-js-trigger="open-filtre">&#709;</span>
+                            </div>
+                        
+                            <div data-js-subfiltre class="non-exist">
+                                <div>
+                                    <input type="checkbox" name="arbres" value="1" id="arbres">
+                                    <label for="arbres">arbres</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="fleurs" value="1" id="fleurs">
+                                    <label for="fleurs">fleurs</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-js-filtre="paysage">
+                            <div>
+                                <div>
+                                    <input type="checkbox" name="paysage" value="1" id="paysage">
+                                    <label for="paysage">paysage</label>
+                                </div>
+                                <span data-js-trigger="open-filtre">&#709;</span>
+                            </div>
+                            <div data-js-subfiltre class="non-exist">
+                                <div>
+                                    <input type="checkbox" name="montagne" value="1" id="montagne">
+                                    <label for="montagne">montagne</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="urbain" value="1" id="urbain">
+                                    <label for="urbain">urbain</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="rural" value="1" id="rural">
+                                    <label for="rural">rural</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div data-js-filtre="personnalite">
+                            <div>
+                                <div>
+                                    <input type="checkbox" name="personnalite" value="1" id="personnalite">
+                                    <label for="personnalite">personnalité</label>
+                                </div>
+                                <span data-js-trigger="open-filtre">&#709;</span>
+                            </div>
+                            <div data-js-subfiltre class="non-exist">
+                                <div>
+                                    <input type="checkbox" name="rois-et-reines" value="1" id="rois-et-reines">
+                                    <label for="rois-et-reines">rois et reines</label>
+                                </div>
+                                <div>
+                                    <input type="checkbox" name="star-du-cinema" value="1" id="star-du-cinema">
+                                    <label for="star-du-cinema">star du cinema</label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- les boutons et config -->
+                    <section>
+                        <aside>
+                            <button class="button-filter var-tri" data-js-trigger="reset">reset</button>
+                            <button class="button-filter var-tri">info</button>
+                        </aside>
+                        <button class="button-filter var-main var-lrg">GO</button>
+                    </section>
+
+                    <!-- les filtres perso -->
+                    <section>
+                        <h3>Mes filtres</h3>
+                        <div>
+                            <input type="checkbox" name="categorie1" value="1" id="categorie1">
+                            <label for="categorie1">catégorie 1</label>
+                        </div>
+                        
+                        <div>
+                            <input type="checkbox" name="categorie2" value="1" id="categorie2">
+                            <label for="categorie2">catégorie 2</label>
+                        </div>
+                                                        
+                        <div>
+                            <input type="checkbox" name="mesMises" value="1" id="mesMises">
+                            <label for="mesMises">mes mises</label>
+                        </div>
+                    </section>
+                </form>
+            </aside>                  
+        </div>
+
+        <!-- flow-lot -->
+        <section class="flow-lot">
+
+            <!-- card-lots -->
+            {% for enchere in encheres %}
+
+            <article class="card-lot" data-js-stamp>
+                <section>
+                    <div>
+                        <header>
+                            <a href="#"><h3>{{ enchere.nom_enchere }}</h3></a>
+                            <strong>{{ enchere.timbre.date_creation }} - {{ enchere.timbre.pays_origine }}</strong>
+                        </header>
+                        <div>
+                            <p>{{ enchere.description }}</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>condition: <strong>{{ enchere.timbre.condition.condition}}</strong></p>
+                        <p>étampé: <strong>{{ enchere.timbre.certifie ? 'oui' : 'non'}}</strong></p>
+                        <a class="button-text var-neutralL" href="#">voir plus</a>
+                        <button class="button-text var-neutralL">vendeur</button>
+                        <span>👁 345</span>
+                        <span><img src="./assets/shapes/mise.svg" alt="mise" loading="lazy"> 46</span>
+                    </div>
+                    <div>
+                        <img src="{{ path }}assets/img/public/{{ enchere.image.image_link }}" alt="{{ enchere.image.image_link }}" title="" data-js-image>
+                    </div>
+        
+                </section>
+                <section>
+                    <div>
+                        <div>
+                            <button class="button-icon bell light" aria-label="alert-button"><picture><img src="./assets/icons/bell.svg" alt="" loading="lazy"></picture></button>
+                            <button class="button-icon heart light" aria-label="like-button"><picture><img src="./assets/icons/heart.svg" alt="" loading="lazy"></picture></button>
+                            <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
+                        </div>
+                        <button class="button-miser">miser</button>
+                    </div>
+                    <div>
+                        <div>
+                            
+                            <table>
+                                <caption>temps restant</caption>
+                                <thead>
+                                    <tr>
+                                        <td>00</td>
+                                        <td>:45</td>
+                                        <td>:56</td>
+                                    </tr>
+                                </thead>
+                                <tr>
+                                    <td>h</td>
+                                    <td>m</td>
+                                    <td>s</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div>
+                            <p>mise courante</p>
+                            <div class="tag-prix">{{ enchere.max_mise}}<span>$</span></div>
+                        </div>
+                    </div>
+                </section>
+            </article>
+            
+            {% endfor%}
+
+
+        </section>
+        
+    </div>
+
+    <!-- bouton pour charger plus d'enchères  -->
+    <button class="button-text var-main var-lrg">voir plus</button>
+
+</section>
+
+<!-- section bas de page -->
+<div>
+    <section>
+        <article class="card-join">
+            <header>
+                <h2>Joignez vous au club!</h2>
+                <p>Être membre du club Stampee donne un accès privilégiés sur les enchères et plus encore!</p>
+                <a href="#" class="button-text var-lrg">Joindre</a>
+            </header>
+            <picture>
+                <img src="./assets/shapes/postal-stamp.svg" alt="postal stamp" loading="lazy">
+            </picture>
+        </article>
+        <article>
+            <div>
+                <h3>Vous ne trouvez pas ce que vous cherchez?</h3>
+                <p>faites une <a href="#">Recherche</a></p>
+            </div>
+            <div>
+                <h3>Vous voulez en savoir plus sur la philatélie?</h3>
+                <p>visitez notre page <a href="#">Actualités</a></p>
+            </div>
+            <div>
+                <h3>Vous désirez en apprendre plus sur le fondateur?</h3>
+                <p>lisez la bio de <a href="#">Lord Stampee</a></p>
+            </div>
+        </article>
+    </section>
+</div>
+
+<!-- footer -->
+<footer>
+    <div>
+        <section>
+            <h3>Contactez-nous</h3>
+            <p>Adresse: <span>28 rue de l'étampe, Min., USA, 1W3SD3</span></p>
+            <p>Téléphone: <span>1-544-432-4222</span></p>
+            <p>Email: <span>contact@lordstampee.com</span></p>
+        </section>
+        <section>
+            <h3>Suivez-nous</h3>
+            <div>
+                <a href="#" target="_blank"><img src="./assets/icons/external/facebook.svg" alt="facebook-icon" loading="lazy"></a>
+                <a href="#" target="_blank"><img src="./assets/icons/external/x.svg" alt="x-icon" loading="lazy"></a>
+                <a href="#" target="_blank"><img src="./assets/icons/external/instagram.svg" alt="instagram-icon" loading="lazy"></a>
+                <a href="#" target="_blank"><img src="./assets/icons/external/threads.svg" alt="threads-icon" loading="lazy"></a>
+                <a href="#" target="_blank"><img src="./assets/icons/external/tiktok.svg" alt="tiktok-icon" loading="lazy"></a>
+                <a href="#" target="_blank"><img src="./assets/icons/external/courrier.svg" alt="courrier-icon" loading="lazy"></a>
+            </div>
+        </section>
+        <section>
+            <h3>Merci à</h3>
+            <img src="./assets/icons/external/maisonneuve.svg" alt="maisonneuve-icon" loading="lazy">
+            <img src="./assets/icons/external/rquebec.svg" alt="rquebec-icon" loading="lazy">
+        </section>
+    </div>
+
+</footer>
+</main>

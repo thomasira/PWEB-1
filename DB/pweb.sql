@@ -58,11 +58,11 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `e2395387`.`pweb_enchere` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `enchere_nom` VARCHAR(45) NULL,
+  `nom_enchere` VARCHAR(45) NULL,
   `date_debut` DATE NOT NULL,
   `date_fin` DATE NOT NULL,
   `prix_plancher` FLOAT NOT NULL,
-  `coups_de_coeur` SMALLINT NOT NULL,
+  `coups_de_coeur` SMALLINT NOT NULL DEFAULT 0,
   `membre_id` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_enchere_membre1_idx` (`membre_id` ASC),
@@ -79,7 +79,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `e2395387`.`pweb_timbre` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `nom` VARCHAR(45) NOT NULL,
+  `nom_timbre` VARCHAR(45) NOT NULL,
   `date_creation` DATE NOT NULL,
   `pays_origine` VARCHAR(20) NOT NULL,
   `certifie` SMALLINT NOT NULL,

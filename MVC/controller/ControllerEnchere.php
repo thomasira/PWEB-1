@@ -2,6 +2,7 @@
 RequirePage::model("Enchere");
 RequirePage::model("Timbre");
 RequirePage::model("Image");
+RequirePage::model("Mise");
 RequirePage::model("Condition");
 
 class ControllerEnchere implements Controller {
@@ -10,7 +11,41 @@ class ControllerEnchere implements Controller {
      * rediriger vers l'index de customer
      */
     public function index() {
-        RequirePage::redirect("customer");
+        $enchere = new Enchere;
+        $data["encheres"] = $enchere->read();
+
+        if($data["encheres"]) {
+            foreach($data["encheres"] as &$enchere) {
+
+
+
+                /* chercher la derniere mise */
+                $mise = new Mise;
+                $where["target"] = "enchere_id";
+                $where["value"] = $enchere["id"];
+                $what = "montant";
+                $maxMise = $mise->readMax($what, $where);
+
+                if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
+                else $enchere["max_mise"] = $maxMise[0];
+                    
+                /* chercher le/les timbres */
+                $timbre = new Timbre;
+                $where["target"] = "enchere_id";
+                $where["value"] = $enchere["id"];
+                $encheresTimbres = $timbre->readWhere($where);
+                $enchere["timbre"] = $encheresTimbres[0];
+                $enchere["timbre"]["date_creation"] = explode('-', $enchere["timbre"]["date_creation"])[0];
+
+                $condition = new Condition;
+                $enchere["timbre"]["condition"] = $condition->readId($enchere["timbre"]["id"]);
+                    
+                /* chercher la premiere image associée du premier timbre */
+                $image = new Image;
+                $enchere["image"] = $image->readId($enchere["timbre"]["id"]);
+            }
+        }
+        Twig::render("enchere/index.html", $data);
     }
 
     public function show() {

@@ -11,7 +11,8 @@ class Enchere extends Crud {
         "date_fin",
         "prix_plancher",
         "coups_de_coeur",
-        "membre_id"
+        "membre_id",
+        "description"
     ];
 }
 
