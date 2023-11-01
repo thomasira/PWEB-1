@@ -3,6 +3,7 @@ body>main{
     flex-flow: column;
 }
 body>main>section{
+    width: 100%;
     position: relative;
     margin: auto;
     max-width: 1400px;
