@@ -17,15 +17,15 @@ class ControllerEnchere implements Controller {
         if($data["encheres"]) {
             foreach($data["encheres"] as &$enchere) {
 
-
-
-                /* chercher la derniere mise */
+                /* chercher la derniere mise et le nbr de mises*/
                 $mise = new Mise;
                 $where["target"] = "enchere_id";
                 $where["value"] = $enchere["id"];
                 $what = "montant";
                 $maxMise = $mise->readMax($what, $where);
+                $nbrMises = $mise->readCount($what, $where);
 
+                $enchere["nbr_mise"] = $nbrMises[0];
                 if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
                 else $enchere["max_mise"] = $maxMise[0];
                     
@@ -38,7 +38,7 @@ class ControllerEnchere implements Controller {
                 $enchere["timbre"]["date_creation"] = explode('-', $enchere["timbre"]["date_creation"])[0];
 
                 $condition = new Condition;
-                $enchere["timbre"]["condition"] = $condition->readId($enchere["timbre"]["id"]);
+                $enchere["timbre"]["condition"] = $condition->readId($enchere["timbre"]["condition_id"]);
                     
                 /* chercher la premiere image associée du premier timbre */
                 $image = new Image;
@@ -84,6 +84,7 @@ class ControllerEnchere implements Controller {
             //créer timbre -> can loop thru later in project
             $timbre = new Timbre;
             $_POST["timbre"]["enchere_id"] = $enchereId;
+
             $timbreId = $timbre->create($_POST["timbre"]);
 
             foreach($_FILES["images"]["name"] as $name) {

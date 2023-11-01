@@ -177,7 +177,8 @@
                 <section>
                     <div>
                         <header>
-                            <a href="#"><h3>{{ enchere.nom_enchere }}</h3></a>
+                            <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
+                            <a href="#"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
                             <strong>{{ enchere.timbre.date_creation }} - {{ enchere.timbre.pays_origine }}</strong>
                         </header>
                         <div>
@@ -190,7 +191,7 @@
                         <a class="button-text var-neutralL" href="#">voir plus</a>
                         <button class="button-text var-neutralL">vendeur</button>
                         <span>👁 345</span>
-                        <span><img src="./assets/shapes/mise.svg" alt="mise" loading="lazy"> 46</span>
+                        <span><img src="./assets/shapes/mise.svg" alt="mise" title="nombre de mises" loading="lazy">{{ enchere.nbr_mise }}</span>
                     </div>
                     <div>
                         <img src="{{ path }}assets/img/public/{{ enchere.image.image_link }}" alt="{{ enchere.image.image_link }}" title="" data-js-image>

@@ -9,8 +9,8 @@
                     <p>&#9993 : {{ membre.email }}</p>
                 </hgroup>
                 <div>
-                    <p>total nbr of bets-add to table</p>
-                    <p>total nbr of encheres-add to table</p>
+                    <p>Votre total d'enchères: {{ membre.total_encheres }}</p>
+                    <p>Votre total de mises: {{ membre.total_mises }}</p>
                 </div>
                 <a href="{{ path }}login/logout" class="button-text">Logout</a>
             </article>    

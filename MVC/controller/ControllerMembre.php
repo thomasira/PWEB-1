@@ -1,41 +1,57 @@
 <?php
-RequirePage::model("Membre");
 RequirePage::model("Enchere");
-RequirePage::model("Timbre");
 RequirePage::model("Image");
+RequirePage::model("Membre");
 RequirePage::model("Mise");
+RequirePage::model("Timbre");
 
-
-
-class ControllerMembre implements Controller {
+class ControllerMembre {
 
     /**
      * rediriger vers l'index de customer
      */
     public function index() {
-        RequirePage::redirect("customer");
+        RequirePage::redirect("membre/profil");
     }
 
     public function create() {
         Twig::render("membre/create.html");
     }
 
+    /**
+     * afficher le profil du membre
+     * chercher toutes les données à afficher
+     */
     public function profil() {
         CheckSession::sessionAuth();
+
+        /* définir la cible pour usages futurs */
+        $where["target"] = "membre_id";
+        $where["value"] = $_SESSION["id"];
         
         /* chercher le compte */
         $id = $_SESSION["id"];
         $membre = new Membre;
         $data["membre"] = $membre->readId($id);
 
+        /* chercher le total des mises du membre */
+        $mise = new Mise;
+        $what = "enchere_id";
+        $totalMises = $mise->readCount($what, $where);
+        $data["membre"]["total_mises"] = $totalMises[0];
+
         /* chercher les enchères associées au compte */
         $enchere = new Enchere;
-        $where["target"] = "membre_id";
-        $where["value"] = $data["membre"]["id"];
         $data["encheres"] = $enchere->readWhere($where);
 
+        /* le total des enchères du membre-> sera ajusté plus bas */
+        $data["membre"]["total_encheres"] = 0;
 
         if($data["encheres"]) {
+
+            /* le total des enchères du membre */
+            $data["membre"]["total_encheres"] = count($data["encheres"]);
+
             foreach($data["encheres"] as &$enchere) {
 
                 /* chercher la derniere mise */

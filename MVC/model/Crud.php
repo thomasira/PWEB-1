@@ -3,7 +3,7 @@
 abstract class Crud extends PDO {
 
     public function __construct() {
-        parent::__construct("mysql:host=localhost;dbname=e2395387;port=3306;charset=utf8", "root", "rootroot");
+        parent::__construct("mysql:host=localhost;dbname=e2395387;port=3306;charset=utf8", "root", "12345678");
     }
 
     /**
@@ -25,6 +25,14 @@ abstract class Crud extends PDO {
         return $query->fetch();
     }
 
+    public function readCount($what, $where) {
+        $target = $where["target"];
+        $value = $where["value"];
+        $sql = "SELECT COUNT($what) FROM $this->table WHERE $target = '$value'";
+        $query = $this->query($sql);
+        return $query->fetch();
+    }
+    
     /**
      * lire les entrées de la DB associées à la classe et au paramètre $where
      * 
