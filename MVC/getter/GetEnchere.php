@@ -6,6 +6,8 @@ RequirePage::model("Mise");
 RequirePage::model("Condition");
 
 class GetEnchere {
+    // envoyer dans modele enchere
+    
     public static function getAll(&$enchere) {
 
         /* définir la cible enchere pour référence */  

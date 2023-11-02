@@ -13,6 +13,9 @@
     <div class="menu-modal">
         
     </div>
+    <div data-js-modal="mise" class="non-exist">
+
+    </div>
 </div>
 <main>
 
@@ -194,7 +197,7 @@
                     <div>
                         <header>
                             <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
-                            <a href="#"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
+                            <a href="#" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
                             <strong>{{ enchere.timbre.date_creation }} - {{ enchere.timbre.pays_origine }}</strong>
                         </header>
                         <div>
@@ -221,11 +224,10 @@
                             <button class="button-icon heart light" aria-label="like-button"><picture><img src="./assets/icons/heart.svg" alt="" loading="lazy"></picture></button>
                             <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
                         </div>
-                        <button class="button-miser">miser</button>
+                        <button class="button-miser" data-js-miser>miser</button>
                     </div>
                     <div>
                         <div>
-                            
                             <table>
                                 <caption>
                                     {{ enchere.status == "en_cours" ? "termine dans" : "commence dans" }}
@@ -246,7 +248,7 @@
                         </div>
                         <div>
                             <p>mise courante</p>
-                            <div class="tag-prix">{{ enchere.max_mise}}<span>$</span></div>
+                            <div class="tag-prix" data-js-mise="{{ enchere.max_mise }}">{{ enchere.max_mise }}<span>$</span></div>
                         </div>
                     </div>
                 </section>

@@ -1,0 +1,6 @@
+
+.card-mise{
+    background-color: var(--colorLight);
+    padding: var(--gapm);
+    border-radius: .4em;
+}

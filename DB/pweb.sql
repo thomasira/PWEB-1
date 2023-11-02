@@ -26,7 +26,7 @@ CREATE TABLE `pweb_condition` (
   `id` int NOT NULL AUTO_INCREMENT,
   `condition` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `pweb_enchere`;
 CREATE TABLE `pweb_enchere` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nom_enchere` varchar(45) DEFAULT NULL,
-  `date_debut` date NOT NULL,
+  `date_debut` datetime NOT NULL,
   `date_fin` datetime NOT NULL,
   `prix_plancher` decimal(10,2) NOT NULL,
   `coups_de_coeur` smallint NOT NULL DEFAULT '0',
@@ -58,7 +58,7 @@ CREATE TABLE `pweb_enchere` (
   PRIMARY KEY (`id`),
   KEY `fk_enchere_membre1_idx` (`membre_id`),
   CONSTRAINT `fk_enchere_membre1` FOREIGN KEY (`membre_id`) REFERENCES `pweb_membre` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -86,7 +86,7 @@ CREATE TABLE `pweb_enchere_favori` (
   KEY `fk_enchere_has_membre_enchere1_idx` (`enchere_id`),
   CONSTRAINT `fk_enchere_has_membre_enchere1` FOREIGN KEY (`enchere_id`) REFERENCES `pweb_enchere` (`id`),
   CONSTRAINT `fk_enchere_has_membre_membre1` FOREIGN KEY (`membre_id`) REFERENCES `pweb_membre` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -113,7 +113,7 @@ CREATE TABLE `pweb_image` (
   PRIMARY KEY (`id`),
   KEY `fk_images_timbre1_idx` (`timbre_id`),
   CONSTRAINT `fk_images_timbre1` FOREIGN KEY (`timbre_id`) REFERENCES `pweb_timbre` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +142,7 @@ CREATE TABLE `pweb_membre` (
   PRIMARY KEY (`id`),
   KEY `fk_membre_privilege1_idx` (`privilege_id`),
   CONSTRAINT `fk_membre_privilege1` FOREIGN KEY (`privilege_id`) REFERENCES `pweb_privilege` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -172,7 +172,7 @@ CREATE TABLE `pweb_mise` (
   KEY `fk_membre_has_enchere_membre1_idx` (`membre_id`),
   CONSTRAINT `fk_membre_has_enchere_enchere1` FOREIGN KEY (`enchere_id`) REFERENCES `pweb_enchere` (`id`),
   CONSTRAINT `fk_membre_has_enchere_membre1` FOREIGN KEY (`membre_id`) REFERENCES `pweb_membre` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -196,7 +196,7 @@ CREATE TABLE `pweb_privilege` (
   `id` int NOT NULL AUTO_INCREMENT,
   `privilege` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -234,7 +234,7 @@ CREATE TABLE `pweb_timbre` (
   CONSTRAINT `fk_timbre_condition` FOREIGN KEY (`condition_id`) REFERENCES `pweb_condition` (`id`),
   CONSTRAINT `fk_timbre_enchere1` FOREIGN KEY (`enchere_id`) REFERENCES `pweb_enchere` (`id`),
   CONSTRAINT `fk_timbre_membre1` FOREIGN KEY (`membre_id`) REFERENCES `pweb_membre` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

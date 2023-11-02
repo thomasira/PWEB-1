@@ -2,12 +2,15 @@ import { Boxfilter } from "./BoxFilter.js";
 import { Stamp } from "./Stamp.js";
 import { ModalImg } from "./ModalImg.js";
 import { BoxImage } from "./BoxImage.js";
+import { Miser } from "./Miser.js";
+
 
 export class GestionnaireEnchere{
     #stamps = [];
     #modalImg;
     #boxImage;
     #boxFilter;
+    #boxMise;
 
     constructor(){
         if (!GestionnaireEnchere.instance) GestionnaireEnchere.instance = this;
@@ -19,7 +22,8 @@ export class GestionnaireEnchere{
             this.#modalImg = new ModalImg(document.querySelector('[data-js-modal="img"]'));
         if(document.querySelector('[data-js-box="image"]') != null) 
             this.#boxImage = new BoxImage(document.querySelector('[data-js-box="image"]'));
-        
+        if(document.querySelector('[data-js-modal="mise"]') != null) 
+            this.#boxMise = new Miser(document.querySelector('[data-js-modal="mise"]'));
         this.init();
     }
 
@@ -31,8 +35,12 @@ export class GestionnaireEnchere{
 
         document.addEventListener('ouvrirImage', (e) => {
             this.#modalImg.ouvrirModal(e.detail);
-            console.log('allo');
         });
+
+        document.addEventListener('ouvrirMise', (e) => {
+            this.#boxMise.ouvrirModal(e.detail);
+            this.#modalImg.fermerImg();
+        })
     }
 
     openBoxFilter() {
@@ -40,8 +48,5 @@ export class GestionnaireEnchere{
         this.elFormOpen.classList.toggle('inverse');
     }
 
-    hoverBoxImage() {
-
-    }
 }
 

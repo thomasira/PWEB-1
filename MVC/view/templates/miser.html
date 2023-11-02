@@ -1,0 +1,13 @@
+
+
+<article class="card-mise">
+    <h2>Miser</h2>
+    <p>Mise courante: {{ enchere.max_mise }}</p>
+    <form action="#" method="post">
+        <label>Votre mise
+            <input type="number" min="{{ enchere.max_mise }}" step="0.50" placeholder="{{ enchere.max_mise }}" name="montant">
+        </label>
+        <input type="hidden" value="{{ enchere.id }}" name="enchere_id">
+        <input type="submit" value="Miser" class="button-miser">
+    </form>
+</article>

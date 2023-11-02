@@ -21,7 +21,7 @@ export class ModalImg{
     }
 
     ouvrirModal(src) {
-        this.el.classList.toggle('non-exist');
+        this.el.classList.remove('non-exist');
         this.elCover.classList.toggle('non-exist');
         this.elBody.classList.toggle('no-scroll');
         this.elImg.src = src;
@@ -31,5 +31,9 @@ export class ModalImg{
         this.el.classList.toggle('non-exist');
         this.elCover.classList.toggle('non-exist');
         this.elBody.classList.toggle('no-scroll');
+    }
+
+    fermerImg() {
+        this.el.classList.add('non-exist');
     }
 }
