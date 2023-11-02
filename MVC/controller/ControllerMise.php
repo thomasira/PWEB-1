@@ -5,9 +5,15 @@ RequirePage::model("Membre");
 
 class ControllerMise {
 
+    public function index() {
+        CheckSession::sessionAuth();
+        RequirePage::jsScript("Miser");
+    }
+
     public function create() {
         CheckSession::sessionAuth();
-        Twig::render("mise/create.html");
+        Twig::render("home.html");
+        RequirePage::jsScript("Miser");
     }
 }
 

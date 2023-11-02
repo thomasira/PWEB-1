@@ -4,45 +4,17 @@ RequirePage::model("Timbre");
 RequirePage::model("Image");
 RequirePage::model("Mise");
 RequirePage::model("Condition");
+RequirePage::getter("GetEnchere");
 
 class ControllerEnchere implements Controller {
 
-    /**
-     * rediriger vers l'index de customer
-     */
     public function index() {
         $enchere = new Enchere;
         $data["encheres"] = $enchere->read();
 
         if($data["encheres"]) {
             foreach($data["encheres"] as &$enchere) {
-
-                /* chercher la derniere mise et le nbr de mises*/
-                $mise = new Mise;
-                $where["target"] = "enchere_id";
-                $where["value"] = $enchere["id"];
-                $what = "montant";
-                $maxMise = $mise->readMax($what, $where);
-                $nbrMises = $mise->readCount($what, $where);
-
-                $enchere["nbr_mise"] = $nbrMises[0];
-                if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
-                else $enchere["max_mise"] = $maxMise[0];
-                    
-                /* chercher le/les timbres */
-                $timbre = new Timbre;
-                $where["target"] = "enchere_id";
-                $where["value"] = $enchere["id"];
-                $encheresTimbres = $timbre->readWhere($where);
-                $enchere["timbre"] = $encheresTimbres[0];
-                $enchere["timbre"]["date_creation"] = explode('-', $enchere["timbre"]["date_creation"])[0];
-
-                $condition = new Condition;
-                $enchere["timbre"]["condition"] = $condition->readId($enchere["timbre"]["condition_id"]);
-                    
-                /* chercher la premiere image associée du premier timbre */
-                $image = new Image;
-                $enchere["image"] = $image->readId($enchere["timbre"]["id"]);
+                GetEnchere::getAll($enchere);
             }
         }
         Twig::render("enchere/index.html", $data);
@@ -51,12 +23,12 @@ class ControllerEnchere implements Controller {
     public function show() {
         $enchere = new Enchere;
         $data["encheres"] = $enchere->read();
-
     }
 
     public function create() {
         $condition = new Condition;
         $data["conditions"] = $condition->read();
+        $data["time"] = date("h:i");
         
         Twig::render("enchere/create.html", $data);
     }
@@ -110,7 +82,6 @@ class ControllerEnchere implements Controller {
         }
     }
 
-
     /**
      * valider les entrées
      */
@@ -124,8 +95,8 @@ class ControllerEnchere implements Controller {
             if($error == 1) $val->errors["images"] = "une de vos photos est trop large, max 2MB";
         } 
 
-        $val->name("nom_enchere")->value($enchere["nom_enchere"])
-            ->min(4)->max(45)->required();
+        if($enchere["nom_enchere"]) $val->name("nom_enchere")->value($enchere["nom_enchere"])
+            ->min(4)->max(45);
 
         $val->name("date_debut")->value($enchere["date_debut"])
             ->datePast(date("Y-m-d"))->required();
@@ -136,7 +107,6 @@ class ControllerEnchere implements Controller {
         $val->name("prix_plancher")->value(floatval($enchere["prix_plancher"]))
             ->min(10)->required();
         
-
         $val->name("nom_timbre")->value($timbre["nom_timbre"])
             ->min(4)->max(45)->required();
 

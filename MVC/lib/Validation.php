@@ -71,7 +71,9 @@
         }
 
         public function datePast($date) {
-            if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
+            $preDate = date_create($date);
+            $currentDate = date_create($this->value);
+            if($currentDate < $preDate) $this->errors[$this->name] = "Cette date n'est pas valide";
             return $this;
         }
 
@@ -79,6 +81,7 @@
             if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
             return $this;
         }
+        
         /**
          * File
          *

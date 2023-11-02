@@ -23,9 +23,6 @@ class Twig {
         $header = $twig->load("templates/header.php");
         $footer = $twig->load("templates/footer.php");
 
-        print_r($twig);
-        die();
-
         echo $twig->render($header, $head);
         echo $twig->render($template, $data);
         echo $twig->render($footer);

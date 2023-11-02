@@ -11,14 +11,14 @@
                         <div>
                             <div>
                                 <label>Nom
-                                    <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}" required>
+                                    <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}">
                                     <span class="error">{{ errors.nom_enchere }}</span>
                                 </label>
                                 <label>Description
                                     <textarea name="enchere[description]" value="{{ enchere.description }}" cols="30" rows="5"></textarea>
                                     <span class="error">{{ errors.description }}</span>
                                 </label>
-                                <label id="tag-prix">Prix de départ
+                                <label id="tag-prix">Prix de départ *
                                     <div class="tag-prix">
                                         <input type="number" min="10" step="0.50" value="{{ enchere.prix_plancher }}" name="enchere[prix_plancher]" placeholder="10.00"/><span>$</span>
                                     </div>
@@ -26,14 +26,16 @@
                                 </label>
                             </div>
                             <div>
-                                <label>Date de début
-                                    <input type="date" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" required>
+                                <label>Date de début *
+                                    <input type="datetime-local" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" required>
                                     <span class="error">{{ errors.date_debut }}</span>
                                 </label>
-                                <label>Date de fin
-                                    <input type="date" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
-                                    <span class="error">{{ errors.date_fin }}</span>
-                                </label>
+                                <div>
+                                    <label>Date de fin *
+                                        <input type="datetime-local" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
+                                        <span class="error">{{ errors.date_fin }}</span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -41,19 +43,19 @@
                         <h3>Timbre</h3>
                         <div>
                             <div>
-                                <label>Nom
+                                <label>Nom *
                                     <input type="text" name="timbre[nom_timbre]]" value="{{ timbre.nom_timbre }}" required>
                                     <span class="error">{{ errors.nom_timbre }}</span>
                                 </label>
-                                <label>Date de création
+                                <label>Date de création *
                                     <input type="date" name="timbre[date_creation]" min="1840-01-01" value="{{ timbre.date_creation }}" required>
                                     <span class="error">{{ errors.date_creation }}</span>
                                 </label>
-                                <label>Pays d'origine
+                                <label>Pays d'origine *
                                     <input type="text" name="timbre[pays_origine]" value="{{ timbre.pays_origine }}" required>
                                     <span class="error">{{ errors.pays_origine }}</span>
                                 </label>
-                                <label>Est-il certifié?
+                                <label>Est-il certifié? *
                                     <select name="timbre[certifie]" required>
                                         <option value="0">non</option>
                                         <option value="1">oui</option>
@@ -73,7 +75,7 @@
                                     <input type="file" accept="image/*" name="images[]" multiple>
                                     <span class="error">{{ errors.images }}</span>
                                 </label>
-                                <label>Condition:
+                                <label>Condition: *
                                     <select name="timbre[condition_id]">
                                         {% for condition in conditions %}
                                             <option value="{{ condition.id }}">{{ condition.condition}}</option>

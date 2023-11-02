@@ -1,5 +1,21 @@
+<div class="modal-cover non-exist" data-js-modal="cover">
+    <div class="modal-image non-exist" data-js-modal="img">
+        <div><button class="button-icon exit"><img src="./assets/shapes/exit.svg" alt="bouton exit" data-js-trigger="exit" loading="lazy"></button></div>
+        <picture>
+            <img src="./assets/img/stamp_whale.jpg" alt="stamp-whale" data-js-img loading="lazy">
+        </picture>
+        <div data-js-pagination><img src="./assets/shapes/pagination.svg" alt="pagination" loading="lazy"></div>
+    </div>
+    <div class="recherche-filtre-modal">
 
+    </div>
+
+    <div class="menu-modal">
+        
+    </div>
+</div>
 <main>
+
 <header class="entete">
     <div>
         <h2>Les enchères</h2>
@@ -211,18 +227,20 @@
                         <div>
                             
                             <table>
-                                <caption>temps restant</caption>
+                                <caption>
+                                    {{ enchere.status == "en_cours" ? "termine dans" : "commence dans" }}
+                                </caption>
                                 <thead>
                                     <tr>
-                                        <td>00</td>
-                                        <td>:45</td>
-                                        <td>:56</td>
+                                        <td><strong>{{ enchere.date_diff.d }}/</strong></td>
+                                        <td>{{ enchere.date_diff.h }}:</td>
+                                        <td>{{ enchere.date_diff.i }}</td>
                                     </tr>
                                 </thead>
                                 <tr>
+                                    <td>j</td>
                                     <td>h</td>
                                     <td>m</td>
-                                    <td>s</td>
                                 </tr>
                             </table>
                         </div>

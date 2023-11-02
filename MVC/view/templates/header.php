@@ -8,13 +8,13 @@
         <meta name="author" content="Thomas Aucoin-Lo">
         <meta name="description" content="Des timbres en enchères de toutes les sortes.">
         <link rel="stylesheet" href="{{ path }}assets/style/main.css">
-        <script type="module" src="./assets/script/main.js"></script>
+        <script type="module" src="{{ path }}assets/script/main.js"></script>
     
         <!-- BOOTSTRAP POUR CAROUSSEL -->
 
-        <script src="./assets/script/bootstrap.bundle.min.js" defer></script>
-        <link href="./assets/style/carousel/bootstrap.min.css" rel="stylesheet">
-        <link href="./assets/style/carousel/carousel.css" rel="stylesheet">
+        <script src="{{ path }}assets/script/bootstrap.bundle.min.js" defer></script>
+        <link href="{{ path }}assets/style/carousel/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ path }}assets/style/carousel/carousel.css" rel="stylesheet">
         <title>STAMPEE | {{ title }}</title>
     </head>
     <body>

@@ -4,6 +4,8 @@ RequirePage::model("Image");
 RequirePage::model("Membre");
 RequirePage::model("Mise");
 RequirePage::model("Timbre");
+RequirePage::getter("GetEnchere");
+
 
 class ControllerMembre {
 
@@ -24,8 +26,8 @@ class ControllerMembre {
      */
     public function profil() {
         CheckSession::sessionAuth();
-
-        /* définir la cible pour usages futurs */
+        
+        /* définir la cible membre pour référence */
         $where["target"] = "membre_id";
         $where["value"] = $_SESSION["id"];
         
@@ -52,27 +54,9 @@ class ControllerMembre {
             /* le total des enchères du membre */
             $data["membre"]["total_encheres"] = count($data["encheres"]);
 
+            /* chercher l'info supplémentaire */
             foreach($data["encheres"] as &$enchere) {
-
-                /* chercher la derniere mise */
-                $mise = new Mise;
-                $where["target"] = "enchere_id";
-                $where["value"] = $enchere["id"];
-                $what = "montant";
-                $maxMise = $mise->readMax($what, $where);
-
-                if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
-                else $enchere["max_mise"] = $maxMise[0];
-                    
-                /* chercher le/les timbres */
-                $timbre = new Timbre;
-                $where["target"] = "enchere_id";
-                $where["value"] = $enchere["id"];
-                $timbreData = $timbre->readWhere($where);
-                    
-                /* chercher la premiere image associée du premier timbre */
-                $image = new Image;
-                $enchere["image"] = $image->readId($timbreData[0]["id"]);
+                GetEnchere::getAll($enchere);
             }
         }
         Twig::render("membre/profil.html", $data);
@@ -82,13 +66,9 @@ class ControllerMembre {
      * enregistrer une entrée dans la DB
      */
     public function store() {
-        if($_SERVER["REQUEST_METHOD"] != "POST"){
-            requirePage::redirect("error");
-            exit();
-        } 
+        if($_SERVER["REQUEST_METHOD"] != "POST") requirePage::redirect("error");
 
         $result = $this->validate();
-
         if($result->isSuccess()) {
             //vérifier si email existe dans la DB
             $membre = new Membre;
@@ -103,12 +83,10 @@ class ControllerMembre {
             }
             
             //créer membre
-            $Membre = new Membre;
+            $membre = new Membre;
             $salt = "7dh#9fj0K";
             $_POST["password"] = password_hash($_POST["password"] . $salt, PASSWORD_BCRYPT);
-            $Membre->create($_POST);
-
-            //message custom ou panel si la requête est faite à l'interne(employé seulement)
+            $membre->create($_POST);
             $data["success"] = "YEAH! votre compte est créé. Connectez-vous pour continuer";
             Twig::render("login/index.html", $data);
 
