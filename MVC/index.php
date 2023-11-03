@@ -3,7 +3,7 @@ session_start();
 define("ROOT", rtrim($_SERVER["SCRIPT_NAME"], "index.php"));
 
 require_once __DIR__ . "/vendor/autoload.php";
-require_once __DIR__ . "/controller/Controller.php";
+require_once __DIR__ . "/core/Controller.php";
 require_once __DIR__ . "/lib/RequirePage.php";
 require_once __DIR__ . "/lib/Twig.php";
 require_once __DIR__ . "/lib/CheckSession.php";

@@ -1,5 +1,5 @@
 <?php
-require_once "./model/Crud.php";
+RequirePage::core("Crud");
 
 class Image extends Crud {
     public $table = "pweb_image";

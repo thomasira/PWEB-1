@@ -1,10 +1,5 @@
 <?php
 RequirePage::model("Enchere");
-RequirePage::model("Timbre");
-RequirePage::model("Image");
-RequirePage::model("Mise");
-RequirePage::model("Condition");
-RequirePage::getter("GetEnchere");
 
 class ControllerEnchere implements Controller {
 
@@ -14,7 +9,8 @@ class ControllerEnchere implements Controller {
 
         if($data["encheres"]) {
             foreach($data["encheres"] as &$enchere) {
-                GetEnchere::getAll($enchere);
+                $model = new Enchere;
+                $model->getAll($enchere);
             }
         }
         Twig::render("enchere/index.html", $data);

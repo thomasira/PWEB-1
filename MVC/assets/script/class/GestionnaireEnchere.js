@@ -35,6 +35,7 @@ export class GestionnaireEnchere{
 
         document.addEventListener('ouvrirImage', (e) => {
             this.#modalImg.ouvrirModal(e.detail);
+            this.#boxMise.fermerMiser();
         });
 
         document.addEventListener('ouvrirMise', (e) => {

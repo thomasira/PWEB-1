@@ -1,13 +1,14 @@
 
 
 <article class="card-mise">
-    <h2>Miser</h2>
-    <p>Mise courante: {{ enchere.max_mise }}</p>
-    <form action="#" method="post">
+    <h2>Miser sur </h2>
+    <p>Mise courante: {{ enchere.max_mise }} $</p>
+    <form action="mise/auth" method="post">
         <label>Votre mise
-            <input type="number" min="{{ enchere.max_mise }}" step="0.50" placeholder="{{ enchere.max_mise }}" name="montant">
+            <input type="number" min="{{ enchere.max_misePlus }}" step="0.50" value="{{ enchere.max_misePlus }}" name="montant">
         </label>
         <input type="hidden" value="{{ enchere.id }}" name="enchere_id">
+        <input type="hidden" value="{{ enchere.max_mise }}" name="montant_min">
         <input type="submit" value="Miser" class="button-miser">
     </form>
 </article>
