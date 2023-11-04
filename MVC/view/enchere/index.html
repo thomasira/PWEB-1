@@ -197,7 +197,7 @@
                     <div>
                         <header>
                             <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
-                            <a href="#" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
+                            <a href="{{ path }}enchere/show?id={{ enchere.id}}" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
                             <strong>{{ enchere.timbre.date_creation }} - {{ enchere.timbre.pays_origine }}</strong>
                         </header>
                         <div>
@@ -207,15 +207,14 @@
                     <div>
                         <p>condition: <strong>{{ enchere.timbre.condition.condition}}</strong></p>
                         <p>étampé: <strong>{{ enchere.timbre.certifie ? 'oui' : 'non'}}</strong></p>
-                        <a class="button-text var-neutralL" href="#">voir plus</a>
+                        <a class="button-text var-neutralL" href="{{ path }}enchere/show?id={{ enchere.id }}">voir plus</a>
                         <button class="button-text var-neutralL">vendeur</button>
                         <span>👁 345</span>
                         <span><img src="./assets/shapes/mise.svg" alt="mise" title="nombre de mises" loading="lazy">{{ enchere.nbr_mise }}</span>
                     </div>
                     <div>
-                        <img src="{{ path }}assets/img/public/{{ enchere.image.image_link }}" alt="{{ enchere.image.image_link }}" title="" data-js-image>
+                        <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}"data-js-image>
                     </div>
-        
                 </section>
                 <section>
                     <div>

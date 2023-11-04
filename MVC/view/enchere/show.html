@@ -1,0 +1,259 @@
+<div class="modal-cover non-exist" data-js-modal="cover">
+    <div data-js-modal="mise" class="non-exist">
+
+    </div>
+</div>
+<main>
+
+    <section>
+
+        <!-- section fiche lot -->
+        <article class="file-lot">
+                <!-- images du timbre -->
+                <div>
+                    <picture>
+                        <img data-js-box="image" src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link}}" data-js-image>
+                    </picture>
+                    <div>
+                    {% for image in enchere.images_sec %}
+                        <picture>
+                            <img src="{{ path }}assets/img/public/{{ image.image_link}}" loading="lazy">
+                        </picture>
+                    {% endfor %}
+                    </div>
+                    <section>
+                        <h4>Étiquettes</h4>
+                        <ul>
+                            <li class="tag-cat">océan</li>
+                            <li class="tag-cat">paysage</li>
+                            <li class="tag-cat">faune</li>
+                            <li class="tag-cat">soviet</li>
+                        </ul>
+                    </section>
+                </div>
+
+                <!-- section info timbre -->
+                <div>
+                    <picture data-js-box="timbre" class="non-exist">
+                        <img src="#" alt="" loading="lazy">
+                    </picture>
+                    <header>
+                        <h2>{{ enchere.timbre.nom_timbre }}</h2>
+                        <h3>{{ enchere.timbre.date_creation }}-{{ enchere.timbre.pays_origine }}</h3>
+                        <section>
+                            <div>
+                                <div class="tag-prix depart">{{ enchere.prix_plancher }}<span>$</span></div>
+                                <p>mise de départ</p>
+                            </div>
+                            <div>
+                                <p><small>Lot: {{ enchere.id }}</small></p>
+                                <div>
+                                    <p>Visitez la page du vendeur</p>
+                                    <a href="#">PLS SEND MEMBRE NAME</a>
+                                </div>
+                            </div>
+                        </section>
+                    </header>
+                    <div>                         
+                        <section>
+                            <h3>Détails</h3>
+                            <ul>
+                                <li>origine: <strong>{{ enchere.timbre.pays_origine }}</strong></li>
+                                <li>année d'émission: <strong>{{ enchere.timbre.date_creation }}</strong></li>
+                                <li>condition: <strong>{{ enchere.timbre.condition.condition }}</strong></li>
+                                <li>certifié: <strong>{{ enchere.timbre.certifie ? "oui" : "non" }}</strong></li>
+                                <li>couleur: <strong>bleu, blanc</strong></li>
+                                <li>dimensions: <strong>{{ enchere.timbre.dimensions ? enchere.timbre.dimensions : "n/a" }}</strong></li>
+                                <li>tirage: <strong>{{ enchere.timbre.tirage ? enchere.timbre.tirage : "n/a" }}</strong></li> 
+                            </ul>
+                        </section>
+                        <section>
+                            <h3>Description</h3>
+                            <p>{{ enchere.timbre.description ? enchere.timbre.description : "aucune description disponible" }}</p>
+                        </section>
+                    </div>
+                </div>
+
+                <!-- section mises et interactions -->
+                <div class="box-side">
+                    <div>
+                        <div>
+                            <div class="tag-prix large">{{ enchere.max_mise }}<span>$</span></div>
+                            <p>mise courante</p>
+                        </div>
+                        <button class="button-miser" data-js-miser>miser</button>
+                    </div>
+
+                    <div>
+                        <div>
+                            <button class="button-icon bell light" aria-label="alert-button"><picture><img src="{{ path }}assets/icons/bell.svg" alt="" loading="lazy"></picture></button>
+                            <button class="button-icon heart light" aria-label="like-button"><picture><img src="{{ path }}assets/icons/heart.svg" alt="" loading="lazy"></picture></button>
+                            <button class="button-icon light" aria-label="star-button"><picture><img src="{{ path }}assets/icons/star.svg" alt="" loading="lazy"></picture></button>
+                        </div>
+                        <div>
+                            <span>👁 1211</span>
+                            <span><img src="{{ path }}assets/shapes/mise.svg" alt="mise" loading="lazy"> {{ enchere.nbr_mise }}</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <p>meneur courant: <strong>user3454</strong></p>
+                        </div>
+                        <div>
+                            <p>votre dernière mise</p>
+                            <div class="tag-prix small">6,843<span>$</span></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <table>
+                            <caption>temps restant</caption>
+                            <thead>
+                                <tr>
+                                    <td><strong>{{ enchere.date_diff.d }}/</strong></td>
+                                    <td>{{ enchere.date_diff.h }}:</td>
+                                    <td>{{ enchere.date_diff.i }}</td>
+                                </tr>
+                            </thead>
+                            <tr>
+                                <td>d</td>
+                                <td>h</td>
+                                <td>m</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <p>pays de livraison: <strong>USA</strong></p>
+                        <p><small>Une fois l'encan terminé, le vendeur vous contectera pour les options de livraison</small></p>
+                    </div>
+                </div>
+
+        </article>
+
+        <!-- section aimerez peut-être -->
+        <section>
+            <hgroup>
+                <h3>Vous aimerez peut-être</h3>
+            </hgroup>
+
+            <div class="flow-thumb">
+
+            {% for enchere in suggere %}
+                <article class="thumb-lot">
+                    <div>
+                        <picture>
+                            <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
+                        </picture>
+                        <button class="button-miser thumb">miser</button>
+                    </div>
+                    <div>
+                        <header>
+                            <h4>{{ enchere.timbre.nom_timbre }}</h4>
+                        </header>
+                        <div>
+                            <div>
+                                <table>
+                                    <caption>termine dans</caption>
+                                    <thead>
+                                        <tr>
+                                            <td><strong>{{ enchere.date_diff.d }}/</strong></td>
+                                            <td>{{ enchere.date_diff.h }}:</td>
+                                            <td>{{ enchere.date_diff.i }}</td>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div>
+                                <p>mise courante</p>
+                                <div class="tag-prix">{{ enchere.max_mise }}<span>$</span></div >
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {% endfor %}
+             
+            </div>
+        </section>
+
+        <!-- section mentions -->
+        <section>
+            <hgroup>
+                <h3>Mentions</h3>
+            </hgroup>
+            <div class="flow-mention">
+                <article class="tag-mention">
+                    <p><cite>@Jean</cite> La plus belle collection de timbres que j'ai vue.</p>
+                </article>
+                <article class="tag-mention">
+                    <p><cite>@Timbretimbre</cite> Quelles baleines!!</p>
+                </article>
+                <article class="tag-mention">
+                    <p><cite>@Paul</cite> Wow les soviets savaient faire de beaux timbres!</p>
+                </article>
+                <article class="tag-mention">
+                    <p><cite>@Luc</cite> De très belles couleurs!</p>
+                </article>
+            </div>
+        </section>
+    </section>
+
+    <!-- section bas de page -->
+    <div>
+        <section>
+            <article class="card-join var-comp">
+                <header>
+                    <h2>Le plus de timbres!</h2>
+                    <p>Stampee est le meilleur site où trouver vos timbres! </p>
+                    <a href="#" class="button-text var-lrg">S'inscrire</a>
+                </header>
+                <picture>
+                    <img src="{{ path }}assets/shapes/postal-stamp.svg" alt="postal stamp" loading="lazy">
+                </picture>
+            </article>
+            <article>
+                <div>
+                    <h3>Vous ne trouvez pas ce que vous cherchez?</h3>
+                    <p>faites une <a href="#">Recherche</a></p>
+                </div>
+                <div>
+                    <h3>Vous voulez en savoir plus sur la philatélie?</h3>
+                    <p>visitez notre page <a href="#">Actualités</a></p>
+                </div>
+                <div>
+                    <h3>Vous désirez en apprendre plus sur le fondateur?</h3>
+                    <p>lisez la bio de <a href="#">Lord Stampee</a></p>
+                </div>
+            </article>
+        </section>
+    </div>
+
+    <!-- footer -->
+    <footer>
+        <div>
+            <section>
+                <h3>Contactez-nous</h3>
+                <p>Adresse: <span>28 rue de l'étampe, Min., USA, 1W3SD3</span></p>
+                <p>Téléphone: <span>1-544-432-4222</span></p>
+                <p>Email: <span>contact@lordstampee.com</span></p>
+            </section>
+            <section>
+                <h3>Suivez-nous</h3>
+                <div>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/facebook.svg" alt="facebook-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/x.svg" alt="x-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/instagram.svg" alt="instagram-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/threads.svg" alt="threads-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/tiktok.svg" alt="tiktok-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/courrier.svg" alt="courrier-icon" loading="lazy"></a>
+                </div>
+            </section>
+            <section>
+                <h3>Merci à</h3>
+                <img src="{{ path }}assets/icons/external/maisonneuve.svg" alt="maisonneuve-icon" loading="lazy">
+                <img src="{{ path }}assets/icons/external/rquebec.svg" alt="rquebec-icon" loading="lazy">
+            </section>
+        </div>
+    </footer>
+</main>

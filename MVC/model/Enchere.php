@@ -62,9 +62,19 @@ class Enchere extends Crud {
             
         /* chercher la premiere image associée du premier timbre */
         $image = new Image;
-        $enchere["image"] = $image->readId($enchere["timbre"]["id"]);
-        if(!$enchere["image"]["image_link"]) {
-            $enchere["image"]["image_link"] = "default.svg";
+
+        $where["target"] = "timbre_id";
+        $where["value"] = $enchere["timbre"]["id"];
+        $enchere["images"] = $image->readWhere($where);
+        
+        if(!$enchere["images"]) {
+            $enchere["image_princ"]["image_link"] = "default.svg";
+        }
+        else {
+            foreach ($enchere["images"] as $image) {
+                if($image["principale"]) $enchere["image_princ"] = $image;
+                else $enchere["images_sec"][] = $image;
+            }
         }
     }
 }

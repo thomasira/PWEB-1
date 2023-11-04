@@ -80,12 +80,16 @@
     border: var(--borderStd);
     border-radius: .4em;
     box-shadow: 1px 1px var(--colorDark);
+    max-width: 100%;
+    aspect-ratio: 3/4;
     display: block;
     overflow: hidden;
-    object-fit: cover;
 }
 .file-lot>div:first-of-type img{
+    width: 100%;
     height: 100%;
+    object-position: center;
+    object-fit: cover;
 }
 .file-lot section:last-of-type ul{
     display: flex;

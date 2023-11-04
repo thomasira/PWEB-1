@@ -17,8 +17,21 @@ class ControllerEnchere implements Controller {
     }
 
     public function show() {
+        if($_SERVER["REQUEST_METHOD"] != "GET"){
+            requirePage::redirect("error");
+            exit();
+        } 
+        $id = $_GET["id"];
         $enchere = new Enchere;
-        $data["encheres"] = $enchere->read();
+        $data["enchere"] = $enchere->readId($id);
+        $enchere->getAll($data["enchere"]);
+
+        $data["suggere"] = array_slice($enchere->read(), 0, 4);
+        foreach($data["suggere"] as &$enchere) {
+            $model = new Enchere;
+            $model->getAll($enchere);
+        }
+        Twig::render("enchere/show.html", $data);
     }
 
     public function create() {
@@ -55,11 +68,15 @@ class ControllerEnchere implements Controller {
 
             $timbreId = $timbre->create($_POST["timbre"]);
 
-            foreach($_FILES["images"]["name"] as $name) {
-                $data["timbre_id"] = $timbreId;
-                $data["image_link"] = $name;
-                $image = new Image;
-                $image->create($data);
+            foreach($_FILES["images"]["name"] as $index => $name) {
+                if($name) {
+                    if($index == 0) $data["principale"] = 1;
+                    else $data["principale"] = 0;
+                    $data["timbre_id"] = $timbreId;
+                    $data["image_link"] = $name;
+                    $image = new Image;
+                    $image->create($data);
+                }
             }
             for ($i=0; $i < count($_FILES["images"]["name"]); $i++) { 
                 $target_dir = "assets/img/public/";
