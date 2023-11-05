@@ -1,7 +1,22 @@
 
 .image-radio{
+    display: flex;
+    flex-flow: column;
+    gap: var(--gapxs);
+    background-color: var(--colorNeutralL);
+    padding: var(--gapm);
+    border-radius: .4em;
+    border: var(--borderStd);
+    box-shadow: inset 2px 2px var(--colorDark);
+}
+.image-radio label{
     & input{
         display: none;
+        &:checked{
+            + img{
+                outline: 4px solid var(--colorSecD);
+            }
+        }
     }
     & img{
         border: var(--borderStd);
@@ -10,8 +25,5 @@
         height: 100px;
         object-fit: cover;
         overflow: hidden;
-        
-        &:active{
-        }
     }
 }

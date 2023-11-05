@@ -71,15 +71,24 @@
                                     <input type="text" name="timbre[dimensions]" value="{{ enchere.timbre.dimensions }}">
                                     <span class="error">{{ errors.dimensions }}</span>
                                 </label>
-                                <div class="flex-row">
 
-                                    {% for image in enchere.images %}
-                                        <label class="image-radio">
-                                            <input type="radio" name="images">
-                                            <img src="{{ path }}assets/img/public/{{ image.image_link }}" alt="">
-                                        </label>
-                                    {% endfor %}
+                                <div class="image-radio">
+                                    <h4>Vos images</h4>
+                                    <p><small>Cliquer sur une image pour déterminer l'image principale du timbre</small></p>
+                                    <div class="flex-row">
+                                            <label>
+                                                <input type="radio" name="images" checked>
+                                                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}">
+                                            </label>
+                                        {% for image in enchere.images_sec %}
+                                            <label>
+                                                <input type="radio" name="images">
+                                                <img src="{{ path }}assets/img/public/{{ image.image_link }}">
+                                            </label>
+                                        {% endfor %}
+                                    </div>
                                 </div>
+
                                 <label>Condition: *
                                     <select name="timbre[condition_id]">
                                         {% for condition in conditions %}
@@ -94,7 +103,7 @@
                 </div>
 
                 <input type="hidden" name="membre_id" value="{{ session.id }}">
-                <input type="submit" value="create" class="button-text">
+                <input type="submit" value="modifier" class="button-text">
            </form>
         </div>
         

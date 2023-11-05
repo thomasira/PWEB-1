@@ -25,7 +25,10 @@
                             <picture>
                                 <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
                             </picture>
-                            <a href="{{ path }}enchere/showMod?id={{ enchere.id }}" class="button-miser thumb var-blue">Modifier</a>
+                            <div>
+                                <a href="{{ path }}enchere/showMod?id={{ enchere.id }}" class="button-miser thumb var-blue">Modifier</a>
+                                <a href="{{ path }}enchere/supprimer?id={{ encher.id }}" class="button-miser thumb">Supprimer</a>
+                            </div>
                         </div>
                         <div>
                             <header>

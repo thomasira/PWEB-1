@@ -19,11 +19,28 @@
     object-fit: cover;
     object-position: center;
 }
-.thumb-lot a{
+.thumb-lot>div:first-of-type{
+    position: relative;
+
+    &>div{
+        display: flex;
+        flex-flow: column;
+        gap: var(--gapxxs);
+        position: absolute;
+        top: var(--gapxxs);
+        left: var(--gapxxs);
+    }
+}
+/* .thumb-lot a:first-of-type{
     position: absolute;
     top: var(--gapxs);
     left: var(--gapxs);
 }
+.thumb-lot a:last-of-type{
+    position: absolute;
+    left: var(--gapxs);
+    bottom: 0;
+} */
 .thumb-lot>div:last-of-type>div{
     align-items: end;
     display: flex;
