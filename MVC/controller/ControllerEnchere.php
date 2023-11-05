@@ -42,6 +42,26 @@ class ControllerEnchere implements Controller {
         Twig::render("enchere/create.html", $data);
     }
 
+    public function showMod() {
+        if($_SERVER["REQUEST_METHOD"] != "GET"){
+            requirePage::redirect("error");
+            exit();
+        } 
+
+        $condition = new Condition;
+        $data["conditions"] = $condition->read();
+
+        $id = $_GET["id"];
+        $enchere = new Enchere;
+        $data["enchere"] = $enchere->readId($id);
+        $enchere->getAll($data["enchere"]);
+        $data["enchere"]["timbre"]["date_creation"] = $data["enchere"]["timbre"][2];
+/*         echo "<pre>";
+        print_r($data);
+        die(); */
+        Twig::render("enchere/showMod.html", $data);
+    }
+
     /**
      * enregistrer une entrée dans la DB
      */

@@ -19,7 +19,7 @@
     object-fit: cover;
     object-position: center;
 }
-.thumb-lot button{
+.thumb-lot a{
     position: absolute;
     top: var(--gapxs);
     left: var(--gapxs);

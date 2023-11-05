@@ -11,5 +11,4 @@ class Mise extends Crud {
         "montant"
     ];
 }
-
 ?>

@@ -1,0 +1,128 @@
+
+
+<main>
+    <section>
+        <h2>Modifier l'enchère lot:{{ enchere.id }}</h2>
+        <div>
+            <form action="{{ path }}enchere/update" method="post" class="form-enchere" enctype="multipart/form-data">
+                <div class="flex-row">
+                    <div class="form var-neutralD split">
+                        <h3>Votre enchère</h3>
+                        <div>
+                            <div>
+                                <label>Nom
+                                    <input type="text" name="enchere[nom_enchere]" value="{{ enchere.nom_enchere }}">
+                                    <span class="error">{{ errors.nom_enchere }}</span>
+                                </label>
+                                <label>Description
+                                    <textarea name="enchere[description]" value="{{ enchere.description }}" cols="30" rows="5"></textarea>
+                                    <span class="error">{{ errors.description }}</span>
+                                </label>
+                                <label id="tag-prix">Prix de départ *
+                                    <div class="tag-prix">
+                                        <input type="number" min="10" step="0.50" value="{{ enchere.prix_plancher }}" name="enchere[prix_plancher]" placeholder="10.00"/><span>$</span>
+                                    </div>
+                                    <span>{{ errors.prix_plancher }}</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label>Date de début *
+                                    <input type="datetime-local" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" required>
+                                    <span class="error">{{ errors.date_debut }}</span>
+                                </label>
+                                <div>
+                                    <label>Date de fin *
+                                        <input type="datetime-local" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
+                                        <span class="error">{{ errors.date_fin }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form split">
+                        <h3>Timbre</h3>
+                        <div>
+                            <div>
+                                <label>Nom *
+                                    <input type="text" name="timbre[nom_timbre]" value="{{ enchere.timbre.nom_timbre }}" required>
+                                    <span class="error">{{ errors.nom_timbre }}</span>
+                                </label>
+                                <label>Date de création *
+                                    <input type="date" name="timbre[date_creation]" min="1840-01-01" value="{{ enchere.timbre.date_creation }}" required>
+                                    <span class="error">{{ errors.date_creation }}</span>
+                                </label>
+                                <label>Pays d'origine *
+                                    <input type="text" name="timbre[pays_origine]" value="{{ enchere.timbre.pays_origine }}" required>
+                                    <span class="error">{{ errors.pays_origine }}</span>
+                                </label>
+                                <label>Est-il certifié? *
+                                    <select name="timbre[certifie]" required>
+                                        <option value="0" {{ enchere.timbre.certifie == 0 ? "selected" : "" }}>non</option>
+                                        <option value="1" {{ enchere.timbre.certifie == 1 ? "selected" : "" }}>oui</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div>
+                                <label>Tirage
+                                    <input type="text" name="timbre[tirage]" value="{{ enchere.timbre.tirage }}">
+                                    <span class="error">{{ errors.tirage }}</span>
+                                </label>
+                                <label>Dimensions
+                                    <input type="text" name="timbre[dimensions]" value="{{ enchere.timbre.dimensions }}">
+                                    <span class="error">{{ errors.dimensions }}</span>
+                                </label>
+                                <div class="flex-row">
+
+                                    {% for image in enchere.images %}
+                                        <label class="image-radio">
+                                            <input type="radio" name="images">
+                                            <img src="{{ path }}assets/img/public/{{ image.image_link }}" alt="">
+                                        </label>
+                                    {% endfor %}
+                                </div>
+                                <label>Condition: *
+                                    <select name="timbre[condition_id]">
+                                        {% for condition in conditions %}
+                                            <option value="{{ condition.id }}" {{ enchere.timbre.condition_id == condition.id ? "selected" : ""}}>
+                                                {{ condition.condition }}</option>
+                                        {% endfor %} 
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <input type="hidden" name="membre_id" value="{{ session.id }}">
+                <input type="submit" value="create" class="button-text">
+           </form>
+        </div>
+        
+    </section>
+    <footer>
+        <div>
+            <section>
+                <h3>Contactez-nous</h3>
+                <p>Adresse: <span>28 rue de l'étampe, Min., USA, 1W3SD3</span></p>
+                <p>Téléphone: <span>1-544-432-4222</span></p>
+                <p>Email: <span>contact@lordstampee.com</span></p>
+            </section>
+            <section>
+                <h3>Suivez-nous</h3>
+                <div>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/facebook.svg" alt="facebook-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/x.svg" alt="x-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/instagram.svg" alt="instagram-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/threads.svg" alt="threads-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/tiktok.svg" alt="tiktok-icon" loading="lazy"></a>
+                    <a href="#" target="_blank"><img src="{{ path }}assets/icons/external/courrier.svg" alt="courrier-icon" loading="lazy"></a>
+                </div>
+            </section>
+            <section>
+                <h3>Merci à</h3>
+                <img src="{{ path }}assets/icons/external/maisonneuve.svg" alt="maisonneuve-icon" loading="lazy">
+                <img src="{{ path }}assets/icons/external/rquebec.svg" alt="rquebec-icon" loading="lazy">
+            </section>
+        </div>
+    </footer>
+</main>

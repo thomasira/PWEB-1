@@ -1,0 +1,17 @@
+
+.image-radio{
+    & input{
+        display: none;
+    }
+    & img{
+        border: var(--borderStd);
+        border-radius: .4em;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        overflow: hidden;
+        
+        &:active{
+        }
+    }
+}

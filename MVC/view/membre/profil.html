@@ -19,11 +19,13 @@
             <h3>Vos Enchères</h3>
             <div class="flow-thumb">
                 {% for enchere in encheres %}
+
                     <article class="thumb-lot">
                         <div>
                             <picture>
-                                <img src="{{ path }}assets/img/public/{{ enchere.image.image_link }}" alt=""  loading="lazy">
+                                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
                             </picture>
+                            <a href="{{ path }}enchere/showMod?id={{ enchere.id }}" class="button-miser thumb var-blue">Modifier</a>
                         </div>
                         <div>
                             <header>
