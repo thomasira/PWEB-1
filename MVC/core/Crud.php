@@ -49,6 +49,30 @@ abstract class Crud extends PDO {
     }
 
     /**
+     * supprimer une entrée de la DB
+     */
+    public function delete($id) {
+        $sql = "DELETE FROM $this->table WHERE $this->primaryKey = :$this->primaryKey";
+        $query = $this->prepare($sql);
+        $query->bindValue(":$this->primaryKey", $id);
+        if($query->execute()) return $id;
+        else return $query->errorInfo(); 
+    }
+
+    
+    /**
+     * supprimer une entrée de la DB
+     */
+    public function deleteWhere($where) {
+        $target = $where["target"];
+        $value = $where["value"];
+        $sql = "DELETE FROM $this->table WHERE $target = '$value'";
+        $query = $this->query($sql);
+        if($query->execute()) return true;
+        else return $query->errorInfo(); 
+    }
+
+    /**
      * lire une entrée de la DB associé à la classe et au paramètre
      * 
      * @param $value -> valeur de clé primaire recherchée

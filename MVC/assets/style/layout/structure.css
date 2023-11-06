@@ -8,7 +8,7 @@ body>main>section{
     margin: auto;
     max-width: 1400px;
 }
-body>main>section>hgroup{ /* watch out FOR CHANGE HERE*/
+body>main>section>section>hgroup{ /* watch out FOR CHANGE HERE*/
     background-color: var(--colorMainD);
     color: var(--colorLight);
     padding: var(--gapTHxxs) var(--gaps);
