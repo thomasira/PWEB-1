@@ -10,6 +10,7 @@ class ControllerEnchere implements Controller {
 
     public function index() {
         if(isset($_SESSION["id"])) $membreId = $_SESSION["id"];
+        else $membreId = false;
         $enchere = new Enchere;
         $data["encheres"] = $enchere->read();
 
