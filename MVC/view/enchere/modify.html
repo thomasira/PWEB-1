@@ -15,7 +15,7 @@
                                     <span class="error">{{ errors.nom_enchere }}</span>
                                 </label>
                                 <label>Description
-                                    <textarea name="enchere[description]" value="{{ enchere.description }}" cols="30" rows="5"></textarea>
+                                    <textarea name="enchere[description]" cols="30" rows="5">{{ enchere.description }}</textarea>
                                     <span class="error">{{ errors.description }}</span>
                                 </label>
                                 <label id="tag-prix">Prix de départ *
@@ -34,6 +34,7 @@
                             {% else %}
                                 <label>Date de début:
                                     <input type="datetime-local" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" disabled>
+                                    <input type="hidden" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}">
                                 </label>
                             {% endif %}
                                 <label>Date de fin *
@@ -105,7 +106,8 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="timbre[timbre_id]" value="{{ enchere.timbre.id }}">
+                <input type="hidden" name="timbre[id]" value="{{ enchere.timbre.id }}">
+                <input type="hidden" name="enchere[id]" value="{{ enchere.id }}">
                 <input type="hidden" name="enchere[status]" value="{{ enchere.status }}">
                 <input type="hidden" name="membre_id" value="{{ session.id }}">
                 <input type="submit" value="modifier" class="button-text">

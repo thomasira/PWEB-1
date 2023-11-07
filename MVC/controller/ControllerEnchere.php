@@ -5,17 +5,24 @@ RequirePage::model("Timbre");
 RequirePage::model("Image");
 RequirePage::model("Condition");
 RequirePage::library("DataFiller");
-RequirePage::library("DateChecker");
-
 
 class ControllerEnchere implements Controller {
 
     public function index() {
+        if(isset($_SESSION["id"])) $membreId = $_SESSION["id"];
         $enchere = new Enchere;
         $data["encheres"] = $enchere->read();
 
         if($data["encheres"]) {
-            foreach($data["encheres"] as &$enchere) DataFiller::getDataEnchere($enchere);
+            $enchereFiltered = [];
+            foreach($data["encheres"] as &$enchere) {
+                if($enchere["membre_id"] != $membreId) {
+                    DataFiller::getDataEnchere($enchere);
+                    DataFiller::dateSimplify($enchere["timbre"]["date_creation"]);
+                    $enchereFiltered[] = $enchere;
+                }
+            }
+            $data["encheres"] = $enchereFiltered;
         }
         Twig::render("enchere/index.html", $data);
     }
@@ -29,7 +36,8 @@ class ControllerEnchere implements Controller {
         $enchere = new Enchere;
         $data["enchere"] = $enchere->readId($id);
         DataFiller::getDataEnchere($data["enchere"]);
-
+        DataFiller::dateSimplify($data["enchere"]["timbre"]["date_creation"]);
+        
         $data["suggere"] = array_slice($enchere->read(), 0, 4);
         foreach($data["suggere"] as &$enchere) {
             DataFiller::getDataEnchere($enchere);
@@ -50,15 +58,12 @@ class ControllerEnchere implements Controller {
             requirePage::redirect("error");
             exit();
         } 
-        $condition = new Condition;
-        $data["conditions"] = $condition->read();
-
         $id = $_POST["enchere_id"];
         $enchere = new Enchere;
         $data["enchere"] = $enchere->readId($id);
+        $condition = new Condition;
+        $data["conditions"] = $condition->read();
         DataFiller::getDataEnchere($data["enchere"]);
-        DateChecker::dateChecker($data["enchere"]);
-        $data["enchere"]["timbre"]["date_creation"] = $data["enchere"]["timbre"][2];
         Twig::render("enchere/modify.html", $data);
     }
 
@@ -70,19 +75,15 @@ class ControllerEnchere implements Controller {
         $_POST["enchere"]["membre_id"] = $_POST["membre_id"];
         $_POST["timbre"]["membre_id"] = $_POST["membre_id"];
 
-        if($_POST["enchere"]["status"] == "en_cours") $enCours = true;
-        else $enCours = false;
-        print_r($_POST);
-        die();
-/*         print_r($enCours);
-        die(); */
-        $result = $this->validate($enCours);
+        if($_POST["enchere"]["status"] == "a_venir") $aVenir = true;
+        else $aVenir = false;
+
+        $result = $this->validate($aVenir);
 
         if($result->isSuccess()) {
 
-
             $where["target"] = "timbre_id";
-            $where["value"] = $_POST["timbre_id"];
+            $where["value"] = $_POST["timbre"]["id"];
             $image = new Image;
             $images = $image->readWhere($where);
             if($images) {
@@ -97,15 +98,19 @@ class ControllerEnchere implements Controller {
                 $data["id"] = $_POST["image_princ"];
                 $image->update($data);
             }
+            $timbre = new Timbre;
+            $timbre->update($_POST["timbre"]);
+            $enchere = new Enchere;
+            $enchere->update($_POST["enchere"]);
             RequirePage::redirect("membre/profil");
-
         } else {
             $condition = new Condition;
             $data["conditions"] = $condition->read();
-            $data["timbre"] = $_POST["timbre"];
             $data["enchere"] = $_POST["enchere"];
+            $data["enchere"]["timbre"] = $_POST["timbre"];
+            DataFiller::getImages($data["enchere"]);
             $data["errors"] = $result->getErrors();
-            Twig::render("enchere/create.html", $data);
+            Twig::render("enchere/modify.html", $data);
         }
     }
 
@@ -162,7 +167,6 @@ class ControllerEnchere implements Controller {
         }
     }
 
-
     public function delete() {
         if($_SERVER["REQUEST_METHOD"] != "POST"){
             requirePage::redirect("error");
@@ -194,7 +198,7 @@ class ControllerEnchere implements Controller {
     /**
      * valider les entrées
      */
-    private function validate($enCours = false) {
+    private function validate($aVenir = true) {
         RequirePage::library("Validation");
         $val = new Validation;
 
@@ -209,7 +213,7 @@ class ControllerEnchere implements Controller {
         if($enchere["nom_enchere"]) $val->name("nom_enchere")->value($enchere["nom_enchere"])
             ->min(4)->max(45);
 
-        if(!$enCours) $val->name("date_debut")->value($enchere["date_debut"])
+        if($aVenir) $val->name("date_debut")->value($enchere["date_debut"])
             ->datePast(date("Y-m-d"))->required();
 
         $val->name("date_fin")->value($enchere["date_fin"])

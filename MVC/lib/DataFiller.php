@@ -2,19 +2,18 @@
 
 class DataFiller {
 
+    /**
+     * remplir le tableau Enchere passé en param(incluant ses timbres, condition, mises, etc)
+     */
     static public function getDataEnchere(&$enchere) {
-        RequirePage::library("DateChecker");
         RequirePage::model("Condition");
         RequirePage::model("Mise");
         RequirePage::model("Timbre");
-        RequirePage::model("Image");
 
         /* définir la cible enchere pour référence */  
         $where["target"] = "enchere_id";
         $where["value"] = $enchere["id"];
 
-        DateChecker::dateChecker($enchere);
-        
         /* chercher la meilleure mise et le nbr de mises*/
         $mise = new Mise;
         $what = "montant";
@@ -29,27 +28,57 @@ class DataFiller {
         $timbre = new Timbre;
         $encheresTimbres = $timbre->readWhere($where);
         $enchere["timbre"] = $encheresTimbres[0];
-        $enchere["timbre"]["date_creation"] = explode('-', $enchere["timbre"]["date_creation"])[0];
 
         $condition = new Condition;
         $enchere["timbre"]["condition"] = $condition->readId($enchere["timbre"]["condition_id"]);
             
-        /* chercher la premiere image associée du premier timbre */
-        $image = new Image;
+        DataFiller::getImages($enchere);
+        DataFiller::dateChecker($enchere);
+    }
 
+    /**
+     * remplir le tableau Enchere passé en param avec les images associées à ses timbres
+     */
+    public static function getImages(&$enchere) {
+        RequirePage::model("Image");
+
+        $image = new Image;
         $where["target"] = "timbre_id";
         $where["value"] = $enchere["timbre"]["id"];
-        $enchere["images"] = $image->readWhere($where);
+        $images = $image->readWhere($where);
         
-        if(!$enchere["images"]) {
+        if(!$images) {
             $enchere["image_princ"]["image_link"] = "default.svg";
         }
         else {
-            foreach ($enchere["images"] as $image) {
+            foreach ($images as $image) {
                 if($image["principale"]) $enchere["image_princ"] = $image;
                 else $enchere["images_sec"][] = $image;
             }
         }
+    }
+
+    /**
+     * remplir le tableau Enchere passé en param avec des détails concernant ses dates
+     */
+    static public function dateChecker(&$enchere) {
+        $endDate = date_create($enchere["date_fin"]);
+        $startDate = date_create($enchere["date_debut"]);
+        $nowDate = date_create(date("Y-m-d h:i"));
+        $dateDiff = date_diff($nowDate, $endDate);
+        if($startDate > $nowDate) {
+            $dateDiff = date_diff($startDate, $nowDate);   
+            $enchere["status"] = "a_venir";
+        } elseif($endDate < $nowDate) $enchere["status"] = "passe";
+        else $enchere["status"] = "en_cours";
+
+        $enchere["date_diff"]["d"] = $dateDiff->format("%a");
+        $enchere["date_diff"]["h"] = $dateDiff->format("%H");
+        $enchere["date_diff"]["i"] = $dateDiff->format("%I");
+    }
+
+    static public function dateSimplify(&$date) {
+        $date = explode('-', $date)[0];
     }
 }
 ?>

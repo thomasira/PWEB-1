@@ -9,6 +9,7 @@ class ControllerMise {
 
     public function auth() {
         if($_SERVER["REQUEST_METHOD"] != "POST") requirePage::redirect("error");
+        if($_SESSION["id"] == $_POST["enchere_membre_id"]) requirePage::redirect("error");
         CheckSession::sessionAuth();
 
         $result = $this->validate();
@@ -17,11 +18,8 @@ class ControllerMise {
             $_POST["membre_id"] = $_SESSION["id"];
             $_POST["date_mise"] = date("Y-m-d h:i:s");
             $mise = new Mise;
-
-            print_r($_POST);
             $mise->create($_POST);
         }
-
         RequirePage::redirect("enchere");
     }
 

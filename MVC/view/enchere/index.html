@@ -192,12 +192,12 @@
             <!-- card-lots -->
             {% for enchere in encheres %}
 
-            <article class="card-lot" data-js-stamp>
+            <article class="card-lot" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
                 <section>
                     <div>
                         <header>
                             <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
-                            <a href="{{ path }}enchere/show?id={{ enchere.id}}" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
+                            <a href="{{ path }}enchere/show?id={{ enchere.id }}" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
                             <strong>{{ enchere.timbre.date_creation }} - {{ enchere.timbre.pays_origine }}</strong>
                         </header>
                         <div>

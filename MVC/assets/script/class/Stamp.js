@@ -6,7 +6,8 @@ export class Stamp{
         this.elMise = this.el.querySelector('[data-js-miser]');
         this.data = {
             mise: this.el.querySelector('[data-js-mise]').dataset.jsMise,
-            id: this.el.querySelector('[data-js-id]').dataset.jsId
+            id: this.el.querySelector('[data-js-id]').dataset.jsId,
+            membre_id: this.el.dataset.jsMembre
         }
         this.init();
     }
