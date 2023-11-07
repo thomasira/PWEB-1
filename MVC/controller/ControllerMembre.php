@@ -2,6 +2,9 @@
 RequirePage::model("Enchere");
 RequirePage::model("Image");
 RequirePage::model("Membre");
+RequirePage::model("Mise");
+RequirePage::library("DataFiller");
+
 
 
 class ControllerMembre {
@@ -53,8 +56,7 @@ class ControllerMembre {
 
             /* chercher l'info supplémentaire */
             foreach($data["encheres"] as &$enchere) {
-               $model = new Enchere;
-               $model->getAll($enchere);
+                DataFiller::getDataEnchere($enchere);
             }
         }
         Twig::render("membre/profil.html", $data);

@@ -71,14 +71,16 @@
         }
 
         public function datePast($date) {
-            $preDate = date_create($date);
-            $currentDate = date_create($this->value);
-            if($currentDate < $preDate) $this->errors[$this->name] = "Cette date n'est pas valide";
+            $preDate = date_create($this->value);
+            $currentDate = date_create($date);
+            if($preDate < $currentDate) $this->errors[$this->name] = "Cette date n'est pas valide";
             return $this;
         }
 
         public function dateFuture($date) {
-            if($this->value < $date) $this->errors[$this->name] = "Cette date n'est pas valide";
+            $FutDate = date_create($this->value);
+            $currentDate = date_create($date);
+            if($currentDate < $FutDate) $this->errors[$this->name] = "Cette date n'est pas valide";
             return $this;
         }
         

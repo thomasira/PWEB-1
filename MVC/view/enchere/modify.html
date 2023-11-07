@@ -26,16 +26,20 @@
                                 </label>
                             </div>
                             <div>
+                            {% if enchere.status == "a_venir" %}
                                 <label>Date de début *
                                     <input type="datetime-local" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" required>
                                     <span class="error">{{ errors.date_debut }}</span>
                                 </label>
-                                <div>
-                                    <label>Date de fin *
-                                        <input type="datetime-local" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
-                                        <span class="error">{{ errors.date_fin }}</span>
-                                    </label>
-                                </div>
+                            {% else %}
+                                <label>Date de début:
+                                    <input type="datetime-local" name="enchere[date_debut]" min="{{ date }}" value="{{ enchere.date_debut }}" disabled>
+                                </label>
+                            {% endif %}
+                                <label>Date de fin *
+                                    <input type="datetime-local" name="enchere[date_fin]" min="{{ date }}" value="{{ enchere.date_fin }}" required>
+                                    <span class="error">{{ errors.date_fin }}</span>
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -71,7 +75,14 @@
                                     <input type="text" name="timbre[dimensions]" value="{{ enchere.timbre.dimensions }}">
                                     <span class="error">{{ errors.dimensions }}</span>
                                 </label>
-
+                                <label>Condition: *
+                                    <select name="timbre[condition_id]">
+                                        {% for condition in conditions %}
+                                            <option value="{{ condition.id }}" {{ enchere.timbre.condition_id == condition.id ? "selected" : ""}}>
+                                                {{ condition.condition }}</option>
+                                        {% endfor %} 
+                                    </select>
+                                </label>
                                 <div class="image-radio">
                                     <h4>Vos images</h4>
                                     <p><small>Cliquer sur une image pour déterminer l'image principale du timbre</small></p>
@@ -89,24 +100,17 @@
                                     </div>
                                 </div>
 
-                                <label>Condition: *
-                                    <select name="timbre[condition_id]">
-                                        {% for condition in conditions %}
-                                            <option value="{{ condition.id }}" {{ enchere.timbre.condition_id == condition.id ? "selected" : ""}}>
-                                                {{ condition.condition }}</option>
-                                        {% endfor %} 
-                                    </select>
-                                </label>
+
                             </div>
                         </div>
                     </div>
                 </div>
-                <input type="hidden" name="timbre_id" value="{{ enchere.timbre.id }}">
+                <input type="hidden" name="timbre[timbre_id]" value="{{ enchere.timbre.id }}">
+                <input type="hidden" name="enchere[status]" value="{{ enchere.status }}">
                 <input type="hidden" name="membre_id" value="{{ session.id }}">
                 <input type="submit" value="modifier" class="button-text">
            </form>
         </div>
-        
     </section>
     <footer>
         <div>
