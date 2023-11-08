@@ -2,13 +2,31 @@
 
 export class Miser{
 
-    constructor(el) {
-        this.el = el;
+    constructor() {
         this.elBody = document.body;
-        this.elCover = this.el.closest('[data-js-modal="cover"]');
+        this.elCover = document.querySelector('[data-js-modal="cover"]');
+        this.elBox = document.querySelector('[data-js-modal="mise"]');
         this.form;
         this.maxMise;
         this.Id;
+        this.buttonsMise = document.querySelectorAll('[data-js-miser]');
+        this.init();
+    }
+
+    init() {
+        this.buttonsMise.forEach(button => {
+            button.addEventListener('click', () => {
+                const data = {
+                    mise: button.dataset.jsMise,
+                    id: button.dataset.jsId,
+                    membre_id: button.dataset.jsMembre
+                }
+                this.ouvrirModal(data);
+            })
+        });
+        this.elCover.addEventListener('click', (e) => {
+            if(!e.target.closest('article')) this.fermerMiser(); 
+        })
     }
 
     async creerFormulaire(detail) {
@@ -20,20 +38,23 @@ export class Miser{
         html = html.replaceAll("{{ enchere.id }}", detail.id);
         html = html.replaceAll("{{ enchere.membre_id }}", detail.membre_id);
 
-        this.el.innerHTML = html;
-        this.form = this.el.querySelector('form');
+        this.elBox.innerHTML = html;
+        this.form = this.elBox.querySelector('form');
 
     }
-
 
     async ouvrirModal(detail) {
         await this.creerFormulaire(detail);
-        this.el.classList.remove('non-exist');
-        this.elCover.classList.toggle('non-exist');
-        this.elBody.classList.toggle('no-scroll');
+        this.elBox.classList.remove('non-exist');
+        this.elCover.classList.remove('non-exist');
+        this.elBody.classList.add('no-scroll');
+        const event = new Event('ouvrirMise');
+        document.dispatchEvent(event);
     }
 
     fermerMiser() {
-        this.el.classList.add('non-exist');
+        this.elBox.classList.add('non-exist');
+        this.elCover.classList.add('non-exist');
+        this.elBody.classList.remove('no-scroll');
     }
 }

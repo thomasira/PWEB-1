@@ -81,7 +81,11 @@
                             <div class="tag-prix large">{{ enchere.max_mise }}<span>$</span></div>
                             <p>mise courante</p>
                         </div>
-                        <button class="button-miser {{ enchere.membre_id == session.id ? 'inactive' : '' }}" data-js-miser {{ enchere.membre_id == session.id ? 'inactive' : '' }}
+                        <button class="button-miser 
+                        {{ enchere.membre_id == session.id ? 'inactive': ''}}" data-js-miser
+                        data-js-membre="{{ enchere.membre_id }}"  
+                        data-js-id="{{ enchere.id }}"  
+                        data-js-mise="{{ enchere.max_mise }}" 
                         >miser</button>
                     </div>
 
@@ -101,7 +105,7 @@
 
                         <div>
                             <p>votre dernière mise</p>
-                            <div class="tag-prix small">6,843<span>$</span></div>
+                            <div class="tag-prix small">TO IMPLEMENT<span>$</span></div>
                         </div>
                     </div>
 
@@ -146,7 +150,11 @@
                         <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
                     </picture>
                     <div>
-                        <button class="button-miser thumb">miser</button>
+                        <button class="button-miser thumb" data-js-miser
+                        data-js-membre="{{ enchere.membre_id }}"  
+                        data-js-id="{{ enchere.id }}"  
+                        data-js-mise="{{ enchere.max_mise }}" 
+                        >miser</button>
                     </div>
                 </div>
                 <div>

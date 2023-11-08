@@ -3,7 +3,7 @@
 abstract class Crud extends PDO {
 
     public function __construct() {
-        parent::__construct("mysql:host=localhost;dbname=e2395387;port=3306;charset=utf8", "root", "12345678");
+        parent::__construct("mysql:host=localhost;dbname=e2395387;port=3306;charset=utf8", "root", "rootroot");
     }
 
     /**
@@ -20,7 +20,7 @@ abstract class Crud extends PDO {
     public function readMax($what, $where) {
         $target = $where["target"];
         $value = $where["value"];
-        $sql = "SELECT MAX($what), membre_id, enchere_id FROM $this->table WHERE $target = '$value' group by membre_id";
+        $sql = "SELECT MAX($what) FROM $this->table WHERE $target = '$value'";
         $query = $this->query($sql);
         return $query->fetch();
     }

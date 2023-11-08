@@ -17,9 +17,9 @@ export class Stamp{
             const event = new CustomEvent('ouvrirImage', {detail: this.elImg.src});
             document.dispatchEvent(event);
         });
-        this.elMise.addEventListener('click', () => {
+        /* this.elMise.addEventListener('click', () => {
             const event = new CustomEvent('ouvrirMise', {detail: this.data});
             document.dispatchEvent(event);
-        });
+        }); */
     }
 }

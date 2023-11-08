@@ -20,7 +20,7 @@ class ControllerMise {
             $mise = new Mise;
             $mise->create($_POST);
         }
-        RequirePage::redirect("enchere");
+        header("location:". $_SERVER['HTTP_REFERER']);
     }
 
     private function validate() {

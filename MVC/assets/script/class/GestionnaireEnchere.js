@@ -11,6 +11,7 @@ export class GestionnaireEnchere{
     #boxImage;
     #boxFilter;
     #boxMise;
+    #mise;
 
     constructor(){
         if (!GestionnaireEnchere.instance) GestionnaireEnchere.instance = this;
@@ -22,8 +23,11 @@ export class GestionnaireEnchere{
             this.#modalImg = new ModalImg(document.querySelector('[data-js-modal="img"]'));
         if(document.querySelector('[data-js-box="image"]') != null) 
             this.#boxImage = new BoxImage(document.querySelector('[data-js-box="image"]'));
-        if(document.querySelector('[data-js-modal="mise"]') != null) 
-            this.#boxMise = new Miser(document.querySelector('[data-js-modal="mise"]'));
+        if(document.querySelector('[data-js-modal="mise"]') != null) {
+            this.#boxMise = document.querySelector('[data-js-modal="mise"]');
+            
+            this.#mise = new Miser();
+        }
         this.init();
     }
 
@@ -35,12 +39,10 @@ export class GestionnaireEnchere{
 
         document.addEventListener('ouvrirImage', (e) => {
             this.#modalImg.ouvrirModal(e.detail);
-            this.#boxMise.fermerMiser();
         });
 
-        document.addEventListener('ouvrirMise', (e) => {
-            this.#boxMise.ouvrirModal(e.detail);
-            this.#modalImg.fermerImg();
+        document.addEventListener('ouvrirMise', () => {
+            if(this.#modalImg) this.#modalImg.fermerImg();
         })
     }
 

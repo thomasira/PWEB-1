@@ -31,9 +31,9 @@
                 <a href="#">Timbres</a>
             </div>
             <div>
-                <form class="recherche">
+                <form class="recherche" action="{{ path }}recherche" method="post">
                     <label>
-                        <img src="{{ path }}assets/icons/magnifier.svg" alt="loupe recherche" title="rechercher" loading="lazy">
+                        <button><img src="{{ path }}assets/icons/magnifier.svg" alt="loupe recherche" title="rechercher" loading="lazy"></button>
                         <input type="text" name="recherche">
                         <span title="plus d'option">+</span>
                     </label>

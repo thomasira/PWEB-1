@@ -223,7 +223,11 @@
                             <button class="button-icon heart light" aria-label="like-button"><picture><img src="./assets/icons/heart.svg" alt="" loading="lazy"></picture></button>
                             <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
                         </div>
-                        <button class="button-miser" data-js-miser>miser</button>
+                        <button class="button-miser" data-js-miser
+                        data-js-membre="{{ enchere.membre_id }}"  
+                        data-js-id="{{ enchere.id }}"  
+                        data-js-mise="{{ enchere.max_mise }}" 
+                        >miser</button>
                     </div>
                     <div>
                         <div>
