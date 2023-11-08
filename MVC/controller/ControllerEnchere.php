@@ -20,6 +20,7 @@ class ControllerEnchere implements Controller {
                 if($enchere["membre_id"] != $membreId) {
                     DataFiller::getDataEnchere($enchere);
                     DataFiller::dateSimplify($enchere["timbre"]["date_creation"]);
+                    DataFiller::checkFavori($enchere);
                     $enchereFiltered[] = $enchere;
                 }
             }

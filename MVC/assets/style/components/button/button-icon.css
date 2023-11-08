@@ -34,6 +34,10 @@
     width: clamp(20px, 3vw, 24px);
 }
 
+.button-icon.active{
+    box-shadow:inset .075em .075em var(--colorDark);
+    background-color: var(--colorSecL);
+}
 
 /* états */
 .button-icon:hover{

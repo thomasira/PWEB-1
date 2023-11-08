@@ -9,9 +9,11 @@ class ControllerMise {
 
     public function auth() {
         if($_SERVER["REQUEST_METHOD"] != "POST") requirePage::redirect("error");
-        if($_SESSION["id"] == $_POST["enchere_membre_id"]) requirePage::redirect("error");
+        if($_SESSION["id"] == $_POST["enchere_membre_id"]) {
+            requirePage::redirect("error");
+            exit();
+        }
         CheckSession::sessionAuth();
-
         $result = $this->validate();
 
         if($result->isSuccess()) {

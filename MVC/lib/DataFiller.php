@@ -10,6 +10,7 @@ class DataFiller {
         RequirePage::model("Mise");
         RequirePage::model("Timbre");
         RequirePage::model("Membre");
+        RequirePage::model("Favori");
 
         /* définir la cible enchere pour référence */  
         $where["target"] = "enchere_id";
@@ -79,6 +80,24 @@ class DataFiller {
         $enchere["date_diff"]["d"] = $dateDiff->format("%a");
         $enchere["date_diff"]["h"] = $dateDiff->format("%H");
         $enchere["date_diff"]["i"] = $dateDiff->format("%I");
+    }
+
+    /**
+     * remplir le tableau Enchere passé en param d'une clé 'favori' si elle existe en DB pour le membre connecté
+     */
+    static public function checkFavori(&$enchere) {
+        $favori = new Favori;
+        $where["target"] = "membre_id";
+        $where["value"] = $_SESSION["id"];
+        $encheresFavoris = $favori->readWhere($where);
+        if($encheresFavoris) {
+            foreach ($encheresFavoris as $enchereFavori) {
+                if($enchere["id"] == $enchereFavori["enchere_id"]) {
+                    $enchere["favori"] = true;
+                }
+            }
+        }
+
     }
 
     static public function dateSimplify(&$date) {

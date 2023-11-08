@@ -192,8 +192,14 @@
             <!-- card-lots -->
             {% for enchere in encheres %}
 
-            <article class="card-lot" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
+            <article class="card-lot {{ enchere.favori ? "tag favori" : ""}}" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
+                {% if enchere.favori %}
+                <div>
+                    <p>favori</p>
+                </div>
+                {% endif %}
                 <section>
+
                     <div>
                         <header>
                             <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
@@ -220,7 +226,21 @@
                     <div>
                         <div>
                             <button class="button-icon bell light" aria-label="alert-button"><picture><img src="./assets/icons/bell.svg" alt="" loading="lazy"></picture></button>
-                            <button class="button-icon heart light" aria-label="like-button"><picture><img src="./assets/icons/heart.svg" alt="" loading="lazy"></picture></button>
+
+                            <!-- button favori -->
+
+                            <a 
+                            
+                            {% if enchere.favori %}
+                                href="{{ path }}favori/deleteFavorite?enchereId={{ enchere.id }}" 
+                            {% else %}
+                                href="{{ path }}favori/addFavorite?enchereId={{ enchere.id }}" 
+                            {% endif %}
+                            class="button-icon heart light {{ enchere.favori ? "active" : ""}}" 
+                            aria-label="like-button">
+                                <picture><img src="./assets/icons/heart.svg" alt="" loading="lazy"></picture>
+                            </a>
+
                             <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
                         </div>
                         <button class="button-miser" data-js-miser
