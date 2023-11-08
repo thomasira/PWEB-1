@@ -46,10 +46,10 @@
                                 <p>mise de départ</p>
                             </div>
                             <div>
-                                <p><small>Lot: {{ enchere.id }}</small></p>
+                                <p><small>Lot: {{ enchere.id }} | {{ enchere.nom_enchere ? enchere.nom_enchere : "n/a"}}</small></p>
                                 <div>
                                     <p>Visitez la page du vendeur</p>
-                                    <a href="#">PLS SEND MEMBRE NAME</a>
+                                    <a href="#">{{ enchere.membre.nom_membre }}</a>
                                 </div>
                             </div>
                         </section>
@@ -69,7 +69,7 @@
                         </section>
                         <section>
                             <h3>Description</h3>
-                            <p>{{ enchere.timbre.description ? enchere.timbre.description : "aucune description disponible" }}</p>
+                            <p>{{ enchere.description ? enchere.description : "aucune description disponible" }}</p>
                         </section>
                     </div>
                 </div>
@@ -81,7 +81,8 @@
                             <div class="tag-prix large">{{ enchere.max_mise }}<span>$</span></div>
                             <p>mise courante</p>
                         </div>
-                        <button class="button-miser" data-js-miser>miser</button>
+                        <button class="button-miser {{ enchere.membre_id == session.id ? 'inactive' : '' }}" data-js-miser {{ enchere.membre_id == session.id ? 'inactive' : '' }}
+                        >miser</button>
                     </div>
 
                     <div>
@@ -97,9 +98,7 @@
                     </div>
 
                     <div>
-                        <div>
-                            <p>meneur courant: <strong>user3454</strong></p>
-                        </div>
+
                         <div>
                             <p>votre dernière mise</p>
                             <div class="tag-prix small">6,843<span>$</span></div>
@@ -141,37 +140,41 @@
             <div class="flow-thumb">
 
             {% for enchere in suggere %}
-                <article class="thumb-lot">
+            <article class="thumb-lot">
+                <div>
+                    <picture>
+                        <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
+                    </picture>
                     <div>
-                        <picture>
-                            <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
-                        </picture>
                         <button class="button-miser thumb">miser</button>
                     </div>
+                </div>
+                <div>
+                <header>
+                    <h4><a href="{{ path }}enchere/show?id={{ enchere.id }}">
+                        {{ enchere.nom_enchere ? enchere.nom_enchere : "n/a"}}
+                    </a></h4>
+                </header>
+                <div>
                     <div>
-                        <header>
-                            <h4>{{ enchere.timbre.nom_timbre }}</h4>
-                        </header>
-                        <div>
-                            <div>
-                                <table>
-                                    <caption>termine dans</caption>
-                                    <thead>
-                                        <tr>
-                                            <td><strong>{{ enchere.date_diff.d }}/</strong></td>
-                                            <td>{{ enchere.date_diff.h }}:</td>
-                                            <td>{{ enchere.date_diff.i }}</td>
-                                        </tr>
-                                    </thead>
-                                </table>
-                            </div>
-                            <div>
-                                <p>mise courante</p>
-                                <div class="tag-prix">{{ enchere.max_mise }}<span>$</span></div >
-                            </div>
-                        </div>
+                        <table>
+                            <caption>termine dans</caption>
+                            <thead>
+                                <tr>
+                                    <td>{{ enchere.date_diff.d}}J</td>
+                                    <td> {{ enchere.date_diff.h}}H</td>
+                                    <td>:{{ enchere.date_diff.i}}M</td>
+                                </tr>
+                            </thead>
+                        </table>
                     </div>
-                </article>
+                    <div>
+                        <p>mise courante</p>
+                        <div class="tag-prix">{{ enchere.max_mise}}<span>$</span></div >
+                    </div>
+                </div>
+            </div>
+        </article>
             {% endfor %}
              
             </div>

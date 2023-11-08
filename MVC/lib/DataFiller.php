@@ -9,10 +9,14 @@ class DataFiller {
         RequirePage::model("Condition");
         RequirePage::model("Mise");
         RequirePage::model("Timbre");
+        RequirePage::model("Membre");
 
         /* définir la cible enchere pour référence */  
         $where["target"] = "enchere_id";
         $where["value"] = $enchere["id"];
+
+        $membre = new Membre;
+        $enchere["membre"] = $membre->readId($enchere["membre_id"]);
 
         /* chercher la meilleure mise et le nbr de mises*/
         $mise = new Mise;

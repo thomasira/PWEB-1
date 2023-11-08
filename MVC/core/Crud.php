@@ -20,7 +20,7 @@ abstract class Crud extends PDO {
     public function readMax($what, $where) {
         $target = $where["target"];
         $value = $where["value"];
-        $sql = "SELECT MAX($what) FROM $this->table WHERE $target = '$value'";
+        $sql = "SELECT MAX($what), membre_id, enchere_id FROM $this->table WHERE $target = '$value' group by membre_id";
         $query = $this->query($sql);
         return $query->fetch();
     }

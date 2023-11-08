@@ -19,25 +19,26 @@
             <h3>Vos Enchères</h3>
             <div class="flow-thumb">
                 {% for enchere in encheres %}
+                
                     <article class="thumb-lot">
-                        <div>
-                            <picture>
-                                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
-                            </picture>
                             <div>
-                                <form method="post" action="{{ path }}enchere/modify">
-                                    <input type="hidden" name="enchere_id" value="{{ enchere.id }}">
-                                    <input type="submit" value="modifier" class="button-miser thumb var-blue">
-                                </form>
-                                <form method="post" action="{{ path }}enchere/delete">
-                                    <input type="hidden" name="enchere_id" value="{{ enchere.id }}">
-                                    <input type="submit" value="supprimer" class="button-miser thumb">
-                                </form>
+                                <picture>
+                                    <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
+                                </picture>
+                                <div>
+                                    <form method="post" action="{{ path }}enchere/modify">
+                                        <input type="hidden" name="enchere_id" value="{{ enchere.id }}">
+                                        <input type="submit" value="modifier" class="button-miser thumb var-blue">
+                                    </form>
+                                    <form method="post" action="{{ path }}enchere/delete">
+                                        <input type="hidden" name="enchere_id" value="{{ enchere.id }}">
+                                        <input type="submit" value="supprimer" class="button-miser thumb">
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div>
+                            <div>
                             <header>
-                                <h4>{{ enchere.nom_enchere }}</h4>
+                                <h4><a href="{{ path }}enchere/show?id={{ enchere.id }}">{{ enchere.nom_enchere }}</a></h4>
                             </header>
                             <div>
                                 <div>
