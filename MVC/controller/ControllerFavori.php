@@ -8,6 +8,7 @@ class ControllerFavori {
     }
 
     public function addFavorite() {
+        CheckSession::sessionAuth();
         $favori = new Favori;
         $data["enchere_id"] = $_GET["enchereId"];
         $data["membre_id"] = $_SESSION["id"];
@@ -16,6 +17,8 @@ class ControllerFavori {
     }
 
     public function deleteFavorite() {
+        CheckSession::sessionAuth();
+
         $favori = new Favori;
         $data["enchere_id"] = $_GET["enchereId"];
         $data["membre_id"] = $_SESSION["id"];

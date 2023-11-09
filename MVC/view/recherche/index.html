@@ -1,19 +1,58 @@
 
 
 <main>
-    <section>
-        <h2>Résultats de la recherche</h2>
-        {% for enchere_nom in encheres_noms %}
-            <p>{{ enchere_nom.nom_enchere }}</p>
+    <section class="file-recherche">
+        <header>
+            <h2>Résultats de la recherche</h2>
+            <p>recherche: <strong>{{ item_recherche }}</strong></p>
+        </header>
+
+        <section>
+        {% if empty %}
+            <p>Aucun résultat trouvé pour {{ item_recherche }}</p>
+        {% endif %}
+        {% if encheres_timbres_noms %}
+            {% for enchere in encheres_timbres_noms %}
+            <a href="{{ path }}enchere/show?id={{ enchere.id }}" class="research-thumb">
+                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" alt="">
+                <div>
+                    <p><strong>{{ enchere.timbre.nom_timbre }}</strong></p>
+                    <p>Lot: {{ enchere.id }} -- {{ enchere.nom_enchere}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endif %}
+        {% if encheres_ids %}
+            {% for enchere in encheres_ids %}
+            <a href="{{ path }}enchere/show?id={{ enchere.id }}" class="research-thumb">
+                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" alt="">
+                <div>
+                    <p>{{ enchere.timbre.nom_timbre }}</p>
+                    <p>Lot: <strong>{{ enchere.id }}</strong> -- {{ enchere.nom_enchere}}</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endif %}
+        {% if encheres_noms %}
+            {% for enchere in encheres_noms %}
+            <a href="{{ path }}enchere/show?id={{ enchere.id }}" class="research-thumb">
+                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" alt="">
+                <div>
+                    <p>{{ enchere.timbre.nom_timbre }}</p>
+                    <p>Lot: {{ enchere.id }} -- <strong>{{ enchere.nom_enchere}}</strong></p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endif %}
+        {% if membres_noms %}
+            {% for membre in membres_noms %}
+            <a href="#">
+                <p>{{ membre.nom_membre }}</p>
+            </a>
         {% endfor %}
-        {% for timbre_nom in timbres_noms %}
-            <p>{{ timbre.nom_timbre }}</p>
-        {% endfor %}
-        {% for timbre in timbres_idss %}
-        <p>{{ timbre.nom_timbre }}</p>
-    {% endfor %}
-        <div>
-        </div>
+        {% endif %}
+
+
     </section>
 
 </main>

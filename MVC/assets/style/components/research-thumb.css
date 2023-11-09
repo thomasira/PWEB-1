@@ -1,0 +1,18 @@
+
+.research-thumb{
+    max-width: max-content;
+    border-radius: .4em;
+    display: flex;
+    flex-flow: row;
+    padding: var(--gapxxs);
+    gap: var(--gapxs);
+    background-color: var(--colorNeutral);
+
+    & img{
+        border-radius: .4em;
+        border: var(--borderStd);
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+    }
+}

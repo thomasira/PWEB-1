@@ -14,5 +14,6 @@ class ControllerHome implements Controller {
      */
     public function error() {
         Twig::render("error.php");
+        die();
     }
 }
