@@ -39,32 +39,40 @@
 
 <!-- section enchère -->
 <section class="section-enchere">
-
     <!-- nav enchère -->
     <nav class="navigation-enchere">
         <div>
-            <a href="{{ path }}enchere" 
+            <a href="{{ path }}enchere{% if order != "date" %}?order={{order}}{% endif %}" 
             class="{{ status == "en_cours" ? "selected" : ""}}">
                 En cours
             </a>
-            <a href="{{ path }}enchere?status=a_venir"
+            <a href="{{ path }}enchere?status=a_venir{% if order != "date" %}&order={{order}}{% endif %}"
             class="{{ status == "a_venir" ? "selected" : ""}}">
                 À venir
             </a>
-            <a href="{{ path }}enchere?status=passe"
+            <a href="{{ path }}enchere?status=passe{% if order != "date" %}&order={{order}}{% endif %}"
             class="{{ status == "passe" ? "selected" : ""}}">
                 Passé
             </a>
-            <a href="{{ path }}enchere?status=tous"
+            <a href="{{ path }}enchere?status=tous{% if order != "date" %}&order={{order}}{% endif %}"
             class="{{ status == "tous" ? "selected" : ""}}">
                 Tous
             </a>
         </div>
         <div>
             <h4>Classer par: </h4>
-            <button>Date</button>
-            <button>Prix</button>
-            <button>Nbr. de mises</button>
+            <a href="{{ path }}enchere{% if status != "en_cours" %}?status={{status}}{% endif %}" 
+            class="{{ order == "date" ? "selected" : ""}}">
+                Date
+            </a>
+            <a href="{{ path }}enchere?order=max_mise{% if status != "en_cours" %}&status={{status}}{% endif %}"
+            class="{{  order == "max_mise" ? "selected" : ""}}">
+                Prix
+            </a>
+            <a href="{{ path }}enchere?order=nbr_mise{% if status != "en_cours" %}&status={{status}}{% endif %}"
+            class="{{  order == "nbr_mise" ? "selected" : ""}}">
+                Nbr. de mises
+            </a>
         </div>
     </nav>
 
@@ -264,7 +272,7 @@
                             <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
                         </div>
                         {% if enchere.status == "a_venir" %}
-                            <button class="button-miser.block var-blue">
+                            <button class="button-miser block var-blue">
                                 À venir
                             </button>
                         {% else %}

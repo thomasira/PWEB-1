@@ -13,7 +13,7 @@ class ControllerFavori {
         $data["enchere_id"] = $_GET["enchereId"];
         $data["membre_id"] = $_SESSION["id"];
         $favori->create($data);
-        RequirePage::redirect("enchere");
+        header("location:". $_SERVER["HTTP_REFERER"]);
     }
 
     public function deleteFavorite() {
@@ -23,6 +23,6 @@ class ControllerFavori {
         $data["enchere_id"] = $_GET["enchereId"];
         $data["membre_id"] = $_SESSION["id"];
         $favori->delete($data);
-        RequirePage::redirect("enchere");
+        header("location:". $_SERVER["HTTP_REFERER"]);
     }
 }

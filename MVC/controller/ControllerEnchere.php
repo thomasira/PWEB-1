@@ -9,12 +9,20 @@ RequirePage::library("DataFiller");
 class ControllerEnchere implements Controller {
 
     public function index() {
+        $data = [];
         if(isset($_SESSION["id"])) $membreId = $_SESSION["id"];
         else $membreId = false;
         $enchere = new Enchere;
 
-        if(isset($_GET["order"])) $order = $_GET["order"];
-        else $order = "date_fin";
+        /* Définir l'ordre d'affichages des enchères->défaut par date */
+
+        $order = "date_fin";
+        $data["order"] = "date";
+        
+        if(isset($_GET["status"]) && $_GET["status"] == "a_venir") {
+            $order = "date_debut";
+        } 
+
         $data["encheres"] = $enchere->read($order);
 
         if($data["encheres"]) {
@@ -44,10 +52,30 @@ class ControllerEnchere implements Controller {
             }
             
 
-            $data["encheres"] = $enchereFiltered;
         }
         if(isset($_GET["status"])) $data["status"] = $_GET["status"];
         else $data["status"] = "en_cours";
+
+
+
+        /* Définir filtrage par ordre */
+        if(isset($_GET["order"])) {
+            usort($enchereFiltered, function($a, $b) {
+                $order = $_GET["order"];
+                if ($a[$order] > $b[$order]) {
+                    return -1;
+                } elseif ($a[$order] < $b[$order]) {
+                    return 1; 
+                }
+                return 0;
+            });
+            $data["order"] = $_GET["order"];
+        }
+
+        $data["encheres"] = $enchereFiltered;
+
+
+
         Twig::render("enchere/index.html", $data);
     }
 
