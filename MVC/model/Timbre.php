@@ -10,6 +10,7 @@ class Timbre extends Crud {
         "date_creation",
         "pays_origine",
         "certifie",
+        "couleur",
         "tirage",
         "enchere_id",
         "condition_id",

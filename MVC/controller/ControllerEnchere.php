@@ -12,20 +12,42 @@ class ControllerEnchere implements Controller {
         if(isset($_SESSION["id"])) $membreId = $_SESSION["id"];
         else $membreId = false;
         $enchere = new Enchere;
-        $data["encheres"] = $enchere->read();
+
+        if(isset($_GET["order"])) $order = $_GET["order"];
+        else $order = "date_fin";
+        $data["encheres"] = $enchere->read($order);
 
         if($data["encheres"]) {
             $enchereFiltered = [];
             foreach($data["encheres"] as &$enchere) {
                 if($enchere["membre_id"] != $membreId) {
                     DataFiller::getDataEnchere($enchere);
-                    DataFiller::dateSimplify($enchere["timbre"]["date_creation"]);
-                    if(isset($_SESSION["id"])) DataFiller::checkFavori($enchere);
+                    DataFiller::dateSimplify($enchere["timbre"]["date_creation"]); 
+                    if(isset($_SESSION["id"])) {
+                        DataFiller::checkFavori($enchere);
+                        DataFiller::checkMeneur($enchere);
+                    }
                     $enchereFiltered[] = $enchere;
                 }
             }
+
+            /* Définir le premier filtrage-> filtrer par status temporel */
+            function testFunc($enchere) {
+                if(isset($_GET["status"])) {
+                    if($_GET["status"] == "tous") return $enchere;
+                    else $status = $_GET["status"];
+                } else $status = "en_cours";
+                if($enchere["status"] == $status) return $enchere; 
+            }
+            if($enchereFiltered) {
+                $enchereFiltered = array_filter($enchereFiltered, "testFunc");
+            }
+            
+
             $data["encheres"] = $enchereFiltered;
         }
+        if(isset($_GET["status"])) $data["status"] = $_GET["status"];
+        else $data["status"] = "en_cours";
         Twig::render("enchere/index.html", $data);
     }
 

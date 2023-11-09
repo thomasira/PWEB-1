@@ -12,13 +12,13 @@
 .navigation-enchere>div:first-of-type{
     background-color: var(--colorDark);
 }
-.navigation-enchere>div:first-of-type button{
+.navigation-enchere>div:first-of-type a{
     color: var(--colorLight);
     font-family: var(--typeHead);
     font-size: var(--fontText);
     padding: var(--gapTHxxs) var(--gapxs);
 }
-.navigation-enchere>div:first-of-type button.selected{
+.navigation-enchere>div:first-of-type a.selected{
     color: var(--colorMainL);
 }
 .navigation-enchere>div:last-of-type button{

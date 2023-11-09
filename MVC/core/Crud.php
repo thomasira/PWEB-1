@@ -9,8 +9,8 @@ abstract class Crud extends PDO {
     /**
      * lire les entrées de la DB associées aux données de la classe
      */
-    public function read($order = null) {
-        $sql = "SELECT * FROM $this->table ORDER BY id $order";
+    public function read($order = "id") {
+        $sql = "SELECT * FROM $this->table ORDER BY $order";
         $query = $this->query($sql);
         $count = $query->rowCount();
         if ($count != 0) return $query->fetchAll();
@@ -20,7 +20,7 @@ abstract class Crud extends PDO {
     public function readMax($what, $where) {
         $target = $where["target"];
         $value = $where["value"];
-        $sql = "SELECT MAX($what) FROM $this->table WHERE $target = '$value'";
+        $sql = "SELECT * FROM $this->table WHERE $what = (SELECT MAX($what) FROM $this->table WHERE $target = $value)";
         $query = $this->query($sql);
         return $query->fetch();
     }

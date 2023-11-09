@@ -43,16 +43,28 @@
     <!-- nav enchère -->
     <nav class="navigation-enchere">
         <div>
-            <button class="selected">En cours</button>
-            <button>À venir</button>
-            <button>Passé</button>
-            <button>Tout</button>
+            <a href="{{ path }}enchere" 
+            class="{{ status == "en_cours" ? "selected" : ""}}">
+                En cours
+            </a>
+            <a href="{{ path }}enchere?status=a_venir"
+            class="{{ status == "a_venir" ? "selected" : ""}}">
+                À venir
+            </a>
+            <a href="{{ path }}enchere?status=passe"
+            class="{{ status == "passe" ? "selected" : ""}}">
+                Passé
+            </a>
+            <a href="{{ path }}enchere?status=tous"
+            class="{{ status == "tous" ? "selected" : ""}}">
+                Tous
+            </a>
         </div>
         <div>
             <h4>Classer par: </h4>
             <button>Date</button>
             <button>Prix</button>
-            <button class="selected">Nbr. de mises</button>
+            <button>Nbr. de mises</button>
         </div>
     </nav>
 
@@ -192,12 +204,20 @@
             <!-- card-lots -->
             {% for enchere in encheres %}
 
-            <article class="card-lot {{ enchere.favori ? "tag favori" : ""}}" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
-                {% if enchere.favori %}
+            <article class="card-lot {{ enchere.favori  or enchere.meneur ? "tag favori" : ""}}" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
                 <div>
-                    <p>favori</p>
-                </div>
+                {% if enchere.meneur %}
+                    <div class="meneur">
+                        <p>meneur 👑</p>
+                    </div>
                 {% endif %}
+                {% if enchere.favori %}
+                    <div class="favori">
+                        <p>favori 💕</p>
+                    </div>
+                {% endif %}
+                </div>
+
                 <section>
 
                     <div>
@@ -243,11 +263,20 @@
 
                             <button class="button-icon light" aria-label="star-button"><picture><img src="./assets/icons/star.svg" alt="" loading="lazy"></picture></button>
                         </div>
-                        <button class="button-miser" data-js-miser
-                        data-js-membre="{{ enchere.membre_id }}"  
-                        data-js-id="{{ enchere.id }}"  
-                        data-js-mise="{{ enchere.max_mise }}" 
-                        >miser</button>
+                        {% if enchere.status == "a_venir" %}
+                            <button class="button-miser.block var-blue">
+                                À venir
+                            </button>
+                        {% else %}
+                            <button class="button-miser" data-js-miser
+                            data-js-membre="{{ enchere.membre_id }}"  
+                            data-js-id="{{ enchere.id }}"  
+                            data-js-mise="{{ enchere.max_mise }}" 
+                            {{ enchere.meneur ? "data-js-meneur" : ""}}>
+                                miser
+                            </button>
+                        {% endif %}
+                        
                     </div>
                     <div>
                         <div>

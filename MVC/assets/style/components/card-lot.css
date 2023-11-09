@@ -123,14 +123,26 @@
     margin-top: var(--gapl);
 }
 .card-lot.tag>div{
-    background-color: var(--colorCompL);
-    border: var(--borderStd);
-    border-radius:.4em .4em 0 0;
     bottom: 100%;
-    padding: var(--gapTHxxs) var(--gapxxs);
+    display: flex;
+    flex-flow: row;
     position: absolute;
+
+    &>div{
+        background-color: var(--colorCompL);
+        border: var(--borderStd);
+        border-radius:.4em .4em 0 0;
+        padding: var(--gapTHxxs) var(--gapxxs);
+        box-shadow: 1px 0 var(--colorDark);
+    }
+    &>.favori{
+        background-color: var(--colorSecL);
+    }
+    &>.meneur{
+        background-color: var(--colorLight);
+    }
 }
-.card-lot.tag>div p{
+/* .card-lot.tag>div p{
     font-family: var(--typeHead);
     font-weight: 600;
 }
@@ -142,7 +154,10 @@
     background-color: var(--colorMainD);
     color: var(--colorLight);
 }
-
+.card-lot.favori>div{
+    background-color: var(--colorSecD);
+    color: var(--colorLight);
+} */
 /* états */
 .card-lot div>img:hover{
     cursor: pointer;

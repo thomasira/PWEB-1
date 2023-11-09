@@ -1,4 +1,10 @@
 <?php
+RequirePage::model("Condition");
+RequirePage::model("Mise");
+RequirePage::model("Timbre");
+RequirePage::model("Membre");
+RequirePage::model("Favori");
+RequirePage::model("Mise");
 
 class DataFiller {
 
@@ -6,11 +12,6 @@ class DataFiller {
      * remplir le tableau Enchere passé en param(incluant ses timbres, condition, mises, etc)
      */
     static public function getDataEnchere(&$enchere) {
-        RequirePage::model("Condition");
-        RequirePage::model("Mise");
-        RequirePage::model("Timbre");
-        RequirePage::model("Membre");
-        RequirePage::model("Favori");
 
         /* définir la cible enchere pour référence */  
         $where["target"] = "enchere_id";
@@ -27,7 +28,8 @@ class DataFiller {
 
         $enchere["nbr_mise"] = $nbrMises[0];
         if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
-        else $enchere["max_mise"] = $maxMise[0];
+        else $enchere["max_mise"] = $maxMise["montant"];
+
             
         /* chercher le/les timbres */
         $timbre = new Timbre;
@@ -99,6 +101,19 @@ class DataFiller {
         }
 
     }
+
+    static public function checkMeneur(&$enchere) {
+        $mise = new Mise;
+        $what = "montant";
+        $where["target"] = "enchere_id";
+        $where["value"] = $enchere["id"];
+
+        $maxMise = $mise->readMax($what, $where);
+        if($maxMise) {
+            if($_SESSION["id"] == $maxMise["membre_id"]) $enchere["meneur"] = true;
+        }
+    }
+
 
     static public function dateSimplify(&$date) {
         $date = explode('-', $date)[0];
