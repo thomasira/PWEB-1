@@ -124,15 +124,32 @@ class ControllerEnchere implements Controller {
             exit();
         } 
         $id = $_GET["id"];
+       
+
         $enchere = new Enchere;
         $data["enchere"] = $enchere->readId($id);
         DataFiller::getDataEnchere($data["enchere"]);
         DataFiller::dateSimplify($data["enchere"]["timbre"]["date_creation"]);
         
-        $data["suggere"] = array_slice($enchere->read(), 0, 4);
-        foreach($data["suggere"] as &$enchere) {
-            DataFiller::getDataEnchere($enchere);
+        $encheres = $enchere->read();
+        $encheresFiltered = [];
+        if(isset($_SESSION["id"])) {
+            $membreId = $_SESSION["id"];
+            foreach($encheres as &$enchere) {
+                if($enchere["membre_id"] != $membreId) {
+                    DataFiller::getDataEnchere($enchere);
+                    $encheresFiltered[] = $enchere;
+                }
+            }
+            $data["suggere"] = array_slice($encheresFiltered, 0, 4);
+
+        } else {
+            $data["suggere"] = array_slice($encheres, 0, 4);
+            foreach($data["suggere"] as &$enchere) {
+                DataFiller::getDataEnchere($enchere);
+            }
         }
+
         Twig::render("enchere/show.html", $data);
     }
 

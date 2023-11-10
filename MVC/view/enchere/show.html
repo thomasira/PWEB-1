@@ -81,12 +81,25 @@
                             <div class="tag-prix large">{{ enchere.max_mise }}<span>$</span></div>
                             <p>mise courante</p>
                         </div>
-                        <button class="button-miser 
-                        {{ enchere.membre_id == session.id ? 'inactive': ''}}" data-js-miser
-                        data-js-membre="{{ enchere.membre_id }}"  
-                        data-js-id="{{ enchere.id }}"  
-                        data-js-mise="{{ enchere.max_mise }}" 
-                        >miser</button>
+                        {% if enchere.status == "a_venir" %}
+                            <button class="button-miser block var-blue">
+                                À venir
+                            </button>
+                        {% endif %}
+                        {% if enchere.status == "passe" %}
+                        <button class="button-miser block var-blue inactive">
+                            Passé
+                        </button>
+                        {% endif %}
+                        {% if enchere.status == "en_cours" %}
+                            <button class="button-miser" data-js-miser
+                            data-js-membre="{{ enchere.membre_id }}"  
+                            data-js-id="{{ enchere.id }}"  
+                            data-js-mise="{{ enchere.max_mise }}" 
+                            {{ enchere.meneur ? "data-js-meneur" : ""}}>
+                                miser
+                            </button>
+                        {% endif %}
                     </div>
 
                     <div>
@@ -150,11 +163,25 @@
                         <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" loading="lazy">
                     </picture>
                     <div>
+                        {% if enchere.status == "a_venir" %}
+                        <button class="button-miser block var-blue thumb">
+                            À venir
+                        </button>
+                    {% endif %}
+                    {% if enchere.status == "passe" %}
+                    <button class="button-miser block var-blue inactive thumb">
+                        Passé
+                    </button>
+                    {% endif %}
+                    {% if enchere.status == "en_cours" %}
                         <button class="button-miser thumb" data-js-miser
                         data-js-membre="{{ enchere.membre_id }}"  
                         data-js-id="{{ enchere.id }}"  
                         data-js-mise="{{ enchere.max_mise }}" 
-                        >miser</button>
+                        {{ enchere.meneur ? "data-js-meneur" : ""}}>
+                            miser
+                        </button>
+                    {% endif %}
                     </div>
                 </div>
                 <div>

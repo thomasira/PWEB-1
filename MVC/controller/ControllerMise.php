@@ -31,6 +31,7 @@ class ControllerMise {
 
         extract($_POST);
         $val->name("montant")->value(floatval($montant))->min(floatval($montant_min))->required();
+
         return $val;
     }
 
