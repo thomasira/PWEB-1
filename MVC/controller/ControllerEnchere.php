@@ -18,11 +18,9 @@ class ControllerEnchere implements Controller {
 
         $order = "date_fin";
         $data["order"] = "date";
-        
         if(isset($_GET["status"]) && $_GET["status"] == "a_venir") {
             $order = "date_debut";
         } 
-
         $data["encheres"] = $enchere->read($order);
 
         if($data["encheres"]) {
@@ -34,13 +32,14 @@ class ControllerEnchere implements Controller {
                     if(isset($_SESSION["id"])) {
                         DataFiller::checkFavori($enchere);
                         DataFiller::checkMeneur($enchere);
+                        DataFiller::checkMises($enchere);
                     }
                     $enchereFiltered[] = $enchere;
                 }
             }
 
-            /* Définir le premier filtrage-> filtrer par status temporel */
-            function testFunc($enchere) {
+            /* Définir le premier filtrage par status dans le temps */
+            function filterStatus($enchere) {
                 if(isset($_GET["status"])) {
                     if($_GET["status"] == "tous") return $enchere;
                     else $status = $_GET["status"];
@@ -48,34 +47,74 @@ class ControllerEnchere implements Controller {
                 if($enchere["status"] == $status) return $enchere; 
             }
             if($enchereFiltered) {
-                $enchereFiltered = array_filter($enchereFiltered, "testFunc");
+                $enchereFiltered = array_filter($enchereFiltered, "filterStatus");
             }
-            
-
-        }
-        if(isset($_GET["status"])) $data["status"] = $_GET["status"];
-        else $data["status"] = "en_cours";
+            if(isset($_GET["status"])) $data["status"] = $_GET["status"];
+            else $data["status"] = "en_cours";
 
 
+            /* Définir filtrage par ordre (date, max mise et nbr mises)*/
+            if(isset($_GET["order"])) {
+                usort($enchereFiltered, function($a, $b) {
+                    $order = $_GET["order"];
+                    if ($a[$order] > $b[$order]) {
+                        return -1;
+                    } elseif ($a[$order] < $b[$order]) {
+                        return 1; 
+                    }
+                    return 0;
+                });
+                $data["order"] = $_GET["order"];
+            }
 
-        /* Définir filtrage par ordre */
-        if(isset($_GET["order"])) {
-            usort($enchereFiltered, function($a, $b) {
-                $order = $_GET["order"];
-                if ($a[$order] > $b[$order]) {
-                    return -1;
-                } elseif ($a[$order] < $b[$order]) {
-                    return 1; 
+            /* définir le filtrage par filtres */
+
+            $data["filtre"] = [];
+            $data["filtre"]["min"] = isset($_GET["filtre"]["min"]) ? $_GET["filtre"]["min"] : "1840";
+            $data["filtre"]["max"] = isset($_GET["filtre"]["max"]) ? $_GET["filtre"]["max"] : "2023";
+
+            if(isset($_GET["filtre"])) {
+                function filterDate($enchere) {
+                    $min = $_GET["filtre"]["min"];
+                    $max = $_GET["filtre"]["max"];
+                    if($enchere["timbre"]["date_creation"] >= $min 
+                    && $enchere["timbre"]["date_creation"] <= $max) {
+                        return $enchere;
+                    }
                 }
-                return 0;
-            });
-            $data["order"] = $_GET["order"];
+                function filterFavori($enchere) {
+                    if(isset($enchere["favori"])) return $enchere;
+                }
+                function filterMise($enchere) {
+                    if(isset($enchere["mise"])) return $enchere;
+                }
+
+                if(isset($_GET["filtre"]["conditions"])) {
+                    $encheresCond = [];
+                    foreach($_GET["filtre"]["conditions"] as $condition) {
+                        foreach($enchereFiltered as $enchere) {
+                            if($enchere["timbre"]["condition_id"] == $condition) {
+                                $encheresCond[] = $enchere;
+                            }
+                        }
+                        $data["filtre"]["conditions"][$condition] = true;
+                    }
+                    $enchereFiltered = $encheresCond;
+                }
+                if(isset($_GET["filtre"]["favori"])) {
+                    $enchereFiltered = array_filter($enchereFiltered, "filterFavori");
+                    $data["filtre"]["favori"] = true;
+                }
+                if(isset($_GET["filtre"]["mises"])) {
+                    $enchereFiltered = array_filter($enchereFiltered, "filterMise");
+                    $data["filtre"]["mise"] = true;
+
+                }
+                $enchereFiltered = array_filter($enchereFiltered, "filterDate");
+
+            }
+            $data["encheres"] = $enchereFiltered;
         }
-
-        $data["encheres"] = $enchereFiltered;
-
-
-
         Twig::render("enchere/index.html", $data);
     }
 

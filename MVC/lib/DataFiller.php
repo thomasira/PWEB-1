@@ -17,6 +17,7 @@ class DataFiller {
         $where["target"] = "enchere_id";
         $where["value"] = $enchere["id"];
 
+        /* lire le membre asocié */
         $membre = new Membre;
         $enchere["membre"] = $membre->readId($enchere["membre_id"]);
 
@@ -25,12 +26,10 @@ class DataFiller {
         $what = "montant";
         $maxMise = $mise->readMax($what, $where);
         $nbrMises = $mise->readCount($what, $where);
-
         $enchere["nbr_mise"] = $nbrMises[0];
         if(empty($maxMise[0])) $enchere["max_mise"] = $enchere["prix_plancher"];
         else $enchere["max_mise"] = $maxMise["montant"];
 
-            
         /* chercher le/les timbres */
         $timbre = new Timbre;
         $encheresTimbres = $timbre->readWhere($where);
@@ -102,6 +101,26 @@ class DataFiller {
 
     }
 
+    /**
+     * remplir le tableau Enchere passé en param d'une clé 'mise' si elle existe en DB pour le membre connecté
+     */
+    static public function checkMises(&$enchere) {
+        $mises = new Mise;
+        $where["target"] = "membre_id";
+        $where["value"] = $_SESSION["id"];
+        $mises = $mises->readWhere($where);
+        if($mises) {
+            foreach ($mises as $mise) {
+                if($enchere["id"] == $mise["enchere_id"]) {
+                    $enchere["mise"] = true;
+                }
+            }
+        }
+    }
+
+    /**
+     * remplir le tableau Enchere passé en param d'une clé 'meneur' si elle existe en DB pour le membre connecté
+     */
     static public function checkMeneur(&$enchere) {
         $mise = new Mise;
         $what = "montant";
@@ -114,7 +133,9 @@ class DataFiller {
         }
     }
 
-
+    /**
+     * simplifier la date de l'enchere passé en param pour format (Y)
+     */
     static public function dateSimplify(&$date) {
         $date = explode('-', $date)[0];
     }

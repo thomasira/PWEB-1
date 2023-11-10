@@ -141,6 +141,14 @@
     &>.meneur{
         background-color: var(--colorLight);
     }
+    &>.mise{
+        background-color: var(--colorMainL);
+        & img{
+            height: 20px;
+            width: 20px;
+            transform: translateY(3px);
+        }
+    } 
 }
 /* .card-lot.tag>div p{
     font-family: var(--typeHead);

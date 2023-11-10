@@ -19,27 +19,7 @@ export class Boxfilter{
 
     #init() {
         this.#elFormOpen.addEventListener('click', () => this.#toggleBoxFilter());
-        this.#elForm.addEventListener('submit', (e) => e.preventDefault());
-        this.#elFormReset.addEventListener('click', () => this.#elForm.reset());
-        this.#initFiltres();   
-    }
 
-    #initFiltres(){
-        const elFilters = this.#el.querySelectorAll('[data-js-filtre]');
-
-        elFilters.forEach(elFilter => {
-            const elFilterLabel = elFilter.querySelector('div:first-of-type');
-            const elFilterToggle = elFilter.querySelector('[data-js-trigger="open-filtre"]');
-            const elSubfilter = elFilter.querySelector('[data-js-subfiltre]');
-            const elLabel = elFilterLabel.querySelector('label');
-
-            elFilterLabel.addEventListener('click', (e) => {
-                if(e.target.type != 'checkbox' && e.target != elLabel) {
-                    elSubfilter.classList.toggle('non-exist');
-                    elFilterToggle.classList.toggle('inverse');
-                };
-            });
-        });
     }
 
     #toggleBoxFilter() {

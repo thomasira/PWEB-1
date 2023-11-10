@@ -86,122 +86,92 @@
                     <h2>Filtres</h2>
                     <span data-js-trigger="open-filtre" class="inverse">&#709;</span>
                 </header> 
-                <form>
+                <form action="{{ path }}enchere" method="get">
+                {% if status != "en_cours" %}
+                    <input type="hidden" name="status" value="{{ status }}">
+                {% endif %}
+                {% if order != "date" %}
+                    <input type="hidden" name="order" value="{{ order }}">
+                {% endif %}
                     <!-- les filtres et sous-filtres -->
                     <section>
-                        <div data-js-filtre="fauna">
+                        <div>
                             <div>
-                                <div>
-                                    <input type="checkbox" name="fauna" value="1" id="fauna">
-                                    <label for="fauna">fauna</label>
-                                </div>
-                                <span data-js-trigger="open-filtre">&#709;</span>
+                                <h3>Condition</h3>
                             </div>
-                            <div data-js-subfiltre class="non-exist">
-                                <div>
-                                    <input type="checkbox" name="mammifère" value="1" id="mammifère">
-                                    <label for="mammifère">mammifère</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="insecte" value="1" id="insecte">
-                                    <label for="insecte">insecte</label>
-                                </div>
+                            <div data-js-subfiltre>
+                                <label>mint
+                                    <input type="checkbox" name="filtre[conditions][1]" value="1"
+                                    {{ filtre.conditions.1 ? "checked" : ""}}>
+                                </label>
+                                <label>mint-1
+                                    <input type="checkbox" name="filtre[conditions][2]" value="2"
+                                    {{ filtre.conditions.2 ? "checked" : ""}}>
+                                </label>
+                                <label>mint-2
+                                    <input type="checkbox" name="filtre[conditions][3]" value="3"
+                                    {{ filtre.conditions.3 ? "checked" : ""}}>
+                                </label>
+                                <label>used
+                                    <input type="checkbox" name="filtre[conditions][4]" value="4"
+                                    {{ filtre.conditions.4 ? "checked" : ""}}>
+                                </label>
+                                <label>ripped
+                                    <input type="checkbox" name="filtre[conditions][5]" value="5"
+                                    {{ filtre.conditions.5 ? "checked" : ""}}>
+                                </label>
                             </div>
                         </div>
 
-                        <div data-js-filtre="flora">
+                        <div>
                             <div>
-                                <div>
-                                    <input type="checkbox" name="flora" value="1" id="flora">
-                                    <label for="flora">flora</label>
-                                </div>
-                                <span data-js-trigger="open-filtre">&#709;</span>
+                                <h3>Année</h3>
                             </div>
-                        
-                            <div data-js-subfiltre class="non-exist">
-                                <div>
-                                    <input type="checkbox" name="arbres" value="1" id="arbres">
-                                    <label for="arbres">arbres</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="fleurs" value="1" id="fleurs">
-                                    <label for="fleurs">fleurs</label>
-                                </div>
+                            <div data-js-subfiltre>
+                                <label>de
+                                    <input type="number" name="filtre[min]" value="{{ filtre.min }}">
+                                </label>
+                                <label>à
+                                    <input type="number" name="filtre[max]" value="{{ filtre.max }}">
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div>
+                                <h3>Catégories</h3>
+                            </div>
+                            <div data-js-subfiltre>
+                               <h3>À venir</h3>
                             </div>
                         </div>
 
-                        <div data-js-filtre="paysage">
-                            <div>
-                                <div>
-                                    <input type="checkbox" name="paysage" value="1" id="paysage">
-                                    <label for="paysage">paysage</label>
-                                </div>
-                                <span data-js-trigger="open-filtre">&#709;</span>
-                            </div>
-                            <div data-js-subfiltre class="non-exist">
-                                <div>
-                                    <input type="checkbox" name="montagne" value="1" id="montagne">
-                                    <label for="montagne">montagne</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="urbain" value="1" id="urbain">
-                                    <label for="urbain">urbain</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="rural" value="1" id="rural">
-                                    <label for="rural">rural</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div data-js-filtre="personnalite">
-                            <div>
-                                <div>
-                                    <input type="checkbox" name="personnalite" value="1" id="personnalite">
-                                    <label for="personnalite">personnalité</label>
-                                </div>
-                                <span data-js-trigger="open-filtre">&#709;</span>
-                            </div>
-                            <div data-js-subfiltre class="non-exist">
-                                <div>
-                                    <input type="checkbox" name="rois-et-reines" value="1" id="rois-et-reines">
-                                    <label for="rois-et-reines">rois et reines</label>
-                                </div>
-                                <div>
-                                    <input type="checkbox" name="star-du-cinema" value="1" id="star-du-cinema">
-                                    <label for="star-du-cinema">star du cinema</label>
-                                </div>
-                            </div>
-                        </div>
                     </section>
                     
                     <!-- les boutons et config -->
                     <section>
                         <aside>
-                            <button class="button-filter var-tri" data-js-trigger="reset">reset</button>
+                            <a href="{{ path }}enchere?{% if order != "date" %}order={{order}}&{% endif %}{% if status != "en_cours" %}status={{status}}{% endif %}"
+                            class="button-filter var-tri" data-js-trigger="reset">reset</a>
                             <button class="button-filter var-tri">info</button>
                         </aside>
                         <button class="button-filter var-main var-lrg">GO</button>
                     </section>
+                    {% if session.fingerprint %}
+                        <section>
+                            <h3>Mes filtres</h3>
+                            <div>
+                                <input type="checkbox" name="filtre[favori]" value="1" id="favori" 
+                                {{ filtre.favori ? "checked" : ""}}>
+                                <label for="favori">mes favoris</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" name="filtre[mises]" value="1" id="mise" 
+                                {{ filtre.mise ? "checked" : ""}}>
+                                <label for="mise">mes mises</label>
+                            </div>
+                        </section>
+                    {% endif %}
 
-                    <!-- les filtres perso -->
-                    <section>
-                        <h3>Mes filtres</h3>
-                        <div>
-                            <input type="checkbox" name="categorie1" value="1" id="categorie1">
-                            <label for="categorie1">catégorie 1</label>
-                        </div>
-                        
-                        <div>
-                            <input type="checkbox" name="categorie2" value="1" id="categorie2">
-                            <label for="categorie2">catégorie 2</label>
-                        </div>
-                                                        
-                        <div>
-                            <input type="checkbox" name="mesMises" value="1" id="mesMises">
-                            <label for="mesMises">mes mises</label>
-                        </div>
-                    </section>
                 </form>
             </aside>                  
         </div>
@@ -212,7 +182,7 @@
             <!-- card-lots -->
             {% for enchere in encheres %}
 
-            <article class="card-lot {{ enchere.favori  or enchere.meneur ? "tag favori" : ""}}" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
+            <article class="card-lot {{ enchere.favori or enchere.meneur or enchere.mise ? "tag favori" : ""}}" data-js-stamp data-js-membre="{{ enchere.membre_id }}">
                 <div>
                 {% if enchere.meneur %}
                     <div class="meneur">
@@ -224,11 +194,22 @@
                         <p>favori 💕</p>
                     </div>
                 {% endif %}
+                {% if enchere.mise %}
+                <div class="mise">
+                    <p>misé <img src="./assets/shapes/mise.svg" alt="mise" title="nombre de mises" loading="lazy"></p>
+                </div>
+            {% endif %}
                 </div>
 
                 <section>
 
                     <div>
+                        {% if enchere.coups_de_coeur %}
+                        <div class="coups-de-coeur">
+                            <h3>Coups de coeur du Lord</h3>
+                            <figure><img src="{{ path }}assets/icons/heart.svg" alt=""></figure>
+                        </div>
+                        {% endif %}
                         <header>
                             <p>Lot {{ enchere.id }} : {{ enchere.nom_enchere }}</p>
                             <a href="{{ path }}enchere/show?id={{ enchere.id }}" data-js-id="{{ enchere.id }}"><h3>{{ enchere.timbre.nom_timbre }}</h3></a>
@@ -237,6 +218,7 @@
                         <div>
                             <p>{{ enchere.description }}</p>
                         </div>
+
                     </div>
                     <div>
                         <p>condition: <strong>{{ enchere.timbre.condition.condition}}</strong></p>
@@ -258,7 +240,6 @@
                             <!-- button favori -->
 
                             <a 
-                            
                             {% if enchere.favori %}
                                 href="{{ path }}favori/deleteFavorite?enchereId={{ enchere.id }}" 
                             {% else %}
@@ -275,7 +256,13 @@
                             <button class="button-miser block var-blue">
                                 À venir
                             </button>
-                        {% else %}
+                        {% endif %}
+                        {% if enchere.status == "passe" %}
+                        <button class="button-miser block var-blue inactive">
+                            Passé
+                        </button>
+                        {% endif %}
+                        {% if enchere.status == "en_cours" %}
                             <button class="button-miser" data-js-miser
                             data-js-membre="{{ enchere.membre_id }}"  
                             data-js-id="{{ enchere.id }}"  
@@ -288,6 +275,9 @@
                     </div>
                     <div>
                         <div>
+                            {% if enchere.status == "passe" %}
+                            <h3>TERMINÉ</h3>
+                            {% else %}
                             <table>
                                 <caption>
                                     {{ enchere.status == "en_cours" ? "termine dans" : "commence dans" }}
@@ -305,9 +295,10 @@
                                     <td>m</td>
                                 </tr>
                             </table>
+                            {% endif %}
                         </div>
                         <div>
-                            <p>mise courante</p>
+                            <p>{{ enchere.status == "passe" ? "mise finale" : "mise courante"}}</p>
                             <div class="tag-prix" data-js-mise="{{ enchere.max_mise }}">{{ enchere.max_mise }}<span>$</span></div>
                         </div>
                     </div>

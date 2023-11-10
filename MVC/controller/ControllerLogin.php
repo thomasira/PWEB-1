@@ -8,7 +8,7 @@ class ControllerLogin implements Controller {
      */
     public function index() {
         if(!isset($_SESSION["fingerprint"])) Twig::render("login/index.html");
-        else RequirePage::redirect("error");
+        else RequirePage::redirect("membre/profil");
     }
  
     /**

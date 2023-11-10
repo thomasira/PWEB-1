@@ -49,13 +49,27 @@ class ControllerRecherche {
                 $data["encheres_timbres_noms"][] = $enchere;
             }
         }
+
+        $where["target"] = "pays_origine";
+        $where["value"] = $data["item_recherche"];
+        $timbresP = $timbre->readWhere($where);
+        if($timbresP) {
+            foreach($timbresP as $timbre) {
+                $enchere = new Enchere;
+                $enchere = $enchere->readId($timbre["enchere_id"]);
+                DataFiller::getDataEnchere($enchere);
+                $data["encheres_timbres_pays"][] = $enchere;
+            }
+        }
+
         $membre = new Membre;
         $where["target"] = "nom_membre";
         $where["value"] = $data["item_recherche"];
         $data["membres_noms"] = $membre->readWhere($where);
 
         if(empty($data["membres_noms"]) && empty($data["encheres_noms"]) 
-        && empty($data["encheres_ids"]) && empty($data["encheres_timbres_noms"])) $data["empty"] = true;
+        && empty($data["encheres_ids"]) && empty($data["encheres_timbres_noms"])
+        && empty($data["encheres_timbres_pays"])) $data["empty"] = true;
         Twig::render("recherche/index.html", $data);
     }
 }

@@ -19,7 +19,7 @@
     padding: var(--gapTHxxs) var(--gapxs);
 }
 .navigation-enchere>div:first-of-type a.selected{
-    color: var(--colorMain);
+    color: var(--colorCompD);
 }
 .navigation-enchere>div:last-of-type a{
     font-family: var(--typeText);

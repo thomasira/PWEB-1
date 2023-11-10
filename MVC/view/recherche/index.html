@@ -18,6 +18,19 @@
                 <div>
                     <p><strong>{{ enchere.timbre.nom_timbre }}</strong></p>
                     <p>Lot: {{ enchere.id }} -- {{ enchere.nom_enchere}}</p>
+                    <p>Ori.: {{ enchere.timbre.pays_origine }}</p>
+                </div>
+            </a>
+            {% endfor %}
+        {% endif %}
+        {% if encheres_timbres_pays %}
+            {% for enchere in encheres_timbres_pays %}
+            <a href="{{ path }}enchere/show?id={{ enchere.id }}" class="research-thumb">
+                <img src="{{ path }}assets/img/public/{{ enchere.image_princ.image_link }}" alt="">
+                <div>
+                    <p>{{ enchere.timbre.nom_timbre }}</p>
+                    <p>Lot: {{ enchere.id }} -- {{ enchere.nom_enchere}}</p>
+                    <p>Ori.: <strong>{{ enchere.timbre.pays_origine }}</strong></p>
                 </div>
             </a>
             {% endfor %}
@@ -29,6 +42,7 @@
                 <div>
                     <p>{{ enchere.timbre.nom_timbre }}</p>
                     <p>Lot: <strong>{{ enchere.id }}</strong> -- {{ enchere.nom_enchere}}</p>
+                    <p>Ori.: {{ enchere.timbre.pays_origine }}</p>
                 </div>
             </a>
             {% endfor %}
@@ -40,6 +54,7 @@
                 <div>
                     <p>{{ enchere.timbre.nom_timbre }}</p>
                     <p>Lot: {{ enchere.id }} -- <strong>{{ enchere.nom_enchere}}</strong></p>
+                    <p>Ori.: {{ enchere.timbre.pays_origine }}</p>
                 </div>
             </a>
             {% endfor %}

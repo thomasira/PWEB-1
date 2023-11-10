@@ -1,0 +1,25 @@
+
+.coups-de-coeur{
+    align-items: center;
+    border: var(--borderStd);
+    border-radius: .4em;
+    box-shadow: 1px 1px var(--colorDark);
+    display: flex;
+    flex-flow: row wrap;
+    max-width: max-content;
+    gap: var(--gapxs);
+    padding: var(--gapTHxxs) var(--gapxs);
+    background-color: var(--colorLight);
+    & h3{
+        font-size: var(--fontxs);
+    }
+    & figure{
+        display: inline;
+    }
+    & img{
+        height: 1.2em;
+        aspect-ratio: 1/1;
+        border: none;
+        box-shadow: none;
+    }
+}
