@@ -60,11 +60,12 @@
             {% endfor %}
         {% endif %}
         {% if membres_noms %}
+        <h3>MEMBRES</h3>
             {% for membre in membres_noms %}
             <a href="#">
-                <p>{{ membre.nom_membre }}</p>
+                <p>nom du membre: <strong>{{ membre.nom_membre }}</strong></p>
             </a>
-        {% endfor %}
+            {% endfor %}
         {% endif %}
 
 

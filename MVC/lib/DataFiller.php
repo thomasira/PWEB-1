@@ -70,7 +70,7 @@ class DataFiller {
     static public function dateChecker(&$enchere) {
         $endDate = date_create($enchere["date_fin"]);
         $startDate = date_create($enchere["date_debut"]);
-        $nowDate = date_create(date("Y-m-d h:i"));
+        $nowDate = date_create(date("Y-m-d G:i"));
         $dateDiff = date_diff($nowDate, $endDate);
         if($startDate > $nowDate) {
             $dateDiff = date_diff($startDate, $nowDate);   
